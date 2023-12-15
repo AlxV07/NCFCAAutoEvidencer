@@ -1,0 +1,19 @@
+{
+  "manifest_version": 3,
+  "name": "DebateEvidenceFormatter",
+  "version": "1.0",
+  "permissions": ["tabs", "webNavigation"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"]
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html"
+  }
+}
+

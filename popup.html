@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Formatted Text Input</title>
+    <script src="popup.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            min-width: 700px;
+        }
+        .single-line-input {
+            display: inline-block;
+            border: 1px solid #ccc;
+            padding: 5px;
+            min-height: 14px;
+            width: 80%;
+            margin: 10px auto;
+            font-size: 12px;
+            line-height: 1.5;
+            outline: none;
+            overflow-y: auto;
+        }
+        .evidence-input {
+             border: 1px solid #ccc;
+             padding: 5px;
+             min-height: 60px;
+             width: 80%;
+             margin: 10px auto;
+             font-size: 14px;
+             line-height: 1.5;
+             outline: none;
+             overflow-y: auto;
+        }
+        .formatted-text {
+            border: 2px solid #ccc;
+            padding: 10px;
+            width: 80%;
+            margin: 0 auto;
+            font-size: 10pt;
+            font-family: "Times New Roman", Times, serif;
+            font-style: italic;
+        }
+        label {
+            min-width: 85px;
+            text-align: center;
+            display: inline-block;
+            margin: 10px auto;
+            padding: 10px;
+            font-size: 12px;
+            min-height: 14px;
+            outline: none;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+    <div style="border: 1px solid #ccc">
+    <label>Author:</label>
+    <div class="single-line-input" contenteditable="true" id="authorInput" oninput="updateFormattedText()">
+    </div>
+    </div>
+
+    <div style="border: 1px solid #ccc">
+    <label>Credentials:</label>
+    <div class="single-line-input" contenteditable="true" id="authorCredentialsInput" oninput="updateFormattedText()">
+    </div>
+    </div>
+
+    <div style="border: 1px solid #ccc">
+    <label>Accessed Date:</label>
+    <div class="single-line-input" contenteditable="true" id="accessedDate" oninput="updateFormattedText()">
+    </div>
+    </div>
+
+    <div style="border: 1px solid #ccc">
+    <label>Published Date:</label>
+    <div class="single-line-input" contenteditable="true" id="publishedDate" oninput="updateFormattedText()">
+    </div>
+    </div>
+
+    <div style="border: 1px solid #ccc">
+    <label>Publisher:</label>
+    <div class="single-line-input" contenteditable="true" id="publisherInput" oninput="updateFormattedText()">
+    </div>
+    </div>
+
+    <div style="border: 1px solid #ccc">
+    <label>Article Title:</label>
+    <div class="single-line-input" contenteditable="true" id="articleInput" oninput="updateFormattedText()">
+    </div>
+    </div>
+
+    <div style="border: 1px solid #ccc">
+    <label>Article Link:</label>
+    <div class="single-line-input" contenteditable="true" id="linkInput" oninput="updateFormattedText()">
+    </div>
+    </div>
+
+    <div style="border: 1px solid #ccc">
+    <label>Evidence:</label>
+    <div class="evidence-input" style="display: inline-block" contenteditable="true" id="evidenceInput" oninput="updateFormattedText()">
+    </div>
+    </div>
+
+    <div style="border: 1px solid #ccc">
+    <div class="formatted-text" id="formattedEvidence" style="display: block">
+    </div>
+    </div>
+
+
+</body>
+</html>
