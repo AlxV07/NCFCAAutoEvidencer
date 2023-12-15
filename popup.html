@@ -34,14 +34,28 @@
         }
         .formatted-text {
             border: 2px solid #ccc;
+            min-height: 60px;
             padding: 10px;
             width: 80%;
-            margin: 0 auto;
+            margin: 10px auto;
             font-size: 10pt;
+            display: inline-block;
             font-family: "Times New Roman", Times, serif;
-            font-style: italic;
+            outline: none;
+            overflow-y: auto;
         }
         label {
+            min-width: 85px;
+            text-align: center;
+            display: inline-block;
+            margin: 10px auto;
+            padding: 10px;
+            font-size: 12px;
+            min-height: 14px;
+            outline: none;
+            overflow-y: auto;
+        }
+        button {
             min-width: 85px;
             text-align: center;
             display: inline-block;
@@ -57,57 +71,56 @@
 <body>
     <div style="border: 1px solid #ccc">
     <label>Author:</label>
-    <div class="single-line-input" contenteditable="true" id="authorInput" oninput="updateFormattedText()">
+    <div class="single-line-input" contenteditable="true" id="authorInput">
     </div>
     </div>
 
     <div style="border: 1px solid #ccc">
     <label>Credentials:</label>
-    <div class="single-line-input" contenteditable="true" id="authorCredentialsInput" oninput="updateFormattedText()">
+    <div class="single-line-input" contenteditable="true" id="authorCredentialsInput">
     </div>
     </div>
 
     <div style="border: 1px solid #ccc">
     <label>Accessed Date:</label>
-    <div class="single-line-input" contenteditable="true" id="accessedDate" oninput="updateFormattedText()">
+    <div class="single-line-input" contenteditable="true" id="accessedDate">
     </div>
     </div>
 
     <div style="border: 1px solid #ccc">
     <label>Published Date:</label>
-    <div class="single-line-input" contenteditable="true" id="publishedDate" oninput="updateFormattedText()">
+    <div class="single-line-input" contenteditable="true" id="publishedDate">
     </div>
     </div>
 
     <div style="border: 1px solid #ccc">
     <label>Publisher:</label>
-    <div class="single-line-input" contenteditable="true" id="publisherInput" oninput="updateFormattedText()">
+    <div class="single-line-input" contenteditable="true" id="publisherInput">
     </div>
     </div>
 
     <div style="border: 1px solid #ccc">
     <label>Article Title:</label>
-    <div class="single-line-input" contenteditable="true" id="articleInput" oninput="updateFormattedText()">
+    <div class="single-line-input" contenteditable="true" id="articleInput">
     </div>
     </div>
 
     <div style="border: 1px solid #ccc">
     <label>Article Link:</label>
-    <div class="single-line-input" contenteditable="true" id="linkInput" oninput="updateFormattedText()">
+    <div class="single-line-input" contenteditable="true" id="linkInput">
     </div>
     </div>
 
     <div style="border: 1px solid #ccc">
     <label>Evidence:</label>
-    <div class="evidence-input" style="display: inline-block" contenteditable="true" id="evidenceInput" oninput="updateFormattedText()">
+    <div class="evidence-input" style="display: inline-block" contenteditable="true" id="evidenceInput">
     </div>
     </div>
 
     <div style="border: 1px solid #ccc">
+    <button id="copyButton">Copy</button>
     <div class="formatted-text" id="formattedEvidence" style="display: block">
     </div>
     </div>
-
-
 </body>
 </html>
