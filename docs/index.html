@@ -71,7 +71,6 @@
                 link: document.getElementById('linkInput').textContent,
                 evd: document.getElementById('evidenceInput').textContent
             };
-            chrome.storage.local.set({ 'savedData': inputData });
             const formattedTextDiv = document.getElementById('formattedEvidence');
             const author = importantSpan(document.getElementById('authorInput').textContent)
             const credentials = credentialSpan(document.getElementById('authorCredentialsInput').textContent)
@@ -138,22 +137,6 @@
 
 
         window.onload = onLoad
-        document.addEventListener('DOMContentLoaded', function () {
-            chrome.storage.local.get('savedData', function(result) {
-                const savedData = result.savedData;
-                if (savedData) {
-                    if (savedData.author) {document.getElementById('authorInput').textContent = savedData.author}
-                    if (savedData.credentials) {document.getElementById('authorCredentialsInput').textContent = savedData.credentials}
-                    if (savedData.accessed) {document.getElementById("accessedDate").textContent = savedData.accessed}
-                    if (savedData.published) {document.getElementById('publishedDate').textContent = savedData.published}
-                    if (savedData.publisher) {document.getElementById('publisherInput').textContent = savedData.publisher}
-                    if (savedData.article) {document.getElementById('articleInput').textContent = savedData.article}
-                    if (savedData.link) {document.getElementById('linkInput').textContent = savedData.link}
-                    if (savedData.evd) {document.getElementById('evidenceInput').textContent = savedData.evd}
-                }
-                updateFormattedText()
-            });
-        })
 
     </script>
     <style>
