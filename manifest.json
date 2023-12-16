@@ -1,23 +1,14 @@
 {
   "manifest_version": 3,
   "name": "NCFCA Auto Evidencer",
-  "version": "1.0",
-  "permissions": ["tabs", "webNavigation", "storage"],
-  "background": {
-    "service_worker": "background.js"
-  },
+  "version": "1.0.0",
+  "permissions": ["storage"],
   "icons": {
     "16": "AutoEvidencerLogo.png",
     "32": "AutoEvidencerLogo.png",
     "64": "AutoEvidencerLogo.png",
     "128": "AutoEvidencerLogo.png"
   },
-  "content_scripts": [
-    {
-      "matches": ["<all_urls>"],
-      "js": ["content.js"]
-    }
-  ],
   "action": {
     "default_popup": "popup.html",
     "default_icon": {
