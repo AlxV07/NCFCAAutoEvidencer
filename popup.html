@@ -2,14 +2,14 @@
 <html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
-    <title>Formatted Text Input</title>
+    <title>Auto Evidencer</title>
     <script src="popup.js"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
             min-width: 700px;
         }
-        .single-line-input {
+        .credential-input {
             display: inline-block;
             border: 1px solid #ccc;
             padding: 5px;
@@ -44,6 +44,16 @@
             outline: none;
             overflow-y: auto;
         }
+        .contact-info {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 10px;
+        }
+        .input-container {
+            display: flex;
+            align-items: flex-start;
+        }
         label {
             min-width: 85px;
             text-align: center;
@@ -69,58 +79,56 @@
     </style>
 </head>
 <body>
-    <div style="border: 1px solid #ccc">
-    <label>Author:</label>
-    <div class="single-line-input" contenteditable="true" id="authorInput">
-    </div>
+    <div class="contact-info">Contact: alexander.kai.chen@gmail.com</div>
+    <h1 style="text-align: center">NCFCA Auto Evidencer</h1>
+    <h5 style="text-align: center">
+        A simple tool to quickly format evidence for NCFCA Team Policy Debate.
+        Easily copy-and-paste data from sources to automatically generate cards.
+    </h5>
+
+    <div class="input-container" style="border: 1px solid #ccc">
+        <label>Author(s):</label>
+        <div class="credential-input" contenteditable="true" id="authorInput"></div>
     </div>
 
-    <div style="border: 1px solid #ccc">
-    <label>Credentials:</label>
-    <div class="single-line-input" contenteditable="true" id="authorCredentialsInput">
-    </div>
-    </div>
-
-    <div style="border: 1px solid #ccc">
-    <label>Accessed Date:</label>
-    <div class="single-line-input" contenteditable="true" id="accessedDate">
-    </div>
+    <div class="input-container" style="border: 1px solid #ccc">
+        <label>Credentials:</label>
+        <div class="credential-input" contenteditable="true" id="authorCredentialsInput"></div>
     </div>
 
-    <div style="border: 1px solid #ccc">
-    <label>Published Date:</label>
-    <div class="single-line-input" contenteditable="true" id="publishedDate">
-    </div>
-    </div>
-
-    <div style="border: 1px solid #ccc">
-    <label>Publisher:</label>
-    <div class="single-line-input" contenteditable="true" id="publisherInput">
-    </div>
+    <div class="input-container" style="border: 1px solid #ccc">
+        <label>Accessed Date:</label>
+        <div class="credential-input" contenteditable="true" id="accessedDate"></div>
     </div>
 
-    <div style="border: 1px solid #ccc">
-    <label>Article Title:</label>
-    <div class="single-line-input" contenteditable="true" id="articleInput">
-    </div>
-    </div>
-
-    <div style="border: 1px solid #ccc">
-    <label>Article Link:</label>
-    <div class="single-line-input" contenteditable="true" id="linkInput">
-    </div>
+    <div class="input-container" style="border: 1px solid #ccc">
+        <label>Published Date:</label>
+        <div class="credential-input" contenteditable="true" id="publishedDate"></div>
     </div>
 
-    <div style="border: 1px solid #ccc">
-    <label>Evidence:</label>
-    <div class="evidence-input" style="display: inline-block" contenteditable="true" id="evidenceInput">
-    </div>
+    <div class="input-container" style="border: 1px solid #ccc">
+        <label>Publisher:</label>
+        <div class="credential-input" contenteditable="true" id="publisherInput"></div>
     </div>
 
-    <div style="border: 1px solid #ccc">
-    <button id="copyButton">Copy</button>
-    <div class="formatted-text" id="formattedEvidence" style="display: block">
+    <div class="input-container" style="border: 1px solid #ccc">
+        <label>Article Title:</label>
+        <div class="credential-input" contenteditable="true" id="articleInput"></div>
     </div>
+
+    <div class="input-container" style="border: 1px solid #ccc">
+        <label>Article Link:</label>
+        <div class="credential-input" contenteditable="true" id="linkInput"></div>
+    </div>
+
+    <div class="input-container" style="border: 1px solid #ccc">
+        <label>Evidence:</label>
+        <div class="evidence-input" style="display: inline-block" contenteditable="true" id="evidenceInput"></div>
+    </div>
+
+    <div class="input-container" style="border: 1px solid #ccc">
+        <button id="copyButton">Copy</button>
+        <div class="formatted-text" id="formattedEvidence" style="display: block"></div>
     </div>
 </body>
 </html>

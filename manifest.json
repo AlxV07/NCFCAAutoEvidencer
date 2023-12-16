@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "DebateEvidenceFormatter",
+  "name": "AutoEvidencer",
   "version": "1.0",
   "permissions": ["tabs", "webNavigation"],
   "background": {

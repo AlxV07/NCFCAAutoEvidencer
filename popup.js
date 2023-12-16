@@ -76,7 +76,7 @@ function addListeners() {
     document.getElementById('linkInput').addEventListener('input', updateFormattedText)
     document.getElementById('evidenceInput').addEventListener('input', updateFormattedText)
     document.getElementById('copyButton').addEventListener('click', function () {
-            let str = document.getElementById("formattedEvidence").innerHTML
+            let str = document.getElementById("formattedEvidence").innerHTML.trim()
             function listener(e) {
                 e.clipboardData.setData("text/html", str);
                 e.clipboardData.setData("text/plain", str);
