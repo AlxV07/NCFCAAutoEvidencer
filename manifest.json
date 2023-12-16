@@ -1,6 +1,7 @@
 {
   "manifest_version": 3,
   "name": "NCFCA Auto Evidencer",
+  "description": "A simple tool to quickly and easily format evidence for NCFCA Team Policy Debate",
   "version": "1.0.0",
   "permissions": ["storage"],
   "icons": {
