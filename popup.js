@@ -55,6 +55,7 @@ function importantSpan(text) {
 }
 
 function updateFormattedText() {
+    document.getElementById('copyButton').textContent = 'Copy'
     const inputData = {
         author: document.getElementById('authorInput').textContent,
         credentials: document.getElementById('authorCredentialsInput').textContent,
@@ -97,6 +98,7 @@ function copyEvd() {
     document.addEventListener("copy", listener);
     document.execCommand("copy");
     document.removeEventListener("copy", listener);
+    document.getElementById('copyButton').textContent = 'Copied ✓'
 }
 
 function clearForm() {

@@ -61,16 +61,15 @@
         }
 
         function updateFormattedText() {
-            const inputData = {
-                author: document.getElementById('authorInput').textContent,
-                credentials: document.getElementById('authorCredentialsInput').textContent,
-                accessed: document.getElementById("accessedDate").textContent,
-                published: document.getElementById('publishedDate').textContent,
-                publisher: document.getElementById('publisherInput').textContent,
-                article: document.getElementById('articleInput').textContent,
-                link: document.getElementById('linkInput').textContent,
-                evd: document.getElementById('evidenceInput').textContent
-            };
+            document.getElementById('copyButton').textContent = 'Copy'
+            document.getElementById('authorInput').textContent;
+            document.getElementById('authorCredentialsInput').textContent;
+            document.getElementById("accessedDate").textContent;
+            document.getElementById('publishedDate').textContent;
+            document.getElementById('publisherInput').textContent;
+            document.getElementById('articleInput').textContent;
+            document.getElementById('linkInput').textContent;
+            document.getElementById('evidenceInput').textContent;
             const formattedTextDiv = document.getElementById('formattedEvidence');
             const author = importantSpan(document.getElementById('authorInput').textContent)
             const credentials = credentialSpan(document.getElementById('authorCredentialsInput').textContent)
@@ -85,6 +84,7 @@
     `)
             formattedTextDiv.innerHTML = timesNewRomanSpan(`${citing}\n${evd}`)
         }
+
 
         function setDate(component) {
             let splitDate = Date().split(" ")
@@ -102,6 +102,7 @@
             document.addEventListener("copy", listener);
             document.execCommand("copy");
             document.removeEventListener("copy", listener);
+            document.getElementById('copyButton').textContent = 'Copied ✓'
         }
 
         function clearForm() {
