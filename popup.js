@@ -6,6 +6,10 @@ function italicizedSpan(text) {
     return `<span style="font-style: italic">${text}</span>`
 }
 
+function boldSpan(text) {
+    return `<span style="font-weight: bold">${text}</span>`
+}
+
 function underlinedSpan(text) {
     return `<span style="text-decoration: underline">${text}</span>`
 }
@@ -54,6 +58,12 @@ function importantSpan(text) {
     }</span>`
 }
 
+function impactSpan(text) {
+    return `<span>${
+        twelvePtSpan(boldSpan(`MPX: ${text}`))
+    }</span>`
+}
+
 function updateFormattedText() {
     document.getElementById('copyButton').textContent = 'Copy'
     const inputData = {
@@ -64,7 +74,8 @@ function updateFormattedText() {
         publisher: document.getElementById('publisherInput').textContent,
         article: document.getElementById('articleInput').textContent,
         link: document.getElementById('linkInput').textContent,
-        evd: document.getElementById('evidenceInput').textContent
+        evd: document.getElementById('evidenceInput').textContent,
+        impact: document.getElementById('impactInput').textContent
     };
     chrome.storage.local.set({ 'savedData': inputData });
     const formattedTextDiv = document.getElementById('formattedEvidence');
@@ -76,10 +87,11 @@ function updateFormattedText() {
     const article = articleSpan(document.getElementById('articleInput').textContent)
     const link = linkSpan(document.getElementById('linkInput').textContent)
     const evd = evidenceSpan(document.getElementById('evidenceInput').textContent)
-    const citing = nonImportantSpan(`
+    const impact = impactSpan(document.getElementById('impactInput').textContent)
+    const citing = nonImportantSpan(` 
         According to ${author} ${credentials}, Accessed on ${accessed}, Published on ${published} by ${publisher}, ${article} ${link}   
     `)
-    formattedTextDiv.innerHTML = timesNewRomanSpan(`${citing}<br>${evd}`)
+    formattedTextDiv.innerHTML = timesNewRomanSpan(`${citing}<br>${evd}<br>${impact}`)
 }
 
 function setDate(component) {
@@ -122,6 +134,7 @@ function addListeners() {
     document.getElementById('articleInput').addEventListener('input', updateFormattedText)
     document.getElementById('linkInput').addEventListener('input', updateFormattedText)
     document.getElementById('evidenceInput').addEventListener('input', updateFormattedText)
+    document.getElementById('impactInput').addEventListener('input', updateFormattedText)
     document.getElementById('copyButton').addEventListener('click', copyEvd)
     document.getElementById('accessedDateButton').addEventListener('click', () => setDate(document.getElementById('accessedDate')))
     document.getElementById('clearButton').addEventListener('click', clearForm)
@@ -146,6 +159,7 @@ document.addEventListener('DOMContentLoaded', function () {
             if (savedData.article) {document.getElementById('articleInput').textContent = savedData.article}
             if (savedData.link) {document.getElementById('linkInput').textContent = savedData.link}
             if (savedData.evd) {document.getElementById('evidenceInput').textContent = savedData.evd}
+            if (savedData.impact) {document.getElementById('impactInput').textContent = savedData.impact}
         }
         updateFormattedText()
     });

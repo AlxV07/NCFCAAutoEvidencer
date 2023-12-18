@@ -1,7 +1,7 @@
 # NCFCA Auto Evidencer
 A simple tool for quickly formatting evidence for NCFCA Team Policy Debate.
 
-Usable as a chrome extension or at https://alxv05.github.io/NCFCAAutoEvidencer/
+Usable as a Chrome Extension or at https://alxv05.github.io/NCFCAAutoEvidencer/
 
 ### Chrome extension installation:
 1. Click the green "<> Code v" button.
