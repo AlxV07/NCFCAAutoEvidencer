@@ -29,9 +29,9 @@
         }
 
         function linkSpan(text) {
-            return `<span style="color: cornflowerblue" >${
+            return `<a href=${text}><span style="color: blue" >${
                 italicizedSpan(underlinedSpan(tenPtSpan(text)))
-            }</span>`
+            }</span></a>`
         }
 
         function evidenceSpan(text) {
