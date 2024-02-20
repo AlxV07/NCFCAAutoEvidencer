@@ -138,6 +138,10 @@
             updateFormattedText()
         }
 
+        function killPotat() {
+            document.getElementById('potat').remove()
+            document.getElementById('killPotat').remove()
+        }
 
         window.onload = onLoad
 
@@ -215,15 +219,15 @@
             overflow-y: auto;
         }
         img {
-            justify-content: center;
             align-items: center;
+            display: block;
             align-content: center;
+            justify-content: center;
             text-align: center;
             padding: 0;
-            max-width: 100%;
+            margin: 10px auto;
+            width: 165px;
             height: auto;
-            display: block;
-            margin: 0 auto;
         }
     </style>
 </head>
@@ -235,7 +239,8 @@
     Easily copy-and-paste data from sources to automatically generate cards.
 </h5>
 
- <img src="https://raw.githubusercontent.com/AlxV05/NCFCAAutoEvidencer/main/potat.jpg" alt="potat">
+ <img id="potat" src="https://raw.githubusercontent.com/AlxV05/NCFCAAutoEvidencer/main/potat.jpg" alt="potat">
+<button id="killPotat" onclick="killPotat()" style="display: block; align-content: center; justify-content: center;">Make Potat go away :(</button>
 
 <div class="input-container" style="border: 1px solid #ccc">
     <label>Author(s):</label>
