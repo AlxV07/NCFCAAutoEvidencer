@@ -32,56 +32,65 @@
     <img id="potat" src="./potat.jpg" alt="potat">
     <button id="killPotat" onclick="killPotat()" style="display: block; align-content: center; justify-content: center;">Make Potat go away :(</button>
 
-    <div class="input-container">
-        <label>Author(s):</label>
-        <div class="credential-input" contenteditable="true" id="authorInput"></div>
-    </div>
+    <div style="display: flex; justify-content: center">
+        <div style="width: 97%;">
+        <div class="input-container">
+            <label>Author(s):</label>
+            <div class="citation-input" contenteditable="true" id="authorInput"></div>
+        </div>
 
-    <div class="input-container">
-        <label>Credentials:</label>
-        <div class="credential-input" contenteditable="true" id="authorCredentialsInput"></div>
-    </div>
+        <div class="input-container">
+            <label>Author(s) Credentials:</label>
+            <div class="citation-input" contenteditable="true" id="authorCredentialsInput"></div>
+        </div>
 
-    <div class="input-container">
-        <label>Accessed Date:</label>
-        <div class="credential-input" style="max-width: 67%" contenteditable="true" id="accessedDate"></div>
-        <button id="accessedDateButton">Today</button>
-    </div>
+        <div class="input-container">
+            <label style="margin-right: 0; padding-right: 0; padding-left: 0; margin-left: 0">Accessed Date:</label>
+            <button id="accessedDateButton" style="min-height: 35px; min-width: 10px; margin-left: 0; margin-right: 0; padding: 5px">Today</button>
+            <div class="citation-input"  contenteditable="true" id="accessedDate"></div>
+        </div>
 
-    <div class="input-container">
-        <label>Published Date:</label>
-        <div class="credential-input" contenteditable="true" id="publishedDate"></div>
-    </div>
+        <div class="input-container">
+            <label>Published Date:</label>
+            <div class="citation-input" contenteditable="true" id="publishedDate"></div>
+        </div>
 
-    <div class="input-container">
-        <label>Publisher:</label>
-        <div class="credential-input" contenteditable="true" id="publisherInput"></div>
-    </div>
+        <div class="input-container">
+            <label>Publisher:</label>
+            <div class="citation-input" contenteditable="true" id="publisherInput"></div>
+        </div>
 
-    <div class="input-container">
-        <label>Article Title:</label>
-        <div class="credential-input" contenteditable="true" id="articleInput"></div>
-    </div>
+        <div class="input-container">
+            <label>Publisher Credentials:</label>
+            <div class="citation-input" contenteditable="true" id="publisherCredentialsInput"></div>
+        </div>
 
-    <div class="input-container">
-        <label>Article Link:</label>
-        <div class="credential-input" contenteditable="true" id="linkInput"></div>
-    </div>
+        <div class="input-container">
+            <label>Article Title:</label>
+            <div class="citation-input" contenteditable="true" id="articleInput"></div>
+        </div>
 
-    <div class="input-container">
-        <label>Evidence:</label>
-        <div class="evidence-input" style="display: inline-block" contenteditable="true" id="evidenceInput"></div>
-    </div>
+        <div class="input-container">
+            <label>Article Link:</label>
+            <div class="citation-input" contenteditable="true" id="linkInput"></div>
+        </div>
 
-    <div class="input-container">
-        <label>Impact:</label>
-        <div class="credential-input" style="display: inline-block" contenteditable="true" id="impactInput"></div>
-    </div>
+        <div class="input-container">
+            <label>Evidence:</label>
+            <div class="evidence-input" style="display: inline-block" contenteditable="true" id="evidenceInput"></div>
+        </div>
 
-    <div class="input-container">
-        <button id="copyButton">Copy</button>
-        <div class="formatted-text" id="formattedEvidence" style="display: block; max-width: 67%"></div>
-        <button id="clearButton">Clear</button>
+        <div class="input-container">
+            <label>Impact:</label>
+            <div class="citation-input" style="display: inline-block" contenteditable="true" id="impactInput"></div>
+        </div>
+
+        <div class="input-container">
+            <button id="copyButton">Copy</button>
+            <div class="formatted-text" id="formattedEvidence" style="display: block; max-width: 67%"></div>
+            <button id="clearButton">Clear</button>
+        </div>
+        </div>
     </div>
 </body>
 </html>
