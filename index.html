@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" sizes="16x16 32x32 64x64" href="./potat.jpg">
+    <meta charset="UTF-8">
+    <title>NCFCA Auto Evidencer</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+</head>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Z8KTGQM6BB"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-Z8KTGQM6BB');
+</script>
+
+<body>
+    <div class="misc-info">
+        Hosting: Chen/Kuykendall, Region 11, 23-24 <br>
+        Contact: alexander.kai.chen@gmail.com <br>
+        <a href="https://alxv07.github.io/AboutMe/">https://alxv07.github.io/AboutMe/<a><br>
+        Version: 1.5.3<br>
+    </div>
+    <h1>NCFCA Auto Evidencer</h1>
+    <h5>
+        A simple tool to help quickly format evidence for NCFCA Team Policy Debate.
+        Simply copy-and-paste data from sources to automatically generate cards.
+        <br>
+    </h5>
+
+    <img id="potat" src="./potat.jpg" alt="potat">
+    <button id="killPotat" onclick="killPotat()" style="display: block; align-content: center; justify-content: center;">Make Potat go away :(</button>
+
+    <div style="display: flex; justify-content: center">
+        <div style="width: 97%;">
+        <div class="input-container">
+            <label>Author(s):</label>
+            <div class="citation-input" contenteditable="true" id="authorInput"></div>
+        </div>
+
+        <div class="input-container">
+            <label>Author(s) Credentials:</label>
+            <div class="citation-input" contenteditable="true" id="authorCredentialsInput"></div>
+        </div>
+
+        <div class="input-container">
+            <label style="margin-right: 0; padding-right: 0; padding-left: 0; margin-left: 0">Accessed Date:</label>
+            <button id="accessedDateButton" style="min-height: 35px; min-width: 10px; margin-left: 0; margin-right: 0; padding: 5px">Today</button>
+            <div class="citation-input"  contenteditable="true" id="accessedDate"></div>
+        </div>
+
+        <div class="input-container">
+            <label>Published Date:</label>
+            <div class="citation-input" contenteditable="true" id="publishedDate"></div>
+        </div>
+
+        <div class="input-container">
+            <label>Publisher:</label>
+            <div class="citation-input" contenteditable="true" id="publisherInput"></div>
+        </div>
+
+        <div class="input-container">
+            <label>Publisher Credentials:</label>
+            <div class="citation-input" contenteditable="true" id="publisherCredentialsInput"></div>
+        </div>
+
+        <div class="input-container">
+            <label>Article Title:</label>
+            <div class="citation-input" contenteditable="true" id="articleInput"></div>
+        </div>
+
+        <div class="input-container">
+            <label>Article Link:</label>
+            <div class="citation-input" contenteditable="true" id="linkInput"></div>
+        </div>
+
+        <div class="input-container">
+            <label>Evidence:</label>
+            <div class="evidence-input" style="display: inline-block" contenteditable="true" id="evidenceInput"></div>
+        </div>
+
+        <div class="input-container">
+            <label>Impact:</label>
+            <div class="citation-input" style="display: inline-block" contenteditable="true" id="impactInput"></div>
+        </div>
+
+        <div class="input-container">
+            <button id="copyButton">Copy</button>
+            <div class="formatted-text" id="formattedEvidence" style="display: block; max-width: 67%"></div>
+            <button id="clearButton">Clear</button>
+        </div>
+        </div>
+    </div>
+</body>
+</html>
