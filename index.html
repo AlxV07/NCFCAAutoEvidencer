@@ -18,79 +18,129 @@
 
 <body>
     <div class="misc-info">
-        Hosting: Chen/Kuykendall, Region 11, 23-24 <br>
-        Contact: alexander.kai.chen@gmail.com <br>
-        <a href="https://alxv07.github.io/AboutMe/">https://alxv07.github.io/AboutMe/<a><br>
-        Version: 1.5.3<br>
+        Contact: alexander.kai.chen@gmail.com | <a href="https://alxv07.github.io/AboutMe/">https://alxv07.github.io/AboutMe/</a> <br>
+        Chen/Kuykendall | Region 11, 23-24 | Sts. Peter & Paul Speech & Debate<br>
+        NCFCA Auto Evidencer Version: 2.1.4<br>
     </div>
     <h1>NCFCA Auto Evidencer</h1>
     <h5>
-        A simple tool to help quickly format evidence for NCFCA Team Policy Debate.
-        Simply copy-and-paste data from sources to automatically generate cards.
+        A tool to quickly format evidence for NCFCA Debate.
+        Copy-and-paste evidence straight from sources to automatically generate cards.
         <br>
     </h5>
 
-    <img id="potat" src="./potat.jpg" alt="potat">
-    <button id="killPotat" onclick="killPotat()" style="display: block; align-content: center; justify-content: center;">Make Potat go away :(</button>
+<!--    <img id="potat" src="./potat.jpg" alt="potat">-->
+<!--    <button id="killPotat" onclick="killPotat()" style="display: block; align-content: center; justify-content: center;">Make Potat go away :(</button>-->
 
     <div style="display: flex; justify-content: center">
         <div style="width: 97%;">
         <div class="input-container">
             <label>Author(s):</label>
-            <div class="citation-input" contenteditable="true" id="authorInput"></div>
+            <div id="authorInput" class="citation-input" contenteditable="true"></div>
+            <button id="exclude_authorInput" style="min-width: 15px; margin-left: 15px; margin-right: 15px;">Exclude</button>
+            <button id="clear_authorInput" style="min-width: 15px; margin-right: 15px;">Clear</button>
         </div>
 
         <div class="input-container">
             <label>Author(s) Credentials:</label>
-            <div class="citation-input" contenteditable="true" id="authorCredentialsInput"></div>
+            <div id="authorCredentialsInput" class="citation-input" contenteditable="true"></div>
+            <button id="exclude_authorCredentialsInput" style="min-width: 15px; margin-left: 15px; margin-right: 15px">Exclude</button>
+            <button id="clear_authorCredentialsInput" style="min-width: 15px; margin-right: 15px">Clear</button>
         </div>
 
         <div class="input-container">
             <label style="margin-right: 0; padding-right: 0; padding-left: 0; margin-left: 0">Accessed Date:</label>
-            <button id="accessedDateButton" style="min-height: 35px; min-width: 10px; margin-left: 0; margin-right: 0; padding: 5px">Today</button>
-            <div class="citation-input"  contenteditable="true" id="accessedDate"></div>
+            <button id="accessedDateButton" style="font-size: 11px; min-height: 36px; min-width: 35px; margin-left: 0; margin-right: 10px; padding: 0;
+                                                   background-color: white; border-width: 1px">Today</button>
+            <div id="accessedDate" class="citation-input" contenteditable="true"></div>
+            <button id="exclude_accessedDate" style="min-width: 15px; margin-left: 15px; margin-right: 15px">Exclude</button>
+            <button id="clear_accessedDate" style="min-width: 15px; margin-right: 15px">Clear</button>
         </div>
 
         <div class="input-container">
             <label>Published Date:</label>
-            <div class="citation-input" contenteditable="true" id="publishedDate"></div>
+            <div id="publishedDate" class="citation-input" contenteditable="true"></div>
+            <button id="exclude_publishedDate" style="min-width: 15px; margin-left: 15px; margin-right: 15px">Exclude</button>
+            <button id="clear_publishedDate" style="min-width: 15px; margin-right: 15px">Clear</button>
         </div>
 
         <div class="input-container">
             <label>Publisher:</label>
-            <div class="citation-input" contenteditable="true" id="publisherInput"></div>
+            <div id="publisherInput" class="citation-input" contenteditable="true" ></div>
+            <button id="exclude_publisherInput" style="min-width: 15px; margin-left: 15px; margin-right: 15px">Exclude</button>
+            <button id="clear_publisherInput" style="min-width: 15px; margin-right: 15px">Clear</button>
         </div>
 
         <div class="input-container">
             <label>Publisher Credentials:</label>
-            <div class="citation-input" contenteditable="true" id="publisherCredentialsInput"></div>
+            <div id="publisherCredentialsInput" class="citation-input" contenteditable="true"></div>
+            <button id="exclude_publisherCredentialsInput" style="min-width: 15px; margin-left: 15px; margin-right: 15px">Exclude</button>
+            <button id="clear_publisherCredentialsInput" style="min-width: 15px; margin-right: 15px">Clear</button>
         </div>
 
         <div class="input-container">
             <label>Article Title:</label>
-            <div class="citation-input" contenteditable="true" id="articleInput"></div>
+            <div id="articleInput" class="citation-input" contenteditable="true"></div>
+            <button id="exclude_articleInput" style="min-width: 15px; margin-left: 15px; margin-right: 15px">Exclude</button>
+            <button id="clear_articleInput" style="min-width: 15px; margin-right: 15px">Clear</button>
         </div>
 
         <div class="input-container">
             <label>Article Link:</label>
-            <div class="citation-input" contenteditable="true" id="linkInput"></div>
+            <div id="linkInput" class="citation-input" contenteditable="true"></div>
+            <button id="exclude_linkInput" style="min-width: 15px; margin-left: 15px; margin-right: 15px">Exclude</button>
+            <button id="clear_linkInput" style="min-width: 15px; margin-right: 15px">Clear</button>
         </div>
 
         <div class="input-container">
             <label>Evidence:</label>
-            <div class="evidence-input" style="display: inline-block" contenteditable="true" id="evidenceInput"></div>
+            <div id="evidenceInput" class="evidence-input" style="display: inline-block; background-color: white" contenteditable="true"></div>
+            <button id="exclude_evidenceInput" style="max-height: 100%; min-width: 15px; margin-left: 15px; margin-right: 15px">Exclude</button>
+            <button id="clear_evidenceInput" style="max-height: 100%; min-width: 15px; margin-right: 15px">Clear</button>
         </div>
 
         <div class="input-container">
             <label>Impact:</label>
-            <div class="citation-input" style="display: inline-block" contenteditable="true" id="impactInput"></div>
+            <div id="impactInput" class="citation-input" style="display: inline-block" contenteditable="true"></div>
+            <button id="exclude_impactInput" style="min-width: 15px; margin-left: 15px; margin-right: 15px">Exclude</button>
+            <button id="clear_impactInput" style="min-width: 15px; margin-right: 15px">Clear</button>
         </div>
 
         <div class="input-container">
             <button id="copyButton">Copy</button>
             <div class="formatted-text" id="formattedEvidence" style="display: block; max-width: 67%"></div>
-            <button id="clearButton">Clear</button>
+            <button id="clearButton">Clear All</button>
         </div>
+
+        <br>
+        <div style="border: 2px #ccc solid  ">
+            <h2>Change Log</h2>
+            <div style="width: 40%; margin-left: 30%; margin-right: 30%">
+                =======3/29/2024 | NCFCA Auto Evidencer Version 2.1.4=======<br>
+                <br>
+                =====Additions:=====<br>
+                - Publicly viewable Change Log<br>
+                - Exclude/Include Field Buttons<br>
+                - Single-Field Clear Buttons<br>
+                - InputField AutoSelection on mouseenter<br>
+                - Styling (hover-shadows & bg-color change)<br>
+                <br>
+                =====Deletions:=====<br>
+                - R.I.P. Potat 2023-2024 (He still lives in the tab icon tho :DDD)<br>
+                <br>
+                =====Possible Upcoming Features:=====<br>
+                - Themes, Button Textures, Fonts :O<br>
+                - Transition Animations >:OOO<br>
+                - Cutie pie ._.<br>
+                - AI Auto-Impact-Writer Wha- (is that illegal?) \_OoO_/<br>
+                - Custom evidence format ordering??? :D<br>
+                <br>
+                Notes:<br>
+                Ewwo :3 Email / google chat to me if you have suggestions or comments! Nothing else to note :D Bai!
+            </div>
+            <br>
+        </div>
+
         </div>
     </div>
 </body>

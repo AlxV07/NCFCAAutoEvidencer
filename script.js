@@ -25,10 +25,45 @@ function updateFormattedText() {
     const link = linkSpan(document.getElementById('linkInput').textContent)
     const evd = evidenceSpan(document.getElementById('evidenceInput').textContent)
     const impact = impactSpan(document.getElementById('impactInput').textContent)
-    const citation = nonImportantSpan(
-        `According to ${author} ${authorCredentials}, Accessed on ${accessed}, Published on ${published} by ${publisher} ${publisherCredentials}, ${article} ${link}`
-    )
-    formattedTextDiv.innerHTML = timesNewRomanSpan(`${citation}<br>${evd}<br>${impact}`)
+
+    const isDisabled = {}
+    for (const inputField of inputFields) {
+        const element = document.getElementById(inputField)
+        isDisabled[inputField] = element.style.textDecoration === 'line-through'
+    }
+    let citationText = ''
+    if (!isDisabled['authorInput']) {
+        citationText += `According to ${author} `
+    }
+    if (!isDisabled['authorCredentialsInput']) {
+        citationText += authorCredentials + ' '
+    }
+    if (!isDisabled['accessedDate']) {
+        citationText += `Accessed on ${accessed} `
+    }
+    if (!isDisabled['publishedDate']) {
+        citationText += `Published on ${published} `
+    }
+    if (!isDisabled['publisherInput']) {
+        citationText += `Published by ${publisher} `
+    }
+    if (!isDisabled['publisherCredentialsInput']) {
+        citationText += publisherCredentials + ' '
+    }
+    if (!isDisabled['articleInput']) {
+        citationText += article + ' '
+    }
+    if (!isDisabled['linkInput']) {
+        citationText += link + ' '
+    }
+    let citation = `${nonImportantSpan(citationText)}`
+    if (!isDisabled['evidenceInput']) {
+        citation += `<br>${evd}`
+    }
+    if (!isDisabled['impactInput']) {
+        citation += `<br>${impact}`
+    }
+    formattedTextDiv.innerHTML = timesNewRomanSpan(`${citation}`)
 }
 
 function setDate(component) {
@@ -61,6 +96,13 @@ function clearForm() {
     document.getElementById('linkInput').textContent = ''
     document.getElementById('evidenceInput').textContent = ''
     document.getElementById('impactInput').textContent = ''
+
+    for (const inputField of inputFields) {
+        const inputFieldExcludeButton = document.getElementById('exclude_' + inputField)
+        if (inputFieldExcludeButton.innerHTML === 'Include') {
+            inputFieldExcludeButton.click()
+        }
+    }
     updateFormattedText()
 }
 
@@ -78,7 +120,61 @@ function addListeners() {
     document.getElementById('copyButton').addEventListener('click', copyEvd)
     document.getElementById('accessedDateButton').addEventListener('click', () => setDate(document.getElementById('accessedDate')))
     document.getElementById('clearButton').addEventListener('click', clearForm)
+
+    const inputContainers = document.querySelectorAll('div[class="input-container"]')
+    for (const element of inputContainers) {
+        element.addEventListener('mouseenter', () => {element.style.backgroundColor = '#f5f5f5'})
+        element.addEventListener('mouseleave', () => {element.style.backgroundColor = 'white'})
+    }
+
+    for (const inputField of inputFields) {
+        const inputFieldElement = document.getElementById(inputField)
+        inputFieldElement.addEventListener('mouseenter', () => {
+            if (inputFieldElement.style.backgroundColor === 'white' || !inputFieldElement.style.backgroundColor) {
+                inputFieldElement.focus()
+                inputFieldElement.style.boxShadow = '3px 3px 3px gray'
+            }
+        })
+        inputFieldElement.addEventListener('mouseleave', () => {
+            inputFieldElement.blur()
+            inputFieldElement.style.boxShadow = ''
+        })
+
+        const inputFieldExcludeButton = document.getElementById('exclude_' + inputField)
+        inputFieldExcludeButton.addEventListener('click', () => {
+            if (inputFieldExcludeButton.innerHTML === 'Exclude') {
+                inputFieldExcludeButton.innerHTML = 'Include'
+                inputFieldElement.contentEditable = 'false'
+                inputFieldElement.style.textDecoration = 'line-through'
+                inputFieldElement.style.backgroundColor = '#ffe9e9'
+            } else {
+                inputFieldExcludeButton.innerHTML = 'Exclude'
+                inputFieldElement.contentEditable = 'true'
+                inputFieldElement.style.textDecoration = ''
+                inputFieldElement.style.backgroundColor = 'white'
+            }
+            updateFormattedText()
+        })
+
+        const inputFieldClearButton = document.getElementById('clear_' + inputField)
+        inputFieldClearButton.addEventListener('click', () => {
+            inputFieldElement.innerHTML = ''
+        })
+    }
 }
+
+const inputFields = [
+    'authorInput',
+    'authorCredentialsInput',
+    'accessedDate',
+    'publishedDate',
+    'publisherInput',
+    'publisherCredentialsInput',
+    'articleInput',
+    'linkInput',
+    'evidenceInput',
+    'impactInput',
+]
 
 function onLoad() {
     addListeners()
