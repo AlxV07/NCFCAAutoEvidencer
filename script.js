@@ -64,6 +64,19 @@ function updateFormattedText() {
         citation += `<br>${impact}`
     }
     formattedTextDiv.innerHTML = timesNewRomanSpan(`${citation}`)
+
+    let everythingExcluded = true
+    for (const disabledKey in isDisabled) {
+        if (!isDisabled[disabledKey]) {
+            everythingExcluded = false
+            break
+        }
+    }
+    if (everythingExcluded) {
+        setTimeout(() => {
+            alert('Knew somebody would do this ;D You silly little idiot <3')
+        }, 250)  // Timeout to update color
+    }
 }
 
 function setDate(component) {
@@ -159,6 +172,7 @@ function addListeners() {
         const inputFieldClearButton = document.getElementById('clear_' + inputField)
         inputFieldClearButton.addEventListener('click', () => {
             inputFieldElement.innerHTML = ''
+            updateFormattedText()
         })
     }
 }
