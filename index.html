@@ -19,7 +19,7 @@
     <div class="misc-info">
         Contact: alexander.kai.chen@gmail.com | <a href="https://alxv07.github.io/AboutMe/">https://alxv07.github.io/AboutMe/</a> <br>
         Chen/Kuykendall | Region 11, 23-24 | Sts. Peter & Paul Speech & Debate<br>
-        NCFCA Auto Evidencer Version: 2.1.9<br>
+        NCFCA Auto Evidencer Version: 2.1.9.2<br>
     </div>
     <h1>NCFCA Auto Evidencer</h1>
     <h5>
@@ -27,115 +27,122 @@
         Copy-and-paste evidence straight from sources to automatically generate cards.
     </h5>
 
-    <div style="display: flex; justify-content: center">
-        <div style="width: 97%;">
-        <div class="input-container">
-            <label>Author(s):</label>
-            <div id="authorInput" class="citation-input" contenteditable="true"></div>
-            <button class="exclude-field-button" id="exclude_authorInput">Exclude</button>
-            <button class="clear-single-field-button" id="clear_authorInput">Clear</button>
-        </div>
+    <div class="main-container" style="display: flex; justify-content: center">
+        <div class="inner-main-container" style="width: 97%;">
 
-        <div class="input-container">
-            <label>Author(s) Credentials:</label>
-            <div id="authorCredentialsInput" class="citation-input" contenteditable="true"></div>
-            <button class="exclude-field-button" id="exclude_authorCredentialsInput">Exclude</button>
-            <button class="clear-single-field-button" id="clear_authorCredentialsInput">Clear</button>
-        </div>
-
-        <div class="input-container">
-            <label style="margin-right: 0; padding-right: 0; padding-left: 0; margin-left: 0">Accessed Date:</label>
-            <button id="accessedDateButton" style="font-size: 11px; min-height: 12px; min-width: 35px; max-height: 36px;
-                                                   margin-left: 0; margin-right: 10px; padding: 0;
-                                                   background-color: white; border-width: 1px">Today</button>
-            <div id="accessedDate" class="citation-input" contenteditable="true"></div>
-            <button class="exclude-field-button" id="exclude_accessedDate">Exclude</button>
-            <button class="clear-single-field-button" id="clear_accessedDate">Clear</button>
-        </div>
-
-        <div class="input-container">
-            <label>Published Date:</label>
-            <div id="publishedDate" class="citation-input" contenteditable="true"></div>
-            <button class="exclude-field-button" id="exclude_publishedDate">Exclude</button>
-            <button class="clear-single-field-button" id="clear_publishedDate">Clear</button>
-        </div>
-
-        <div class="input-container">
-            <label>Publisher:</label>
-            <div id="publisherInput" class="citation-input" contenteditable="true" ></div>
-            <button class="exclude-field-button" id="exclude_publisherInput">Exclude</button>
-            <button class="clear-single-field-button" id="clear_publisherInput">Clear</button>
-        </div>
-
-        <div class="input-container">
-            <label>Publisher Credentials:</label>
-            <div id="publisherCredentialsInput" class="citation-input" contenteditable="true"></div>
-            <button class="exclude-field-button" id="exclude_publisherCredentialsInput">Exclude</button>
-            <button class="clear-single-field-button" id="clear_publisherCredentialsInput">Clear</button>
-        </div>
-
-        <div class="input-container">
-            <label>Article Title:</label>
-            <div id="articleInput" class="citation-input" contenteditable="true"></div>
-            <button class="exclude-field-button" id="exclude_articleInput">Exclude</button>
-            <button class="clear-single-field-button" id="clear_articleInput">Clear</button>
-        </div>
-
-        <div class="input-container">
-            <label>Article Link:</label>
-            <div id="linkInput" class="citation-input" contenteditable="true"></div>
-            <button class="exclude-field-button" id="exclude_linkInput">Exclude</button>
-            <button class="clear-single-field-button" id="clear_linkInput">Clear</button>
-        </div>
-
-        <div class="input-container">
-            <label>Evidence:</label>
-            <div id="evidenceInput" class="evidence-input" style="display: inline-block; background-color: white" contenteditable="true"></div>
-            <button class="exclude-field-button" id="exclude_evidenceInput">Exclude</button>
-            <button class="clear-single-field-button" id="clear_evidenceInput">Clear</button>
-        </div>
-
-        <div class="input-container">
-            <label>Impact:</label>
-            <div id="impactInput" class="citation-input" style="display: inline-block" contenteditable="true"></div>
-            <button class="exclude-field-button" id="exclude_impactInput">Exclude</button>
-            <button class="clear-single-field-button" id="clear_impactInput">Clear</button>
-        </div>
-
-        <div class="input-container">
-            <button id="copyButton">Copy</button>
-            <div class="formatted-text" id="formattedEvidence" style="display: block; max-width: 67%"></div>
-            <button id="clearButton">Clear All</button>
-        </div>
-
-        <br>
-        <div style="border: 2px #ccc solid">
-            <h2>Major Change Log</h2>
-            <div style="width: 40%; margin-left: 30%; margin-right: 30%">
-                =======3/29/2024 | NCFCA Auto Evidencer Version 2.1=======<br>
-                <br>
-                =====Additions=====<br>
-                - Publicly viewable Major Change Log<br>
-                - Exclude/Include Field Buttons<br>
-                - Single-Field Clear Buttons<br>
-                - InputField AutoSelection on mouseenter<br>
-                - Styling (hover-shadows & bg-color change)<br>
-                <br>
-                =====Deletions=====<br>
-                - R.I.P. Potat 2023-2024 (He still lives in the tab icon tho :DDD)<br>
-                <br>
-                =====Possible Upcoming Features=====<br>
-                - Themes, Button Textures, Fonts :O<br>
-                - Transition Animations<br>
-                - Custom evidence format ordering :D<br>
-                - AI Auto-Impact-Writer Wha- (is that illegal?) \_OoO_/<br>
-                <br>
-                =======Notes:=======<br>
-                Ewwo :3 Email / google chat to me if you have suggestions or comments! Nothing else to note :D Bai!
+            <div class="field-container">
+                <label class="field-label">Author(s)</label>
+                <div class="field-input" id="authorInput" contenteditable="true"></div>
+                <button class="exclude-field-button" id="exclude_authorInput">Exclude</button>
+                <button class="clear-single-field-button" id="clear_authorInput">Clear</button>
             </div>
-            <br>
-        </div>
 
+            <div class="field-container">
+                <label class="field-label">Author(s) Credentials</label>
+                <div class="field-input" id="authorCredentialsInput" contenteditable="true"></div>
+                <button class="exclude-field-button" id="exclude_authorCredentialsInput">Exclude</button>
+                <button class="clear-single-field-button" id="clear_authorCredentialsInput">Clear</button>
+            </div>
+
+            <div class="field-container">
+                <label class="field-label" id="accessedDateLabel">Accessed Date</label>
+                <button id="accessedDateButton">Today</button>
+                <div class="field-input" id="accessedDateInput" contenteditable="true"></div>
+                <button class="exclude-field-button" id="exclude_accessedDateInput">Exclude</button>
+                <button class="clear-single-field-button" id="clear_accessedDateInput">Clear</button>
+            </div>
+
+            <div class="field-container">
+                <label class="field-label">Published Date</label>
+                <div class="field-input" id="publishedDateInput" contenteditable="true"></div>
+                <button class="exclude-field-button" id="exclude_publishedDateInput">Exclude</button>
+                <button class="clear-single-field-button" id="clear_publishedDateInput">Clear</button>
+            </div>
+
+            <div class="field-container">
+                <label class="field-label">Publisher</label>
+                <div class="field-input" id="publisherInput" contenteditable="true" ></div>
+                <button class="exclude-field-button" id="exclude_publisherInput">Exclude</button>
+                <button class="clear-single-field-button" id="clear_publisherInput">Clear</button>
+            </div>
+
+            <div class="field-container">
+                <label class="field-label">Publisher Credentials</label>
+                <div class="field-input" id="publisherCredentialsInput" contenteditable="true"></div>
+                <button class="exclude-field-button" id="exclude_publisherCredentialsInput">Exclude</button>
+                <button class="clear-single-field-button" id="clear_publisherCredentialsInput">Clear</button>
+            </div>
+
+            <div class="field-container">
+                <label class="field-label">Article Title</label>
+                <div class="field-input" id="articleInput" contenteditable="true"></div>
+                <button class="exclude-field-button" id="exclude_articleInput">Exclude</button>
+                <button class="clear-single-field-button" id="clear_articleInput">Clear</button>
+            </div>
+
+            <div class="field-container">
+                <label class="field-label">Article Link</label>
+                <div class="field-input" id="linkInput" contenteditable="true"></div>
+                <button class="exclude-field-button" id="exclude_linkInput">Exclude</button>
+                <button class="clear-single-field-button" id="clear_linkInput">Clear</button>
+            </div>
+
+            <div class="evidence-container">
+                <div class="field-container">
+                    <label class="field-label">Evidence</label>
+                    <div class="field-input" id="evidenceInput" contenteditable="true"></div>
+                    <button class="exclude-field-button" id="exclude_evidenceInput">Exclude</button>
+                    <button class="clear-single-field-button" id="clear_evidenceInput">Clear</button>
+                </div>
+<!--                <div class="field-container">-->
+<!--                    <div class="field-input" id="evidenceImportanceInput" style="-->
+<!--                    max-width: 67%; padding: 40px;"></div>-->
+<!--                    <button id="evidenceImportanceInputUnderline">Toggle Underline</button>-->
+<!--                </div>-->
+            </div>
+
+            <div class="field-container">
+                <label class="field-label">Impact</label>
+                <div class="field-input" id="impactInput" contenteditable="true"></div>
+                <button class="exclude-field-button" id="exclude_impactInput">Exclude</button>
+                <button class="clear-single-field-button" id="clear_impactInput">Clear</button>
+            </div>
+
+            <div class="field-container">
+                <button id="copyButton">Copy</button>
+                <div class="formatted-evidence" id="formattedEvidence"></div>
+                <button id="clearAllButton">Clear All</button>
+            </div>
+
+            <br>
+            <div class="user-manual" style="border: 2px #ccc solid"></div>
+
+            <br>
+            <div class="major-change-log" style="border: 2px #ccc solid">
+                <h2>Major Change Log</h2>
+                <div style="width: 40%; margin-left: 30%; margin-right: 30%">
+                    =======3/29/2024 | NCFCA Auto Evidencer Version 2.1=======<br>
+                    <br>
+                    Additions:<br>
+                    - Publicly viewable Major Change Log<br>
+                    - Exclude/Include Field Buttons<br>
+                    - Single-Field Clear Buttons<br>
+                    - InputField AutoSelection on mouseenter<br>
+                    - Styling (hover-shadows & bg-color change)<br>
+                    <br>
+                    Deletions:<br>
+                    - R.I.P. Potat 2023-2024 (He still lives in the tab icon tho :DDD)<br>
+                    <br>
+                    Possible Upcoming Features:<br>
+                    - Themes, Button Textures, Fonts :O<br>
+                    - Transition Animations :P<br>
+                    - Custom evidence format ordering :D<br>
+                    <br>
+                    Notes:<br>
+                    Ewwo :3 Email / google chat to me if you have suggestions or comments!
+                </div>
+                <br>
+            </div>
         </div>
     </div>
 </body>

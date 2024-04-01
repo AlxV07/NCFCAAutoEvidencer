@@ -10,14 +10,6 @@ h1, h2, h5 {
     text-shadow: 3px 5px 3px lightgray;
 }
 
-label {
-    text-align: center;
-    margin: 10px;
-    padding: 10px;
-    font-size: 12px;
-    min-width: 110px;
-}
-
 button {
     font-family: Cantarell, sans-serif;
     font-size: 12px;
@@ -27,7 +19,7 @@ button {
     border-width: 1px;
     border-radius: 5px;
     min-width: 85px;
-    max-height: 40px;
+    max-height: 37px;
     transition: 0.1s ease;
 }
 button:hover {
@@ -44,7 +36,7 @@ button:hover {
     text-shadow: 2px 2px 2px lightgray;
 }
 
-.input-container {
+.field-container {
     display: flex;
     flex-direction: row;
     justify-content: left;
@@ -52,7 +44,17 @@ button:hover {
     transition: 0.1s ease;
 }
 
-.citation-input {
+.field-label {
+    text-align: center;
+    margin: 10px;
+    padding: 10px;
+    font-size: 11px;
+    min-width: 110px;
+}
+
+.field-input {
+    font-family: "Times New Roman", serif;
+    font-size: 12px;
     transition: 0.1s ease;
     background-color: white;
     display: inline-block;
@@ -60,33 +62,16 @@ button:hover {
     padding: 5px;
     width: 90%;
     margin: 10px auto;
-    font-size: 12px;
     line-height: 1.5;
     outline: none;
 }
 
-.evidence-input {
-    border: 1px solid #ccc;
-    padding: 5px;
-    min-height: 60px;
-    width: 90%;
-    margin: 10px auto;
-    font-size: 14px;
-    line-height: 1.5;
-    outline: none;
-    transition: 0.1s ease;
-}
-
-.formatted-text {
+.evidence-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
     border: 2px solid #ccc;
-    min-height: 60px;
-    padding: 10px;
-    width: 80%;
-    margin: 10px auto;
-    font-size: 10pt;
-    display: inline-block;
-    font-family: "Times New Roman", Times, serif;
-    outline: none;
+    transition: 0.1s ease;
 }
 
 .clear-single-field-button {
@@ -98,4 +83,43 @@ button:hover {
     min-width: 60px;
     margin-left: 15px;
     margin-right: 15px;
+}
+
+#accessedDateLabel {
+    margin-right: 10px;
+    margin-left: 0;
+    padding-right: 0;
+    padding-left: 0;
+    text-align: right
+}
+
+#accessedDateButton {
+    font-size: 11px;
+    min-height: 12px;
+    min-width: 35px;
+    max-height: 36px;
+    margin-left: 0;
+    margin-right: 10px;
+    padding: 0;
+    background-color: white;
+}
+
+.formatted-evidence {
+    border: 2px solid #ccc;
+    padding: 10px;
+    width: 80%;
+    max-width: 67%;
+    margin: 10px auto;
+}
+
+#copyButton {
+    margin: 20px auto;
+    height: 45px;
+    max-height: 45px;
+}
+
+#clearAllButton {
+    margin: 20px auto;
+    height: 45px;
+    max-height: 45px;
 }
