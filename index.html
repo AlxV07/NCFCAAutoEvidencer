@@ -3,11 +3,10 @@
 <head>
     <link rel="icon" sizes="16x16 32x32 64x64" href="./potat.jpg">
     <meta charset="UTF-8">
-    <title>NCFCA Auto Evidencer</title>
     <link rel="stylesheet" href="style.css">
+    <title>NCFCA Auto Evidencer</title>
     <script src="script.js"></script>
 </head>
-
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z8KTGQM6BB"></script>
 <script>
     window.dataLayer = window.dataLayer || [];
@@ -20,90 +19,87 @@
     <div class="misc-info">
         Contact: alexander.kai.chen@gmail.com | <a href="https://alxv07.github.io/AboutMe/">https://alxv07.github.io/AboutMe/</a> <br>
         Chen/Kuykendall | Region 11, 23-24 | Sts. Peter & Paul Speech & Debate<br>
-        NCFCA Auto Evidencer Version: 2.1.5<br>
+        NCFCA Auto Evidencer Version: 2.1.9<br>
     </div>
     <h1>NCFCA Auto Evidencer</h1>
     <h5>
         A tool to quickly format evidence for NCFCA Debate.
         Copy-and-paste evidence straight from sources to automatically generate cards.
-        <br>
     </h5>
-
-<!--    <img id="potat" src="./potat.jpg" alt="potat">-->
-<!--    <button id="killPotat" onclick="killPotat()" style="display: block; align-content: center; justify-content: center;">Make Potat go away :(</button>-->
 
     <div style="display: flex; justify-content: center">
         <div style="width: 97%;">
         <div class="input-container">
             <label>Author(s):</label>
             <div id="authorInput" class="citation-input" contenteditable="true"></div>
-            <button id="exclude_authorInput" style="min-width: 15px; margin-left: 15px; margin-right: 15px;">Exclude</button>
-            <button id="clear_authorInput" style="min-width: 15px; margin-right: 15px;">Clear</button>
+            <button class="exclude-field-button" id="exclude_authorInput">Exclude</button>
+            <button class="clear-single-field-button" id="clear_authorInput">Clear</button>
         </div>
 
         <div class="input-container">
             <label>Author(s) Credentials:</label>
             <div id="authorCredentialsInput" class="citation-input" contenteditable="true"></div>
-            <button id="exclude_authorCredentialsInput" style="min-width: 15px; margin-left: 15px; margin-right: 15px">Exclude</button>
-            <button id="clear_authorCredentialsInput" style="min-width: 15px; margin-right: 15px">Clear</button>
+            <button class="exclude-field-button" id="exclude_authorCredentialsInput">Exclude</button>
+            <button class="clear-single-field-button" id="clear_authorCredentialsInput">Clear</button>
         </div>
 
         <div class="input-container">
             <label style="margin-right: 0; padding-right: 0; padding-left: 0; margin-left: 0">Accessed Date:</label>
-            <button id="accessedDateButton" style="font-size: 11px; min-height: 36px; min-width: 35px; margin-left: 0; margin-right: 10px; padding: 0;
+            <button id="accessedDateButton" style="font-size: 11px; min-height: 12px; min-width: 35px; max-height: 36px;
+                                                   margin-left: 0; margin-right: 10px; padding: 0;
                                                    background-color: white; border-width: 1px">Today</button>
             <div id="accessedDate" class="citation-input" contenteditable="true"></div>
-            <button id="exclude_accessedDate" style="min-width: 15px; margin-left: 15px; margin-right: 15px">Exclude</button>
-            <button id="clear_accessedDate" style="min-width: 15px; margin-right: 15px">Clear</button>
+            <button class="exclude-field-button" id="exclude_accessedDate">Exclude</button>
+            <button class="clear-single-field-button" id="clear_accessedDate">Clear</button>
         </div>
 
         <div class="input-container">
             <label>Published Date:</label>
             <div id="publishedDate" class="citation-input" contenteditable="true"></div>
-            <button id="exclude_publishedDate" style="min-width: 15px; margin-left: 15px; margin-right: 15px">Exclude</button>
-            <button id="clear_publishedDate" style="min-width: 15px; margin-right: 15px">Clear</button>
+            <button class="exclude-field-button" id="exclude_publishedDate">Exclude</button>
+            <button class="clear-single-field-button" id="clear_publishedDate">Clear</button>
         </div>
 
         <div class="input-container">
             <label>Publisher:</label>
             <div id="publisherInput" class="citation-input" contenteditable="true" ></div>
-            <button id="exclude_publisherInput" style="min-width: 15px; margin-left: 15px; margin-right: 15px">Exclude</button>
-            <button id="clear_publisherInput" style="min-width: 15px; margin-right: 15px">Clear</button>
+            <button class="exclude-field-button" id="exclude_publisherInput">Exclude</button>
+            <button class="clear-single-field-button" id="clear_publisherInput">Clear</button>
         </div>
 
         <div class="input-container">
             <label>Publisher Credentials:</label>
             <div id="publisherCredentialsInput" class="citation-input" contenteditable="true"></div>
-            <button id="exclude_publisherCredentialsInput" style="min-width: 15px; margin-left: 15px; margin-right: 15px">Exclude</button>
-            <button id="clear_publisherCredentialsInput" style="min-width: 15px; margin-right: 15px">Clear</button>
+            <button class="exclude-field-button" id="exclude_publisherCredentialsInput">Exclude</button>
+            <button class="clear-single-field-button" id="clear_publisherCredentialsInput">Clear</button>
         </div>
 
         <div class="input-container">
             <label>Article Title:</label>
             <div id="articleInput" class="citation-input" contenteditable="true"></div>
-            <button id="exclude_articleInput" style="min-width: 15px; margin-left: 15px; margin-right: 15px">Exclude</button>
-            <button id="clear_articleInput" style="min-width: 15px; margin-right: 15px">Clear</button>
+            <button class="exclude-field-button" id="exclude_articleInput">Exclude</button>
+            <button class="clear-single-field-button" id="clear_articleInput">Clear</button>
         </div>
 
         <div class="input-container">
             <label>Article Link:</label>
             <div id="linkInput" class="citation-input" contenteditable="true"></div>
-            <button id="exclude_linkInput" style="min-width: 15px; margin-left: 15px; margin-right: 15px">Exclude</button>
-            <button id="clear_linkInput" style="min-width: 15px; margin-right: 15px">Clear</button>
+            <button class="exclude-field-button" id="exclude_linkInput">Exclude</button>
+            <button class="clear-single-field-button" id="clear_linkInput">Clear</button>
         </div>
 
         <div class="input-container">
             <label>Evidence:</label>
             <div id="evidenceInput" class="evidence-input" style="display: inline-block; background-color: white" contenteditable="true"></div>
-            <button id="exclude_evidenceInput" style="max-height: 100%; min-width: 15px; margin-left: 15px; margin-right: 15px">Exclude</button>
-            <button id="clear_evidenceInput" style="max-height: 100%; min-width: 15px; margin-right: 15px">Clear</button>
+            <button class="exclude-field-button" id="exclude_evidenceInput">Exclude</button>
+            <button class="clear-single-field-button" id="clear_evidenceInput">Clear</button>
         </div>
 
         <div class="input-container">
             <label>Impact:</label>
             <div id="impactInput" class="citation-input" style="display: inline-block" contenteditable="true"></div>
-            <button id="exclude_impactInput" style="min-width: 15px; margin-left: 15px; margin-right: 15px">Exclude</button>
-            <button id="clear_impactInput" style="min-width: 15px; margin-right: 15px">Clear</button>
+            <button class="exclude-field-button" id="exclude_impactInput">Exclude</button>
+            <button class="clear-single-field-button" id="clear_impactInput">Clear</button>
         </div>
 
         <div class="input-container">
@@ -113,7 +109,7 @@
         </div>
 
         <br>
-        <div style="border: 2px #ccc solid  ">
+        <div style="border: 2px #ccc solid">
             <h2>Major Change Log</h2>
             <div style="width: 40%; margin-left: 30%; margin-right: 30%">
                 =======3/29/2024 | NCFCA Auto Evidencer Version 2.1.4=======<br>
@@ -135,7 +131,7 @@
                 - AI Auto-Impact-Writer Wha- (is that illegal?) \_OoO_/<br>
                 - Custom evidence format ordering??? :D<br>
                 <br>
-                Notes:<br>
+                =======Notes:=======<br>
                 Ewwo :3 Email / google chat to me if you have suggestions or comments! Nothing else to note :D Bai!
             </div>
             <br>

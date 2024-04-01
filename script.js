@@ -145,7 +145,7 @@ function addListeners() {
         inputFieldElement.addEventListener('mouseenter', () => {
             if (inputFieldElement.style.backgroundColor === 'white' || !inputFieldElement.style.backgroundColor) {
                 inputFieldElement.focus()
-                inputFieldElement.style.boxShadow = '3px 3px 3px gray'
+                inputFieldElement.style.boxShadow = '2px 2px 3px gray'
             }
         })
         inputFieldElement.addEventListener('mouseleave', () => {
@@ -193,11 +193,6 @@ const inputFields = [
 function onLoad() {
     addListeners()
     updateFormattedText()
-}
-
-function killPotat() {
-    document.getElementById('potat').remove()
-    document.getElementById('killPotat').remove()
 }
 
 window.onload = onLoad
