@@ -151,7 +151,7 @@ function updateFormattedText() {
     const formattedEvidence = document.getElementById('formattedEvidence');
     const author = importantSpan(document.getElementById('authorInput').textContent)
     const authorCredentials = credentialSpan(document.getElementById('authorCredentialsInput').textContent)
-    const accessed = importantSpan(document.getElementById('accessedDateInput').textContent)
+    const accessed = nonImportantSpan(document.getElementById('accessedDateInput').textContent)
     const published = importantSpan(document.getElementById('publishedDateInput').textContent)
     const publisher = importantSpan(document.getElementById('publisherInput').textContent)
     const publisherCredentials = credentialSpan(document.getElementById('publisherCredentialsInput').textContent)
