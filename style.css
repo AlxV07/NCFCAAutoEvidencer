@@ -1,39 +1,103 @@
 body {
     font-family: Cantarell, sans-serif;
-    min-width: 700px;
     overflow-y: auto;
     overflow-x: auto;
-}
-
-h1, h2, h5 {
-    text-align: center;
-    text-shadow: 3px 5px 3px lightgray;
+    background-color: #888;
 }
 
 button {
     font-family: Cantarell, sans-serif;
-    font-size: 12px;
-    text-align: center;
-    margin: 10px 0;
-    padding: 10px;
-    border-width: 1px;
-    border-radius: 5px;
-    min-width: 85px;
-    max-height: 37px;
-    transition: 0.1s ease;
-}
-button:hover {
-    box-shadow: 2px 2px 3px gray;
+    cursor: pointer;
 }
 
-.misc-info {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    text-align: right;
-    line-height: 1.5;
-    font-size: 10px;
-    text-shadow: 2px 2px 2px lightgray;
+.top-container {
+    display: flex;
+    height: 100%;
+    width: 100%;
+}
+
+.toolbar {
+    width: 13%;
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: scroll;
+}
+.toolbar h2 {
+    margin-bottom: 20px;
+}
+.toolbar a {
+    color: #fff;
+    text-decoration: none;
+    margin: 10px 0;
+    padding: 10px;
+    width: 90%;
+    text-align: center;
+    background-color: #444;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    cursor: pointer;
+}
+.toolbar a:hover {
+    background-color: #555;
+}
+.toolbar button {
+    color: #fff;
+    text-decoration: none;
+    margin: 10px 0;
+    padding: 10px;
+    width: 100%;
+    text-align: center;
+    background-color: #444;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    cursor: pointer;
+}
+.toolbar button:hover {
+    background-color: #555;
+}
+
+.tabs-container {
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    min-height: 650px;
+    max-height: 650px;
+    width: 99%;
+    scrollbar-width: thin;
+    border: #555555 1px solid;
+    border-radius: 5px;
+}
+.tabs-container a {
+    color: #fff;
+    text-decoration: none;
+    background-color: #444;
+    border-radius: 5px;
+    width: 99%;
+    margin-bottom: 10px;
+    transition: background-color 0.3s;
+}
+.tabs-container a:hover {
+    background-color: #555;
+}
+
+.content {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    background-color: #f9f9f9;
+}
+.content h1 {
+    margin-bottom: 20px;
+}
+.content p {
+    margin-bottom: 15px;
+    line-height: 1.6;
 }
 
 .field-container {
@@ -43,7 +107,6 @@ button:hover {
     border: 2px solid #ccc;
     transition: 0.1s ease;
 }
-
 .field-label {
     text-align: center;
     margin: 10px;
@@ -51,10 +114,12 @@ button:hover {
     font-size: 11px;
     min-width: 110px;
 }
-
 .field-input {
+    font-style: normal;
     font-family: "Times New Roman", serif;
     font-size: 12px;
+    text-decoration: none;
+    color: black;
     transition: 0.1s ease;
     background-color: white;
     display: inline-block;
@@ -66,42 +131,33 @@ button:hover {
     outline: none;
 }
 
-.evidence-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: left;
-    border: 2px solid #ccc;
-    transition: 0.1s ease;
+.field-clear {
+    min-width: 50px;
+    margin: 5px 15px;
+    border-radius: 5px;
 }
-
-.clear-single-field-button {
-    min-width: 15px;
-    margin-right: 15px;
-}
-
-.exclude-field-button {
+.field-exclude {
     min-width: 60px;
-    margin-left: 15px;
-    margin-right: 15px;
+    margin: 5px 3px 5px 15px;
+    border-radius: 5px;
 }
 
-#accessedDateLabel {
-    margin-right: 10px;
+#label_accessed {
     margin-left: 0;
+    margin-right: 0;
+    padding-left: 20px;
     padding-right: 0;
-    padding-left: 0;
-    text-align: right
+    text-align: center;
 }
-
-#accessedDateButton {
+.accessedDateButton {
     font-size: 11px;
     min-height: 12px;
     min-width: 35px;
     max-height: 36px;
-    margin-left: 0;
-    margin-right: 10px;
+    margin: 5px 10px 5px 0;
     padding: 0;
     background-color: white;
+    border-radius: 5px;
 }
 
 .formatted-evidence {
@@ -111,15 +167,15 @@ button:hover {
     max-width: 67%;
     margin: 10px auto;
 }
-
-#copyButton {
+.copyButton {
     margin: 20px auto;
     height: 45px;
     max-height: 45px;
+    border-radius: 5px;
 }
-
-#clearAllButton {
+.clearAllButton {
     margin: 20px auto;
     height: 45px;
     max-height: 45px;
+    border-radius: 5px;
 }

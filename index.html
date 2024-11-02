@@ -1,150 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="icon" sizes="16x16 32x32 64x64" href="./potat.jpg">
+    <link rel="icon" sizes="16x16 32x32 64x64" href="imgs/potat.jpg">
+<!--    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z8KTGQM6BB"></script>-->
+<!--    <script>-->
+<!--        window.dataLayer = window.dataLayer || [];-->
+<!--        function gtag(){dataLayer.push(arguments);}-->
+<!--        gtag('js', new Date());-->
+<!--        gtag('config', 'G-Z8KTGQM6BB');-->
+<!--    </script>-->
     <meta charset="UTF-8">
     <link rel="stylesheet" href="style.css">
-    <title>NCFCA Auto Evidencer</title>
+    <title>NCFCAAutoEvidencer</title>
     <script src="script.js"></script>
 </head>
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-Z8KTGQM6BB"></script>
-<script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-Z8KTGQM6BB');
-</script>
 
 <body>
-    <div class="misc-info">
-        Contact: alexander.kai.chen@gmail.com | <a href="https://alxv07.github.io/AboutMe/">https://alxv07.github.io/AboutMe/</a> <br>
-        Chen/Kuykendall | Region 11, 23-24 | Sts. Peter & Paul Speech & Debate<br>
-        Chen/O'Connors | Region 11, 24-25 | Sts. Peter & Paul Speech & Debate<br>
-        NCFCA Auto Evidencer Version: 2.1.9.2<br>
-    </div>
-    <h1>NCFCA Auto Evidencer</h1>
-    <h5>
-        A tool to quickly format evidence for NCFCA Debate.
-        Copy-and-paste evidence straight from sources to automatically generate cards.
-    </h5>
+    <div class="top-container" id="top-container">
 
-    <div class="main-container" style="display: flex; justify-content: center">
-        <div class="inner-main-container" style="width: 97%;">
+        <div class="toolbar" id="toolbar">
+            <h2>NCFCAAutoEvidencer</h2>
 
-            <div class="field-container">
-                <label class="field-label">Author(s)</label>
-                <div class="field-input" id="authorInput" contenteditable="true"></div>
-                <button class="exclude-field-button" id="exclude_authorInput">Exclude</button>
-                <button class="clear-single-field-button" id="clear_authorInput">Clear</button>
+            <div class="tabs-container" id="tabs-container">
+
             </div>
 
-            <div class="field-container">
-                <label class="field-label">Author(s) Credentials</label>
-                <div class="field-input" id="authorCredentialsInput" contenteditable="true"></div>
-                <button class="exclude-field-button" id="exclude_authorCredentialsInput">Exclude</button>
-                <button class="clear-single-field-button" id="clear_authorCredentialsInput">Clear</button>
-            </div>
+            <button id="new-tab">+</button>
 
-            <div class="field-container">
-                <label class="field-label" id="accessedDateLabel">Accessed Date</label>
-                <button id="accessedDateButton">Today</button>
-                <div class="field-input" id="accessedDateInput" contenteditable="true"></div>
-                <button class="exclude-field-button" id="exclude_accessedDateInput">Exclude</button>
-                <button class="clear-single-field-button" id="clear_accessedDateInput">Clear</button>
-            </div>
-
-            <div class="field-container">
-                <label class="field-label">Published Date</label>
-                <div class="field-input" id="publishedDateInput" contenteditable="true"></div>
-                <button class="exclude-field-button" id="exclude_publishedDateInput">Exclude</button>
-                <button class="clear-single-field-button" id="clear_publishedDateInput">Clear</button>
-            </div>
-
-            <div class="field-container">
-                <label class="field-label">Publisher</label>
-                <div class="field-input" id="publisherInput" contenteditable="true" ></div>
-                <button class="exclude-field-button" id="exclude_publisherInput">Exclude</button>
-                <button class="clear-single-field-button" id="clear_publisherInput">Clear</button>
-            </div>
-
-            <div class="field-container">
-                <label class="field-label">Publisher Credentials</label>
-                <div class="field-input" id="publisherCredentialsInput" contenteditable="true"></div>
-                <button class="exclude-field-button" id="exclude_publisherCredentialsInput">Exclude</button>
-                <button class="clear-single-field-button" id="clear_publisherCredentialsInput">Clear</button>
-            </div>
-
-            <div class="field-container">
-                <label class="field-label">Article Title</label>
-                <div class="field-input" id="articleInput" contenteditable="true"></div>
-                <button class="exclude-field-button" id="exclude_articleInput">Exclude</button>
-                <button class="clear-single-field-button" id="clear_articleInput">Clear</button>
-            </div>
-
-            <div class="field-container">
-                <label class="field-label">Article Link</label>
-                <div class="field-input" id="linkInput" contenteditable="true"></div>
-                <button class="exclude-field-button" id="exclude_linkInput">Exclude</button>
-                <button class="clear-single-field-button" id="clear_linkInput">Clear</button>
-            </div>
-
-            <div class="evidence-container">
-                <div class="field-container">
-                    <label class="field-label">Evidence</label>
-                    <div class="field-input" id="evidenceInput" contenteditable="true"></div>
-                    <button class="exclude-field-button" id="exclude_evidenceInput">Exclude</button>
-                    <button class="clear-single-field-button" id="clear_evidenceInput">Clear</button>
-                </div>
-<!--                <div class="field-container">-->
-<!--                    <div class="field-input" id="evidenceImportanceInput" style="-->
-<!--                    max-width: 67%; padding: 40px;"></div>-->
-<!--                    <button id="evidenceImportanceInputUnderline">Toggle Underline</button>-->
-<!--                </div>-->
-            </div>
-
-            <div class="field-container">
-                <label class="field-label">Impact</label>
-                <div class="field-input" id="impactInput" contenteditable="true"></div>
-                <button class="exclude-field-button" id="exclude_impactInput">Exclude</button>
-                <button class="clear-single-field-button" id="clear_impactInput">Clear</button>
-            </div>
-
-            <div class="field-container">
-                <button id="copyButton">Copy</button>
-                <div class="formatted-evidence" id="formattedEvidence"></div>
-                <button id="clearAllButton">Clear All</button>
-            </div>
-
-            <br>
-            <div class="user-manual" style="border: 2px #ccc solid"></div>
-
-            <br>
-            <div class="major-change-log" style="border: 2px #ccc solid">
-                <h2>Major Change Log</h2>
-                <div style="width: 40%; margin-left: 30%; margin-right: 30%">
-                    =======3/29/2024 | NCFCA Auto Evidencer Version 2.1=======<br>
-                    <br>
-                    Additions:<br>
-                    - Publicly viewable Major Change Log<br>
-                    - Exclude/Include Field Buttons<br>
-                    - Single-Field Clear Buttons<br>
-                    - InputField AutoSelection on mouseenter<br>
-                    - Styling (hover-shadows & bg-color change)<br>
-                    <br>
-                    Deletions:<br>
-                    - R.I.P. Potat 2023-2024 (He still lives in the tab icon tho :DDD)<br>
-                    <br>
-                    Possible Upcoming Features:<br>
-                    - Themes, Button Textures, Fonts :O<br>
-                    - Transition Animations :P<br>
-                    - Custom evidence format ordering :D<br>
-                    <br>
-                    Notes:<br>
-                    Ewwo :3 Email / google chat to me if you have suggestions or comments!
-                </div>
-                <br>
-            </div>
+            <a id="settings-tab" href="#settings">Settings</a>
+            <a id="about-tab" href="#about">About</a>
         </div>
+
+        <div class="content" id="content">
+
+        </div>
+
     </div>
 </body>
 </html>
