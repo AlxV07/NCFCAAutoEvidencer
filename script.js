@@ -1,3 +1,5 @@
+// === Constants & Values ===
+
 const settingsContent = `
 <h2>Settings</h2>
 To be implemented soon.<br><br>
@@ -5,7 +7,6 @@ To be implemented soon.<br><br>
 NOTICE: Massive rework of application in progress.  Please report any bugs!<br><br>
 
 Settings will include: <br>
-- Option to cleanly disable evidence-saving (disable cookies). <br>
 - Access to auto-citation database. <br>
 - Color theme customization. <br>
 - Encoded evidence sharer & loader. <br>
@@ -23,12 +24,9 @@ Copy-and-paste evidence straight from sources to automatically format cards.
 
 NCFCAAutoEvidencer Version 3+ introduces new usability, wrapping the good old Evidencer in a multi-tab database-powered application.<br>
 Version 3+ will enable users to:<br>
-- Customize field arrangement in evidence citations.<br>
-- Manually emphasize text excerpts from evidence in-Evidencer.<br>
 - Automatically cite from a growing database of citations of known authors, publishers, and websites.<br>
-- Save, edit, and share multiple evidence citations across sessions and devices.<br>
-- Choose and create custom UI color themes.<br>
-- Work on multiple evidence citations in different tabs*. <br><br>
+- Save, edit, and share multiple evidence citations across sessions and devices using tabs.*<br>
+- Choose and create custom UI color themes.<br><br>
 
 NOTICE: Massive rework of application in progress.  Please report any bugs!<br><br>
 
@@ -40,8 +38,13 @@ Any suggestions, comments, or feedback is appreciated! <br><br>
 
 Contact: alexander.kai.chen@gmail.com | <a href="https://alxv07.github.io/AboutMe/">https://alxv07.github.io/AboutMe/</a> <br>
 Chen/Kuykendall | Region 11, 2023-2024 | Sts. Peter & Paul Speech & Debate<br>
-Chen/O'Connors | Region 11, 2024-2025 | Sts. Peter & Paul Speech & Debate<br><br>
-`;
+Chen/O'Connors | Region 11, 2024-2025 | Sts. Peter & Paul Speech & Debate<br><br>`;
+
+const tabSplit = '$7T@B37$'
+const itemSplit = '$71T3MS7$'
+const fieldValSplit = '$7F13LDS7$'
+const cookiesStart = '$7ST@7T7$'
+const cookiesEnd = '$73N0S7$'
 
 const defaultFieldOrder = 'author,authorCredentials,publisher,publisherCredentials,publishedDate,title,link,accessed,evidence,impact'.split(',');
 const defaultExcluded = 'n,n,n,n,n,n,n,n,n,n'.split(',');
@@ -54,6 +57,42 @@ const hashToContent = new Map([
 ]);
 
 let prevTab = null;
+
+
+// === Tabs ===
+
+function getTabs() {
+    const tabsContainer = document.getElementById('tabs-container');
+    return Array.from(tabsContainer.querySelectorAll('a'));
+}
+
+function newTab() {
+    const tabsContainer = document.getElementById('tabs-container')
+    const tab = document.createElement('a');
+    tab.textContent = `Tab ${getTabs().length}`;
+    tab.href = `#tab${getTabs().length}`;
+    hashToContent.set(`#tab${getTabs().length}`, [defaultFieldOrder, defaultExcluded, defaultFieldValues]);  // Temp TODO: change to preferred fieldOrder (After cookies implemented)
+    tabsContainer.appendChild(tab);
+    tabsContainer.scrollTop = tabsContainer.scrollHeight;
+    tab.click();
+}
+
+function initializeTabsContainer() {
+    const tabsContainer = document.getElementById('tabs-container')
+    for (const hashToContentKey of hashToContent.keys()) {
+        if (hashToContent.get(hashToContentKey) !== hashToContentKey) {  // Is a tab
+            const tab = document.createElement('a');
+            tab.textContent = `Tab ${getTabs().length}`;
+            tab.href = hashToContentKey;
+            tabsContainer.appendChild(tab);
+            tabsContainer.scrollTop = tabsContainer.scrollHeight;
+            tab.click();
+        }
+    }
+}
+
+
+// === Window Listeners ===
 
 function onHashChange() {
     let hash = window.location.hash;
@@ -100,36 +139,6 @@ function onHashChange() {
     content.innerHTML = newContent;
 }
 
-function getTabs() {
-    const tabsContainer = document.getElementById('tabs-container');
-    return Array.from(tabsContainer.querySelectorAll('a'));
-}
-
-function newTab() {
-    const tabsContainer = document.getElementById('tabs-container')
-    const tab = document.createElement('a');
-    tab.textContent = `Tab ${getTabs().length}`;
-    tab.href = `#tab${getTabs().length}`;
-    hashToContent.set(`#tab${getTabs().length}`, [defaultFieldOrder, defaultExcluded, defaultFieldValues]);  // Temp TODO: change to preferred fieldOrder (After cookies implemented)
-    tabsContainer.appendChild(tab);
-    tabsContainer.scrollTop = tabsContainer.scrollHeight;
-    tab.click();
-}
-
-function initializeTabsContainer() {
-    const tabsContainer = document.getElementById('tabs-container')
-    for (const hashToContentKey of hashToContent.keys()) {
-        if (hashToContent.get(hashToContentKey) !== hashToContentKey) {  // Is a tab
-            const tab = document.createElement('a');
-            tab.textContent = `Tab ${getTabs().length}`;
-            tab.href = hashToContentKey;
-            tabsContainer.appendChild(tab);
-            tabsContainer.scrollTop = tabsContainer.scrollHeight;
-            tab.click();
-        }
-    }
-}
-
 function onLoad() {
     const hash = window.location.hash;
     if (hash !== '') {
@@ -142,6 +151,9 @@ function onLoad() {
 
 window.addEventListener('load', onLoad);
 window.addEventListener('hashchange', onHashChange);
+
+
+// === Cookies ===
 
 function loadCookies() {
     try {
@@ -219,41 +231,8 @@ function stringifyTabData(hash) {
     return hash + itemSplit + fieldOrder + itemSplit + excluded + itemSplit + fieldValues
 }
 
-const tabSplit = '$7T@B37$'
-const itemSplit = '$71T3MS7$'
-const fieldValSplit = '$7F13LDS7$'
-const cookiesStart = '$7ST@7T7$'
-const cookiesEnd = '$73N0S7$'
-/*
-Evidencing Setup Data Stored per tab:
-fieldOrder, excludedFields, fieldValues
 
-tabs split by `$7T@B37$`
-items split by `$7F13L0S7$`
-fieldOrder = [a,b,c...]
-excluded = [y,n,y...]  // y=yes, n=no
-fieldValues split by `$7ST@7T7$`
-
-
-On tab selected:
-Load evidencing setup for tab
-
-On new tab:
-Create new evidencing setup (default or from preferred setup stored in cookies)
-
-Fields:
-Author
-AuthorCredentials
-Publisher
-PublisherCredentials
-PublishedDate
-ArticleTitle
-ArticleLink
-AccessedDate
-Evidence
-Impact
- */
-
+// === Evidencing Setup ===
 
 function generateEvidencingSetupContentFrom(data) {
     const fieldOrder = data[0]
@@ -297,7 +276,9 @@ function generateFieldContentFrom(field) {
     </div>`;
 }
 
+
 // === Evidencing ===
+
 function timesNewRomanSpan(text) {return `<span style="font-family: 'Times New Roman', Times, serif">${text}</span>`}
 function italicizedSpan(text) {return `<span style="font-style: italic">${text}</span>`}
 function boldSpan(text) {return `<span style="font-weight: bold">${text}</span>`}
@@ -412,7 +393,6 @@ function updateFormattedText() {
         const element = document.getElementById('input_' + field)
         isDisabled[field] = element.style.textDecoration === 'line-through'
     })
-    // TODO: Replace old way of generating with following field order
     let citationText = ''
     if (!isDisabled['author']) {
         citationText += `According to ${author} `
