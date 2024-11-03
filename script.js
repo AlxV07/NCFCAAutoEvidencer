@@ -14,8 +14,7 @@ NOTICE: Massive rework of application in progress.  Please report any bugs!<br><
 
 Settings will include: <br>
 - Access to auto-citation database. <br>
-- Color theme customization. <br>
-- Encoded evidence sharer & loader. <br> `;
+- Color theme customization. <br>`;
 
 const aboutContent = `
 <h2>About</h2>
@@ -30,7 +29,7 @@ Copy-and-paste evidence straight from sources to automatically format cards.
 NCFCAAutoEvidencer Version 3+ introduces new usability, wrapping the good old Evidencer in a multi-tab database-powered application.<br>
 Version 3+ will enable users to:<br>
 - Automatically cite from a growing database of citations of known authors, publishers, and websites.<br>
-- Save, edit, and share multiple evidence citations across sessions and devices using tabs.<br>
+- Save & edit multiple pieces of evidence across sessions and devices with tabs.<br>
 - Choose and create custom UI color themes.<br><br>
 
 NOTICE: Massive rework of application in progress.  Please report any bugs!<br><br>
@@ -87,7 +86,7 @@ function newTab() {
     const tab = document.createElement('a');
 
     let href = (Date.now() % 1000).toString()
-    while (hashToContent.has(`#tab${href}`)) {
+    while (hashToContent.has(`#tab${href}`) || (href.startsWith('6') && href.endsWith('6'))) {
         href = (Date.now() % 1000).toString()
     }
 
