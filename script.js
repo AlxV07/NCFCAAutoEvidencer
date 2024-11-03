@@ -1,3 +1,9 @@
+/*
+DISCLAIMER: This code is absolutely disgusting and was put together while half-awake.  Plus it's JS.
+I might try to clean it up, but it works rn & I don't want to break everything - so we'll see.
+ */
+
+
 // === Constants & Values ===
 
 const settingsContent = `
@@ -9,14 +15,13 @@ NOTICE: Massive rework of application in progress.  Please report any bugs!<br><
 Settings will include: <br>
 - Access to auto-citation database. <br>
 - Color theme customization. <br>
-- Encoded evidence sharer & loader. <br>
-`;
+- Encoded evidence sharer & loader. <br> `;
 
 const aboutContent = `
 <h2>About</h2>
 
-NCFCAAutoEvidencer Version: 3.0.1.1<br>
-Last updated: 11/2/24<br><br>
+NCFCAAutoEvidencer Version: 3.0.1.3<br>
+Last updated: 11/3/24<br><br>
 
 A tool to quickly format evidence for NCFCA Debate.
 Copy-and-paste evidence straight from sources to automatically format cards.
@@ -25,14 +30,12 @@ Copy-and-paste evidence straight from sources to automatically format cards.
 NCFCAAutoEvidencer Version 3+ introduces new usability, wrapping the good old Evidencer in a multi-tab database-powered application.<br>
 Version 3+ will enable users to:<br>
 - Automatically cite from a growing database of citations of known authors, publishers, and websites.<br>
-- Save, edit, and share multiple evidence citations across sessions and devices using tabs.*<br>
+- Save, edit, and share multiple evidence citations across sessions and devices using tabs.<br>
 - Choose and create custom UI color themes.<br><br>
 
 NOTICE: Massive rework of application in progress.  Please report any bugs!<br><br>
 
 NOTICE: NCFCAAutoEvidencer Version 3+ uses cookies to, and only to, save evidence in-browser across sessions. Blocking cookies blocks this feature.<br><br>
-
-*NOTICE: Tab deletion has yet to be implemented; to delete all tabs, clear cookies for this website.<br><br>
 
 Any suggestions, comments, or feedback is appreciated! <br><br>
 
@@ -46,7 +49,7 @@ const fieldValSplit = '$7F13LDS7$'
 const cookiesStart = '$7ST@7T7$'
 const cookiesEnd = '$73N0S7$'
 
-const defaultFieldOrder = 'author,authorCredentials,publisher,publisherCredentials,publishedDate,title,link,accessed,evidence,impact'.split(',');
+const defaultFieldOrder = 'author,authorCredentials,publisher,publisherCredentials,publishedDate,title,accessed,link,evidence,impact'.split(',');
 const defaultExcluded = 'n,n,n,n,n,n,n,n,n,n'.split(',');
 const defaultFieldValues = ',,,,,,,,,'.split(',');
 const tabNotFoundContent = `<h2>Tab Not Found</h2><p>The requested tab does not exist.</p>`;
@@ -56,7 +59,20 @@ const hashToContent = new Map([
     // Hash -> [fieldOrder, excluded, fieldValues]
 ]);
 
-let prevTab = null;
+const fieldToLabel = new Map([
+    ['author', 'Authors(s)'],
+    ['authorCredentials', 'Authors(s) Credentials'],
+    ['publisher', 'Publisher'],
+    ['publisherCredentials', 'Publisher Credentials'],
+    ['publishedDate', 'Published Date'],
+    ['title', 'Article Title'],
+    ['accessed', 'Accessed'],
+    ['link', 'Article Link'],
+    ['evidence', 'Evidence'],
+    ['impact', 'Impact'],
+]);
+
+let curTab = null;
 
 
 // === Tabs ===
@@ -69,21 +85,50 @@ function getTabs() {
 function newTab() {
     const tabsContainer = document.getElementById('tabs-container')
     const tab = document.createElement('a');
-    tab.textContent = `Tab ${getTabs().length}`;
-    tab.href = `#tab${getTabs().length}`;
-    hashToContent.set(`#tab${getTabs().length}`, [defaultFieldOrder, defaultExcluded, defaultFieldValues]);  // Temp TODO: change to preferred fieldOrder (After cookies implemented)
+
+    let href = (Date.now() % 1000).toString()
+    while (hashToContent.has(`#tab${href}`)) {
+        href = (Date.now() % 1000).toString()
+    }
+
+    tab.textContent = `Tab ${href}`;
+    tab.href = `#tab${href}`;
+    hashToContent.set(`#tab${href}`, [defaultFieldOrder, defaultExcluded, defaultFieldValues]);
     tabsContainer.appendChild(tab);
     tabsContainer.scrollTop = tabsContainer.scrollHeight;
     tab.click();
 }
 
+function deleteTab() {
+    const tabsContainer = document.getElementById('tabs-container')
+    let tabs = getTabs()
+    if (tabs.length === 0) {
+        return;
+    }
+    hashToContent.delete(`${window.location.hash}`);
+    const c = document.querySelector(`a[href~="${window.location.hash}"]`)
+    tabsContainer.removeChild(c)
+    const i = tabs.indexOf(c)
+
+    updateCookies()
+
+    tabs = getTabs()
+
+    if (tabs.length === 0) {
+        document.getElementById('about-tab').click()
+    } else {
+        const m = Math.max(i - 1, 0)
+        tabs[m].click()
+    }
+}
+
 function initializeTabsContainer() {
     const tabsContainer = document.getElementById('tabs-container')
-    for (const hashToContentKey of hashToContent.keys()) {
-        if (hashToContent.get(hashToContentKey) !== hashToContentKey) {  // Is a tab
+    for (const hash of hashToContent.keys()) {
+        if (hashToContent.get(hash) !== hash) {  // Is a tab
             const tab = document.createElement('a');
-            tab.textContent = `Tab ${getTabs().length}`;
-            tab.href = hashToContentKey;
+            tab.textContent = `Tab ${hash.slice(4)}`;
+            tab.href = hash;
             tabsContainer.appendChild(tab);
             tabsContainer.scrollTop = tabsContainer.scrollHeight;
             tab.click();
@@ -98,18 +143,21 @@ function onHashChange() {
     let hash = window.location.hash;
     const content = document.getElementById('content');
     let newContent;
-    if (hash === '') {
-        hash = '#about'
-    }
     if (hashToContent.has(hash)) {
         const tab = document.querySelector(`a[href="${hash}"]`)
-        tab.style.backgroundColor = '#ad2d2d'
-        if (prevTab !== null) {
-            prevTab.style.backgroundColor = '#444'
+        if (curTab !== null) {
+            const t = curTab
+            t.style.backgroundColor = '#444'
+            curTab.onmouseenter = () => {t.style.backgroundColor = '#555'}
+            curTab.onmouseleave = () => {t.style.backgroundColor = '#444'}
         }
-        prevTab = tab;
+        curTab = tab;
+        curTab.style.backgroundColor = '#ad2d2d'
+        curTab.onmouseenter = () => {tab.style.backgroundColor = '#ad3d2d'}
+        curTab.onmouseleave = () => {tab.style.backgroundColor = '#ad2d2d'}
 
         loadCookies()
+
         const data = hashToContent.get(hash);
         if (hash === data) {  // Not a tab
             switch (hash) {
@@ -125,11 +173,11 @@ function onHashChange() {
         } else {
             generateEvidencingSetupContentFrom(data)
             addContentListeners()
-            for (let i = 0; i < data[0].length; i++) {
+            for (let i = 0; i < data[0].length; i++) {  // Exclude
                 if (data[1][i] === 'y') {
                     document.getElementById('exclude_' + data[0][i]).onclick(true) // true for skip update
                 }
-            }  // Exclude
+            }
             updateFormattedText()
             return
         }
@@ -144,9 +192,13 @@ function onLoad() {
     if (hash !== '') {
         onHashChange();
     }
-    document.getElementById('new-tab').onclick = () => {newTab()}
+    document.getElementById('new-tab').addEventListener('click', newTab)
     loadCookies()
     initializeTabsContainer()
+
+    const aboutTab = document.getElementById('about-tab');
+    curTab = aboutTab
+    aboutTab.click();
 }
 
 window.addEventListener('load', onLoad);
@@ -157,9 +209,12 @@ window.addEventListener('hashchange', onHashChange);
 
 function loadCookies() {
     try {
+        if (document.cookie === '') {
+            return
+        }
         const cookie = document.cookie.split(cookiesStart, 2)[1].split(cookiesEnd, 2)[0]
         if (cookie === '') {
-            return
+            return;
         }
 
         const tabs = cookie.split(tabSplit)
@@ -182,13 +237,7 @@ function loadCookies() {
     }
 }
 
-function updateCookies() {
-    /*
-    User opens page; loads cookie data, populating cookieData
-    When value edited, tab created, update cookieData, stringify, then set as cookie
-     */
-    let result = '';
-
+function updateCurrentTabContent() {
     let hash = window.location.hash;
     const fieldOrderArray = hashToContent.get(hash)[0]
     const excludedArray = []
@@ -199,6 +248,10 @@ function updateCookies() {
     })
     hashToContent.get(hash)[1] = excludedArray
     hashToContent.get(hash)[2] = fieldValueArray
+}
+
+function updateCookies() {
+    let result = '';
 
     for (const hashToContentKey of hashToContent.keys()) {
         if (hashToContent.get(hashToContentKey) !== hashToContentKey) {  // Is a tab
@@ -232,48 +285,92 @@ function stringifyTabData(hash) {
 }
 
 
-// === Evidencing Setup ===
+// === Evidencing Setup Generation ===
 
 function generateEvidencingSetupContentFrom(data) {
-    const fieldOrder = data[0]
-    const excluded = data[1]
-    const fieldValues = data[2]
-    let content = `<h2>${prevTab.textContent}</h2>`;
-    fieldOrder.forEach(field => {
-         content += generateFieldContentFrom(field);
-    })
+    const [fieldOrder, excluded, fieldValues] = data
+
+    let content = `
+    <h2 id="content-title">${curTab.textContent} <button id="delete-tab">Delete</button> </h2>
+    `;
+
+    fieldOrder.forEach(field => { content += generateFieldContentFrom(field); })
+
     content += `
     <div class="field-container">
-        <button class="copyButton">Copy</button>
-        <div class="formatted-evidence"></div>
-        <button class="clearAllButton">Clear All</button>
+        <button id="copy-button">Copy</button>
+        <div id="formatted-display"></div>
+        <button id="clearall-button">Clear All</button>
     </div> `;
+
     document.getElementById('content').innerHTML = content;
+
     for (let i = 0; i < fieldOrder.length; i++) {
         document.getElementById('input_' + fieldOrder[i]).textContent = fieldValues[i]
     }
 }
 
-const fieldToLabel = new Map([
-    ['author', 'Authors(s)'],
-    ['authorCredentials', 'Authors(s) Credentials'],
-    ['publisher', 'Publisher'],
-    ['publisherCredentials', 'Publisher Credentials'],
-    ['publishedDate', 'Published Date'],
-    ['title', 'Article Title'],
-    ['link', 'Article Link'],
-    ['accessed', 'Accessed'],
-    ['evidence', 'Evidence'],
-    ['impact', 'Impact'],
-]);
 function generateFieldContentFrom(field) {
     return `<div class="field-container">
         <label class="field-label" id="label_${field}">${fieldToLabel.get(field)}</label>` +
-        (field === "accessed"? `<button class="accessedDateButton">Today</button>` : '') +
+        (field === "accessed"? `<button id="accessed-button">Today</button>` : '') +
         `<div class="field-input" id="input_${field}" contentEditable="true"></div>
         <button class="field-exclude" id="exclude_${field}">Exclude</button>
         <button class="field-clear" id="clear_${field}">Clear</button>
     </div>`;
+}
+
+function addContentListeners() {
+    document.getElementById('delete-tab').addEventListener('click', deleteTab)
+    document.getElementById('accessed-button').addEventListener('click', setAccessedDate)
+    document.getElementById('copy-button').addEventListener('click', copyEvd)
+    document.getElementById('clearall-button').addEventListener('click', clearForm)
+
+    const fieldContainers = document.querySelectorAll('div[class="field-container"]')
+    for (const element of fieldContainers) {
+        element.addEventListener('mouseenter', () => {element.style.backgroundColor = '#f5f5f5'})
+        element.addEventListener('mouseleave', () => {element.style.backgroundColor = 'white'})
+        element.style.backgroundColor = 'white'
+    }
+
+    defaultFieldOrder.forEach(field => {
+        const inputFieldElement = document.getElementById('input_' + field);
+        inputFieldElement.addEventListener('input', updateFormattedText)
+
+        inputFieldElement.addEventListener('mouseenter', () => {
+            if (inputFieldElement.style.backgroundColor === 'white' || !inputFieldElement.style.backgroundColor) {
+                inputFieldElement.focus()
+                inputFieldElement.style.boxShadow = '2px 2px 3px gray'
+            }
+        })
+        inputFieldElement.addEventListener('mouseleave', () => {
+            inputFieldElement.blur()
+            inputFieldElement.style.boxShadow = ''
+        })
+        const inputFieldExcludeButton = document.getElementById('exclude_' + field)
+        inputFieldExcludeButton.onclick = (skipUpdate) => {
+            if (inputFieldExcludeButton.innerHTML === 'Exclude') {
+                inputFieldExcludeButton.innerHTML = 'Include'
+                inputFieldElement.contentEditable = 'false'
+                inputFieldElement.style.textDecoration = 'line-through'
+                inputFieldElement.style.backgroundColor = '#ffe9e9'
+            } else {
+                inputFieldExcludeButton.innerHTML = 'Exclude'
+                inputFieldElement.contentEditable = 'true'
+                inputFieldElement.style.textDecoration = ''
+                inputFieldElement.style.backgroundColor = 'white'
+            }
+            if (skipUpdate === true) {
+                return
+            }
+            updateFormattedText()
+        }
+        const inputFieldClearButton = document.getElementById('clear_' + field)
+        inputFieldClearButton.addEventListener('click', () => {
+            inputFieldElement.innerHTML = ''
+            updateFormattedText()
+        })
+    })
 }
 
 
@@ -323,60 +420,10 @@ function clearForm() {
     updateFormattedText()
 }
 
-function addContentListeners() {
-    document.querySelector('[class~=copyButton]').addEventListener('click', copyEvd)
-    document.querySelector('[class~=accessedDateButton]').addEventListener('click', () => setAccessedDate())
-    document.querySelector('[class~=clearAllButton]').addEventListener('click', clearForm)
-
-    const fieldContainers = document.querySelectorAll('div[class="field-container"]')
-    for (const element of fieldContainers) {
-        element.addEventListener('mouseenter', () => {element.style.backgroundColor = '#f5f5f5'})
-        element.addEventListener('mouseleave', () => {element.style.backgroundColor = 'white'})
-    }
-
-    defaultFieldOrder.forEach(field => {
-        const inputFieldElement = document.getElementById('input_' + field);
-        inputFieldElement.addEventListener('input', updateFormattedText)
-
-        inputFieldElement.addEventListener('mouseenter', () => {
-            if (inputFieldElement.style.backgroundColor === 'white' || !inputFieldElement.style.backgroundColor) {
-                inputFieldElement.focus()
-                inputFieldElement.style.boxShadow = '2px 2px 3px gray'
-            }
-        })
-        inputFieldElement.addEventListener('mouseleave', () => {
-            inputFieldElement.blur()
-            inputFieldElement.style.boxShadow = ''
-        })
-        const inputFieldExcludeButton = document.getElementById('exclude_' + field)
-        inputFieldExcludeButton.onclick = (skipUpdate) => {
-            if (inputFieldExcludeButton.innerHTML === 'Exclude') {
-                inputFieldExcludeButton.innerHTML = 'Include'
-                inputFieldElement.contentEditable = 'false'
-                inputFieldElement.style.textDecoration = 'line-through'
-                inputFieldElement.style.backgroundColor = '#ffe9e9'
-            } else {
-                inputFieldExcludeButton.innerHTML = 'Exclude'
-                inputFieldElement.contentEditable = 'true'
-                inputFieldElement.style.textDecoration = ''
-                inputFieldElement.style.backgroundColor = 'white'
-            }
-            if (skipUpdate === true) {
-                return
-            }
-            updateFormattedText()
-        }
-        const inputFieldClearButton = document.getElementById('clear_' + field)
-        inputFieldClearButton.addEventListener('click', () => {
-            inputFieldElement.innerHTML = ''
-            updateFormattedText()
-        })
-    })
-}
-
 function updateFormattedText() {
-    document.querySelector('[class~=copyButton]').textContent = 'Copy'
-    const formattedEvidence = document.querySelector('[class~=formatted-evidence]');
+    document.getElementById('copy-button').textContent = 'Copy'
+    const formattedDisplay = document.getElementById('formatted-display');
+
     const author = importantSpan(document.getElementById('input_author').textContent)
     const authorCredentials = credentialSpan(document.getElementById('input_authorCredentials').textContent)
     const accessed = nonImportantSpan(document.getElementById('input_accessed').textContent)
@@ -400,20 +447,20 @@ function updateFormattedText() {
     if (!isDisabled['authorCredentials']) {
         citationText += authorCredentials + ' '
     }
-    if (!isDisabled['accessed']) {
-        citationText += `Accessed on ${accessed} `
-    }
-    if (!isDisabled['publishedDate']) {
-        citationText += `Published on ${published} `
-    }
     if (!isDisabled['publisher']) {
         citationText += `Published by ${publisher} `
     }
     if (!isDisabled['publisherCredentials']) {
         citationText += publisherCredentials + ' '
     }
+    if (!isDisabled['publishedDate']) {
+        citationText += `Published on ${published} `
+    }
     if (!isDisabled['title']) {
         citationText += article + ' '
+    }
+    if (!isDisabled['accessed']) {
+        citationText += `Accessed on ${accessed} `
     }
     if (!isDisabled['link']) {
         citationText += link + ' '
@@ -425,6 +472,7 @@ function updateFormattedText() {
     if (!isDisabled['impact']) {
         citation += `<br>${impact}`
     }
-    formattedEvidence.innerHTML = timesNewRomanSpan(`${citation}`)
+    formattedDisplay.innerHTML = timesNewRomanSpan(`${citation}`)
+    updateCurrentTabContent()
     updateCookies()
 }
