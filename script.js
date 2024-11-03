@@ -145,7 +145,7 @@ window.addEventListener('hashchange', onHashChange);
 
 function loadCookies() {
     try {
-        const cookie = document.cookie
+        const cookie = document.cookie.split(cookiesStart, 2)[1].split(cookiesEnd, 2)[0]
         if (cookie === '') {
             return
         }
@@ -194,7 +194,7 @@ function updateCookies() {
         }
     }
     result = result.substring(0, result.length - tabSplit.length)
-    document.cookie = result
+    document.cookie = cookiesStart + result + cookiesEnd
 }
 
 function stringifyTabData(hash) {
@@ -220,8 +220,10 @@ function stringifyTabData(hash) {
 }
 
 const tabSplit = '$7T@B37$'
-const itemSplit = '$7F13L0S7$'
-const fieldValSplit = '$7ST@7T7$'
+const itemSplit = '$71T3MS7$'
+const fieldValSplit = '$7F13LDS7$'
+const cookiesStart = '$7ST@7T7$'
+const cookiesEnd = '$73N0S7$'
 /*
 Evidencing Setup Data Stored per tab:
 fieldOrder, excludedFields, fieldValues
