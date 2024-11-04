@@ -398,7 +398,7 @@ function setAccessedDate() {
 }
 
 function copyEvd() {
-    let str = document.querySelector("[class~=formatted-evidence]").innerHTML.trim()
+    let str = document.getElementById('formatted-display').innerHTML.trim()
     function listener(e) {
         e.clipboardData.setData("text/html", str);
         e.clipboardData.setData("text/plain", str);
@@ -407,7 +407,7 @@ function copyEvd() {
     document.addEventListener("copy", listener);
     document.execCommand("copy");
     document.removeEventListener("copy", listener);
-    document.getElementById('copyButton').textContent = 'Copied ✓'
+    document.getElementById('copy-button').textContent = 'Copied ✓'
 }
 
 function clearForm() {
