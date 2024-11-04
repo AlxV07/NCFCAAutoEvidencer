@@ -28,7 +28,8 @@ Copy-and-paste evidence straight from sources to automatically format cards.
 
 NCFCAAutoEvidencer Version 3+ introduces new usability, wrapping the good old AutoEvidencer in a multi-tab database-powered application.<br>
 Version 3+ will enable users to:<br>
-- Automatically cite from a growing database of citations of known authors, publishers, and websites.<br>
+- Automatically cite from a database of known authors, publishers, and websites.<br>
+- Utilize a LLM to automatically extract credentials from websites.<br>
 - Save & edit multiple pieces of evidence across sessions and devices with tabs.<br>
 - Choose and create custom UI color themes.<br><br>
 
@@ -290,7 +291,7 @@ function generateEvidencingSetupContentFrom(data) {
     const [fieldOrder, excluded, fieldValues] = data
 
     let content = `
-    <h2 id="content-title">${curTab.textContent} <button id="delete-tab">Delete</button> </h2>
+    <h2 id="content-title">${curTab.textContent} <button id="delete-tab">Delete Tab</button> </h2>
     `;
 
     fieldOrder.forEach(field => { content += generateFieldContentFrom(field); })
@@ -425,11 +426,11 @@ function updateFormattedText() {
 
     const author = importantSpan(document.getElementById('input_author').textContent)
     const authorCredentials = credentialSpan(document.getElementById('input_authorCredentials').textContent)
-    const accessed = nonImportantSpan(document.getElementById('input_accessed').textContent)
     const published = importantSpan(document.getElementById('input_publishedDate').textContent)
     const publisher = importantSpan(document.getElementById('input_publisher').textContent)
     const publisherCredentials = credentialSpan(document.getElementById('input_publisherCredentials').textContent)
     const article = articleSpan(document.getElementById('input_title').textContent)
+    const accessed = nonImportantSpan(document.getElementById('input_accessed').textContent)
     const link = linkSpan(document.getElementById('input_link').textContent)
     const evd = evidenceSpan(document.getElementById('input_evidence').textContent)
     const impact = impactSpan(document.getElementById('input_impact').textContent)
@@ -607,3 +608,29 @@ const publisherToCredential = new Map([
     ]
 ]);
 
+// Potentially use LLM to extract author name & link to bio for article, then extract bio from link to bio
+// Please return in one line, separated by a semicolon, the author's name and the link to his bio from this html
+
+
+// const prompt = "What is the capital of France?";
+// async function sendTextToServer(text) {
+//     try {
+//         const response = await fetch('http://localhost:5000/process', {
+//             method: 'POST',
+//             headers: {
+//                 'Content-Type': 'application/json',
+//             },
+//             body: JSON.stringify({ text }),
+//         });
+//
+//         if (!response.ok) {
+//             throw new Error('Network response was not ok ' + response.statusText);
+//         }
+//
+//         const data = await response.json();
+//         console.log('Processed text from server:', data.processed_text);
+//     } catch (error) {
+//         console.error('There was a problem with the fetch operation:', error);
+//     }
+// }
+// await sendTextToServer(prompt)
