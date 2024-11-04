@@ -9,7 +9,10 @@ client = Client()
 
 
 def generate_response(prompt: str):
-    c = client.chat.completions.create(model="gpt-3.5-turbo", messages=[{"role": "user", "content": prompt}])
+    c = client.chat.completions.create(model="gpt-3.5-turbo", messages=[
+    {"role": "system", "content": "Find the author of this article and the link to his bio page from this HTML. Return the author's name and the link, separated by a semi-colon and no extra whitespace."},
+    {"role": "user", "content": prompt}
+    ])
     return c.choices[0].message.content
 
 

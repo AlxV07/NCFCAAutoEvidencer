@@ -611,8 +611,22 @@ const publisherToCredential = new Map([
 // Potentially use LLM to extract author name & link to bio for article, then extract bio from link to bio
 // Please return in one line, separated by a semicolon, the author's name and the link to his bio from this html
 
-
-// const prompt = "What is the capital of France?";
+// async function fetchLines(url) {
+//     try {
+//         const response = await fetch(url);
+//         if (!response.ok) {
+//             throw new Error(`HTTP error! Status: ${response.status}`);
+//         }
+//         const text = await response.text();
+//         const lines = text.split('\n');
+//         return lines.slice(0, 1).join('\n');
+//     } catch (error) {
+//         console.error('Error fetching HTML:', error);
+//         return null;
+//     }
+// }
+//
+// let u = 'https://www.cnn.com/2023/09/27/americas/costa-rica-migration-emergency-intl/index.html'
 // async function sendTextToServer(text) {
 //     try {
 //         const response = await fetch('http://localhost:5000/process', {
@@ -627,10 +641,16 @@ const publisherToCredential = new Map([
 //             throw new Error('Network response was not ok ' + response.statusText);
 //         }
 //
+//         console.log(response)
+//
 //         const data = await response.json();
-//         console.log('Processed text from server:', data.processed_text);
+//         console.log(data.processed_text);
 //     } catch (error) {
 //         console.error('There was a problem with the fetch operation:', error);
 //     }
 // }
-// await sendTextToServer(prompt)
+// console.log('sending...')
+// await sendTextToServer(await fetchLines(u))
+// await sendTextToServer("What is one plus two")
+// console.log('finished')
+//
