@@ -534,6 +534,8 @@ const publisherToName = new Map([
     ['reuters', 'Reuters'],
     ['cbsnews', 'CBS News'],
     ['ustr', 'Office of the United States Trade Representative'],
+    ['bloomberg', 'Bloomberg'],
+    ['foreignassistance', 'U.S. Government Foreign Assistance'],
 ])
 
 const publisherToCredential = new Map([
@@ -605,27 +607,41 @@ const publisherToCredential = new Map([
         'professionals with decades of specialized experience in trade issues and regions of the world. We ' +
         'negotiate directly with foreign governments to create trade agreements, to resolve disputes, and to ' +
         'participate in global trade policy organizations. '
+    ],
+    ['bloomberg',
+        'Bloomberg L.P. is an American privately held financial, software, data, and media company headquarted' +
+        'in Midtown Manhattan, New York City.'
     ]
+    ['dialogo-americas',
+        'DIÁLOGO is a professional digital military magazine published by the U.S. Southern Command. The website is published in four languages: English, Spanish, Portuguese, and Haitian Creole.\n' +
+        'DIÁLOGO is updated daily to address the current issues most important to the armed forces and other security professionals. Our audience comprises 30 nations in Latin America and the Caribbean.'
+    ]
+
 ]);
 
 // Potentially use LLM to extract author name & link to bio for article, then extract bio from link to bio
 // Please return in one line, separated by a semicolon, the author's name and the link to his bio from this html
 
-// async function fetchLines(url) {
-//     try {
-//         const response = await fetch(url);
-//         if (!response.ok) {
-//             throw new Error(`HTTP error! Status: ${response.status}`);
-//         }
-//         const text = await response.text();
-//         const lines = text.split('\n');
-//         return lines.slice(0, 1).join('\n');
-//     } catch (error) {
-//         console.error('Error fetching HTML:', error);
-//         return null;
-//     }
-// }
-//
+async function fetchLines(url) {
+    try {
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const text = await response.text();
+
+        const parser = new DOMParser()
+        const doc = parser.parseFromString(text, 'text/html');
+
+        console.log(doc)
+
+        return doc.body.textContent
+    } catch (error) {
+        console.error('Error fetching HTML:', error);
+        return null;
+    }
+}
+
 // let u = 'https://www.cnn.com/2023/09/27/americas/costa-rica-migration-emergency-intl/index.html'
 // async function sendTextToServer(text) {
 //     try {
@@ -644,13 +660,15 @@ const publisherToCredential = new Map([
 //         console.log(response)
 //
 //         const data = await response.json();
-//         console.log(data.processed_text);
+//         console.log(data.content);
 //     } catch (error) {
 //         console.error('There was a problem with the fetch operation:', error);
 //     }
 // }
-// console.log('sending...')
-// await sendTextToServer(await fetchLines(u))
-// await sendTextToServer("What is one plus two")
-// console.log('finished')
+// Testing
 //
+// const p = await fetchLines(u)
+// console.log(p)
+// console.log('sending...')
+// await sendTextToServer(p)
+// console.log('finished')
