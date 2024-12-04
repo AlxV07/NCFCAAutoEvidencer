@@ -209,27 +209,15 @@ window.addEventListener('hashchange', onHashChange);
 
 function loadCookies() {
     try {
-        if (document.cookie === '') {
-            return
-        }
+        if (document.cookie === '' || document.cookie.split(cookiesStart, 2)[1] === '') { return; }
         const cookie = document.cookie.split(cookiesStart, 2)[1].split(cookiesEnd, 2)[0]
-        if (cookie === '') {
-            return;
-        }
+        if (cookie === '') { return; }
 
-        const tabs = cookie.split(tabSplit)
-        tabs.forEach(data => {
-            const d = data.split(itemSplit)
-            const hash = d[0];
-            const fieldOrderS = d[1];
-            const excludedS = d[2];
-            const fieldValuesS = d[3];
-
-            const fieldOrder = fieldOrderS.substring(1, fieldOrderS.length - 1).split(',');
-            const excluded = excludedS.substring(1, excludedS.length - 1).split(',');
-            const fieldValues = fieldValuesS.substring(1, fieldValuesS.length - 1).split(fieldValSplit)
-
-            hashToContent.set(hash, [fieldOrder, excluded, fieldValues])
+        const tabContent = JSON.parse(cookie);
+        tabContent.forEach(data => {
+            const hash = data[0];
+            const d = data[1]
+            hashToContent.set(hash, d)
         })
 
     } catch (e) {
@@ -251,37 +239,13 @@ function updateCurrentTabContent() {
 }
 
 function updateCookies() {
-    let result = '';
-
+    const tabToContent = []
     for (const hashToContentKey of hashToContent.keys()) {
         if (hashToContent.get(hashToContentKey) !== hashToContentKey) {  // Is a tab
-            result += stringifyTabData(hashToContentKey) + tabSplit
+            tabToContent.push([hashToContentKey, hashToContent.get(hashToContentKey)])
         }
     }
-    result = result.substring(0, result.length - tabSplit.length)
-    document.cookie = cookiesStart + result + cookiesEnd
-}
-
-function stringifyTabData(hash) {
-    const fieldOrderArray = hashToContent.get(hash)[0]
-    const excludedArray = hashToContent.get(hash)[1]
-    const fieldValueArray = hashToContent.get(hash)[2]
-    let fieldOrder = '['
-    let excluded = '['
-    let fieldValues = '['
-    fieldOrderArray.forEach(field => {
-        fieldOrder += field + ','
-    })
-    excludedArray.forEach(e => {
-        excluded += e + ','
-    })
-    fieldValueArray.forEach(v => {
-        fieldValues += v + fieldValSplit
-    })
-    fieldOrder = fieldOrder.substring(0, fieldOrder.length - 1) + ']'
-    excluded = excluded.substring(0, excluded.length - 1) + ']'
-    fieldValues = fieldValues.substring(0, fieldValues.length - fieldValSplit.length) + ']'
-    return hash + itemSplit + fieldOrder + itemSplit + excluded + itemSplit + fieldValues
+    document.cookie = cookiesStart + JSON.stringify(tabToContent) + cookiesEnd
 }
 
 
@@ -609,14 +573,15 @@ const publisherToCredential = new Map([
         'participate in global trade policy organizations. '
     ],
     ['bloomberg',
-        'Bloomberg L.P. is an American privately held financial, software, data, and media company headquarted' +
+        'Bloomberg L.P. is an American privately held financial, software, data, and media company headquarted ' +
         'in Midtown Manhattan, New York City.'
-    ]
+    ],
     ['dialogo-americas',
-        'DIÁLOGO is a professional digital military magazine published by the U.S. Southern Command. The website is published in four languages: English, Spanish, Portuguese, and Haitian Creole.\n' +
-        'DIÁLOGO is updated daily to address the current issues most important to the armed forces and other security professionals. Our audience comprises 30 nations in Latin America and the Caribbean.'
+        'DIÁLOGO is a professional digital military magazine published by the U.S. Southern Command. The website is ' +
+        'published in four languages: English, Spanish, Portuguese, and Haitian Creole. DIÁLOGO is updated daily ' +
+        'to address the current issues most important to the armed forces and other security professionals. Our audience ' +
+        'comprises 30 nations in Latin America and the Caribbean.'
     ]
-
 ]);
 
 // Potentially use LLM to extract author name & link to bio for article, then extract bio from link to bio
