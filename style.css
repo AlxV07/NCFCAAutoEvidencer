@@ -26,9 +26,11 @@ button {
     align-items: center;
     overflow-y: scroll;
 }
+
 #toolbar h2 {
     margin-bottom: 20px;
 }
+
 #toolbar a {
     color: #fff;
     text-decoration: none;
@@ -41,9 +43,11 @@ button {
     transition: background-color 0.3s;
     cursor: pointer;
 }
+
 #toolbar a:hover {
     background-color: #555;
 }
+
 #toolbar button {
     color: #fff;
     text-decoration: none;
@@ -57,6 +61,7 @@ button {
     transition: background-color 0.3s;
     cursor: pointer;
 }
+
 #toolbar button:hover {
     background-color: #555;
 }
@@ -73,6 +78,7 @@ button {
     border: #555555 1px solid;
     border-radius: 5px;
 }
+
 #tabs-container a {
     color: #fff;
     text-decoration: none;
@@ -82,6 +88,7 @@ button {
     margin-bottom: 10px;
     transition: background-color 0.3s;
 }
+
 #tabs-container a:hover {
     background-color: #555;
 }
@@ -102,6 +109,7 @@ button {
     padding-bottom: 5px;
     padding-top: 5px;
 }
+
 .field-label {
     text-align: center;
     margin: 10px;
@@ -109,6 +117,7 @@ button {
     font-size: 11px;
     min-width: 110px;
 }
+
 .field-input {
     font-style: normal;
     font-family: "Times New Roman", serif;
@@ -125,12 +134,14 @@ button {
     line-height: 1.5;
     outline: none;
 }
+
 .field-clear {
     min-width: 50px;
     margin: 5px 15px;
     border-radius: 5px;
     background-color: #f6f6f6;
 }
+
 .field-exclude {
     min-width: 60px;
     margin: 5px 3px 5px 15px;
@@ -145,6 +156,7 @@ button {
     padding-right: 0;
     text-align: center;
 }
+
 #accessed-button {
     font-size: 11px;
     min-height: 12px;
@@ -163,6 +175,7 @@ button {
     max-width: 67%;
     margin: 10px auto;
 }
+
 #copy-button {
     margin: 20px auto;
     height: 45px;
@@ -170,6 +183,7 @@ button {
     border-radius: 5px;
     background-color: #f6f6f6;
 }
+
 #clearall-button {
     margin: 20px auto;
     height: 45px;

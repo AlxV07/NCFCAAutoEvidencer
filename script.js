@@ -1,12 +1,12 @@
 /*
-DISCLAIMER: This code is absolutely disgusting and was put together while half-awake.  Plus it's JS.
+DISCLAIMER: This code is quite iffy and was put together while half-awake, plus it's JS so.
 I might try to clean it up, but it works rn & I don't want to break everything - so we'll see.
  */
 
 
 // === Constants & Values ===
 
-const settingsContent = `
+const SettingsContent = `
 <h2>Settings</h2>
 To be implemented soon.<br><br>
 
@@ -14,13 +14,14 @@ NOTICE: Massive rework of application in progress.  Please report any bugs!<br><
 
 Settings will include: <br>
 - Control auto-citation tools. <br>
-- Color theme customization. <br>`;
+- Color theme customization. <br>
+`;
 
-const aboutContent = `
+const AboutContent = `
 <h2>About</h2>
 
-NCFCAAutoEvidencer Version: 3.1.2<br>
-Last updated: 11/3/24<br><br>
+NCFCAAutoEvidencer Version: 3.1.4<br>
+Last updated: 12/4/24<br><br>
 
 A tool to quickly format evidence for NCFCA Debate.
 Copy-and-paste evidence straight from sources to automatically format cards.
@@ -41,24 +42,19 @@ Any suggestions, comments, or feedback is appreciated! <br><br>
 
 Contact: alexander.kai.chen@gmail.com | <a href="https://alxv07.github.io/AboutMe/">https://alxv07.github.io/AboutMe/</a> <br>
 Chen/Kuykendall | Region 11, 2023-2024 | Sts. Peter & Paul Speech & Debate<br>
-Chen/O'Connors | Region 11, 2024-2025 | Sts. Peter & Paul Speech & Debate<br><br>`;
+Chen/O'Connors | Region 11, 2024-2025 | Sts. Peter & Paul Speech & Debate<br><br>
+`;
 
-const tabSplit = '$7T@B37$'
-const itemSplit = '$71T3MS7$'
-const fieldValSplit = '$7F13LDS7$'
-const cookiesStart = '$7ST@7T7$'
-const cookiesEnd = '$73N0S7$'
+const NonTabsHashToContent = new Map([['#about', AboutContent], ['#settings', SettingsContent]]);
+
+const tabNotFoundContent = `<h2>Tab Not Found</h2><p>The requested tab does not exist.</p>`;
+
+const cookiesStart = '$7ST@7T7$';
+const cookiesEnd = '$73N0S7$';
 
 const defaultFieldOrder = 'author,authorCredentials,publisher,publisherCredentials,publishedDate,title,accessed,link,evidence,impact'.split(',');
 const defaultExcluded = 'n,n,n,n,n,n,n,n,n,n'.split(',');
 const defaultFieldValues = ',,,,,,,,,'.split(',');
-const tabNotFoundContent = `<h2>Tab Not Found</h2><p>The requested tab does not exist.</p>`;
-const hashToContent = new Map([
-    ['#settings', '#settings'],
-    ['#about', '#about']
-    // Hash -> [fieldOrder, excluded, fieldValues]
-]);
-
 const fieldToLabel = new Map([
     ['author', 'Authors(s)'],
     ['authorCredentials', 'Authors(s) Credentials'],
@@ -72,67 +68,80 @@ const fieldToLabel = new Map([
     ['impact', 'Impact'],
 ]);
 
-let curTab = null;
+const TabsContainer = document.getElementById('tabs-container')
+const TabHashToData = new Map([]);  // Hash -> [fieldOrder, excluded, fieldValues]
 
+const ContentDisplay = document.getElementById('content');
+
+const aboutTab = document.getElementById('about-tab');
 
 // === Tabs ===
 
+let curTab = null;
+
 function getTabs() {
-    const tabsContainer = document.getElementById('tabs-container');
-    return Array.from(tabsContainer.querySelectorAll('a'));
+    return Array.from(TabsContainer.querySelectorAll('a'));
+}
+
+function addTabComponent(tab) {
+    TabsContainer.appendChild(tab);
+    TabsContainer.scrollTop = TabsContainer.scrollHeight;
+}
+
+function updateTab(hash, data) {
+    TabHashToData.set(hash, data);
 }
 
 function newTab() {
-    const tabsContainer = document.getElementById('tabs-container')
+    /*
+    Creates a new tab.
+     */
     const tab = document.createElement('a');
 
+    // Generate unique good hash
     let href = (Date.now() % 1000).toString()
-    while (hashToContent.has(`#tab${href}`) || (href.startsWith('6') && href.endsWith('6'))) {
+    while (TabHashToData.has(`#tab${href}`) || (href.startsWith('6') && href.endsWith('6'))) {
         href = (Date.now() % 1000).toString()
     }
 
     tab.textContent = `Tab ${href}`;
     tab.href = `#tab${href}`;
-    hashToContent.set(`#tab${href}`, [defaultFieldOrder, defaultExcluded, defaultFieldValues]);
-    tabsContainer.appendChild(tab);
-    tabsContainer.scrollTop = tabsContainer.scrollHeight;
-    tab.click();
+    updateTab(`#tab${href}`, [defaultFieldOrder, defaultExcluded, defaultFieldValues]);
+    addTabComponent(tab);
+    tab.click();  // Triggers onHashChange
 }
 
 function deleteTab() {
-    const tabsContainer = document.getElementById('tabs-container')
+    /*
+    Deletes the selected tab.
+     */
     let tabs = getTabs()
-    if (tabs.length === 0) {
-        return;
-    }
-    hashToContent.delete(`${window.location.hash}`);
-    const c = document.querySelector(`a[href~="${window.location.hash}"]`)
-    tabsContainer.removeChild(c)
-    const i = tabs.indexOf(c)
+    const hash = window.location.hash;
+    TabHashToData.delete(`${hash}`);
+    const i = tabs.indexOf(TabsContainer.removeChild(document.querySelector(`a[href~="${hash}"]`)))
 
     updateCookies()
 
+    // Trigger onHashChange
     tabs = getTabs()
-
     if (tabs.length === 0) {
-        document.getElementById('about-tab').click()
+        aboutTab.click()
     } else {
-        const m = Math.max(i - 1, 0)
-        tabs[m].click()
+        tabs[Math.max(i - 1, 0)].click()
     }
 }
 
 function initializeTabsContainer() {
-    const tabsContainer = document.getElementById('tabs-container')
-    for (const hash of hashToContent.keys()) {
-        if (hashToContent.get(hash) !== hash) {  // Is a tab
-            const tab = document.createElement('a');
-            tab.textContent = `Tab ${hash.slice(4)}`;
-            tab.href = hash;
-            tabsContainer.appendChild(tab);
-            tabsContainer.scrollTop = tabsContainer.scrollHeight;
-            tab.click();
-        }
+    /*
+    Populates TabsContainer onLoad
+     */
+    for (const hash of TabHashToData.keys()) {
+        const tab = document.createElement('a');
+        tab.textContent = `Tab ${hash.slice(4)}`;
+        tab.href = hash;
+        TabsContainer.appendChild(tab);
+        TabsContainer.scrollTop = TabsContainer.scrollHeight;
+        tab.click();  // Trigger onHashChange
     }
 }
 
@@ -140,54 +149,47 @@ function initializeTabsContainer() {
 // === Window Listeners ===
 
 function onHashChange() {
-    let hash = window.location.hash;
-    const content = document.getElementById('content');
-    let newContent;
-    if (hashToContent.has(hash)) {
-        const tab = document.querySelector(`a[href="${hash}"]`)
-        if (curTab !== null) {
-            const t = curTab
-            t.style.backgroundColor = '#444'
-            curTab.onmouseenter = () => {t.style.backgroundColor = '#555'}
-            curTab.onmouseleave = () => {t.style.backgroundColor = '#444'}
-        }
-        curTab = tab;
-        curTab.style.backgroundColor = '#ad2d2d'
-        curTab.onmouseenter = () => {tab.style.backgroundColor = '#ad3d2d'}
-        curTab.onmouseleave = () => {tab.style.backgroundColor = '#ad2d2d'}
+    /*
+    On window hash changed.
+     */
+    const hash = window.location.hash;
 
-        loadCookies()
-
-        const data = hashToContent.get(hash);
-        if (hash === data) {  // Not a tab
-            switch (hash) {
-                case '#settings': {
-                    newContent = settingsContent;
-                    break;
-                }
-                case '#about': {
-                    newContent = aboutContent;
-                    break;
-                }
-            }
-        } else {
-            generateEvidencingSetupContentFrom(data)
-            addContentListeners()
-            for (let i = 0; i < data[0].length; i++) {  // Exclude
-                if (data[1][i] === 'y') {
-                    document.getElementById('exclude_' + data[0][i]).onclick(true) // true for skip update
-                }
-            }
-            updateFormattedText()
-            return
-        }
-    } else {
-        newContent = tabNotFoundContent;
+    // Tab not found?
+    if (!TabHashToData.has(hash) && !NonTabsHashToContent.has(hash)) {
+        ContentDisplay.innerHTML = tabNotFoundContent;
+        return;
     }
-    content.innerHTML = newContent;
+
+    // Otherwise, select tab.
+    const tab = document.querySelector(`a[href="${hash}"]`)  // Find tab w/ target hash
+    if (curTab !== null) {
+        const t = curTab
+        t.style.backgroundColor = '#444'
+        curTab.onmouseenter = () => {t.style.backgroundColor = '#555'}
+        curTab.onmouseleave = () => {t.style.backgroundColor = '#444'}
+    }
+    curTab = tab;
+    curTab.style.backgroundColor = '#ad2d2d'
+    curTab.onmouseenter = () => {tab.style.backgroundColor = '#ad3d2d'}
+    curTab.onmouseleave = () => {tab.style.backgroundColor = '#ad2d2d'}
+
+    // Is a none-tab?
+    if (NonTabsHashToContent.has(hash)) {
+        ContentDisplay.innerHTML = NonTabsHashToContent.get(hash);
+        return;
+    }
+
+    loadCookies()
+    setDisplayContentFromData(TabHashToData.get(hash))
+    addContentListeners()
+    updateFormattedText()
 }
 
 function onLoad() {
+    /*
+    On window load.
+     */
+
     const hash = window.location.hash;
     if (hash !== '') {
         onHashChange();
@@ -196,7 +198,7 @@ function onLoad() {
     loadCookies()
     initializeTabsContainer()
 
-    const aboutTab = document.getElementById('about-tab');
+    // Open application to about page
     curTab = aboutTab
     aboutTab.click();
 }
@@ -207,58 +209,83 @@ window.addEventListener('hashchange', onHashChange);
 
 // === Cookies ===
 
+function clearCookies() {
+    document.cookie = ''
+}
+
 function loadCookies() {
+    /*
+    Loads cookie data and updates tabs.
+     */
+
+    // Cookies empty or no data
     try {
-        if (document.cookie === '' || document.cookie.split(cookiesStart, 2)[1] === '') { return; }
-        const cookie = document.cookie.split(cookiesStart, 2)[1].split(cookiesEnd, 2)[0]
-        if (cookie === '') { return; }
-
-        const tabContent = JSON.parse(cookie);
-        tabContent.forEach(data => {
-            const hash = data[0];
-            const d = data[1]
-            hashToContent.set(hash, d)
-        })
-
+        if (document.cookie === '' || document.cookie.split(cookiesStart, 2)[1].split(cookiesEnd, 2)[0] === '') {
+            return;
+        }
     } catch (e) {
-        console.log('Error loading cookies:', e)
+        console.log('Error loading cookies:', e);
+        console.log('Clearing document.cookie');
+        clearCookies();
+        return;
+    }
+
+    const cookie = document.cookie.split(cookiesStart, 2)[1].split(cookiesEnd, 2)[0]
+
+    try {
+        const hashToData = JSON.parse(cookie);
+        hashToData.forEach(a => {
+            const hash = a[0];
+            const d = a[1];
+            updateTab(hash, d);
+        })
+    } catch (e) {
+        console.log('Error loading cookies:', e);
+        console.log('Clearing document.cookie');
+        clearCookies();
     }
 }
 
 function updateCurrentTabContent() {
     let hash = window.location.hash;
-    const fieldOrderArray = hashToContent.get(hash)[0]
-    const excludedArray = []
-    const fieldValueArray = []
+    const fieldOrderArray = TabHashToData.get(hash)[0];
+    const excludedArray = [];
+    const fieldValueArray = [];
     fieldOrderArray.forEach(field => {
         excludedArray.push((document.getElementById('exclude_' + field).textContent === 'Include') ? 'y' : 'n')
         fieldValueArray.push(document.getElementById('input_' + field).textContent)
     })
-    hashToContent.get(hash)[1] = excludedArray
-    hashToContent.get(hash)[2] = fieldValueArray
+    TabHashToData.get(hash)[1] = excludedArray
+    TabHashToData.get(hash)[2] = fieldValueArray
 }
 
 function updateCookies() {
-    const tabToContent = []
-    for (const hashToContentKey of hashToContent.keys()) {
-        if (hashToContent.get(hashToContentKey) !== hashToContentKey) {  // Is a tab
-            tabToContent.push([hashToContentKey, hashToContent.get(hashToContentKey)])
-        }
+    /*
+    Updates document cookies.
+     */
+    const a = []
+    for (const hash of TabHashToData.keys()) {
+        a.push([hash, TabHashToData.get(hash)])
     }
-    document.cookie = cookiesStart + JSON.stringify(tabToContent) + cookiesEnd
+    document.cookie = cookiesStart + JSON.stringify(a) + cookiesEnd
 }
 
 
 // === Evidencing Setup Generation ===
 
-function generateEvidencingSetupContentFrom(data) {
+function setDisplayContentFromData(data) {
+    /*
+    Generates and sets Content display from data: creates elements for Evidencing setup, sets field values, excludes
+     */
     const [fieldOrder, excluded, fieldValues] = data
 
     let content = `
     <h2 id="content-title">${curTab.textContent} <button id="delete-tab">Delete Tab</button> </h2>
     `;
 
-    fieldOrder.forEach(field => { content += generateFieldContentFrom(field); })
+    fieldOrder.forEach(field => {
+        content += generateFieldContentFrom(field);
+    })
 
     content += `
     <div class="field-container">
@@ -267,10 +294,16 @@ function generateEvidencingSetupContentFrom(data) {
         <button id="clearall-button">Clear All</button>
     </div> `;
 
-    document.getElementById('content').innerHTML = content;
+    ContentDisplay.innerHTML = content;
 
     for (let i = 0; i < fieldOrder.length; i++) {
         document.getElementById('input_' + fieldOrder[i]).textContent = fieldValues[i]
+    }
+
+    for (let i = 0; i < excluded.length; i++) {  // Exclude
+        if (excluded[i] === 'y') {
+            document.getElementById('exclude_' + data[0][i]).onclick(true) // true for skip update
+        }
     }
 }
 
@@ -500,6 +533,7 @@ const publisherToName = new Map([
     ['ustr', 'Office of the United States Trade Representative'],
     ['bloomberg', 'Bloomberg'],
     ['foreignassistance', 'U.S. Government Foreign Assistance'],
+    ['dialogo-americas', 'Dialogo Americas']
 ])
 
 const publisherToCredential = new Map([
@@ -583,57 +617,3 @@ const publisherToCredential = new Map([
         'comprises 30 nations in Latin America and the Caribbean.'
     ]
 ]);
-
-// Potentially use LLM to extract author name & link to bio for article, then extract bio from link to bio
-// Please return in one line, separated by a semicolon, the author's name and the link to his bio from this html
-
-async function fetchLines(url) {
-    try {
-        const response = await fetch(url);
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        const text = await response.text();
-
-        const parser = new DOMParser()
-        const doc = parser.parseFromString(text, 'text/html');
-
-        console.log(doc)
-
-        return doc.body.textContent
-    } catch (error) {
-        console.error('Error fetching HTML:', error);
-        return null;
-    }
-}
-
-// let u = 'https://www.cnn.com/2023/09/27/americas/costa-rica-migration-emergency-intl/index.html'
-// async function sendTextToServer(text) {
-//     try {
-//         const response = await fetch('http://localhost:5000/process', {
-//             method: 'POST',
-//             headers: {
-//                 'Content-Type': 'application/json',
-//             },
-//             body: JSON.stringify({ text }),
-//         });
-//
-//         if (!response.ok) {
-//             throw new Error('Network response was not ok ' + response.statusText);
-//         }
-//
-//         console.log(response)
-//
-//         const data = await response.json();
-//         console.log(data.content);
-//     } catch (error) {
-//         console.error('There was a problem with the fetch operation:', error);
-//     }
-// }
-// Testing
-//
-// const p = await fetchLines(u)
-// console.log(p)
-// console.log('sending...')
-// await sendTextToServer(p)
-// console.log('finished')
