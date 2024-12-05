@@ -180,7 +180,7 @@ function onHashChange() {
 
     loadCookies()
     setDisplayContentFromData(TabHashToData.get(hash))
-    addContentListeners()
+    addEvidencingListeners()
     updateFormattedText()
 }
 
@@ -316,7 +316,7 @@ function generateFieldContentFrom(field) {
     </div>`;
 }
 
-function addContentListeners() {
+function addEvidencingListeners() {
     document.getElementById('delete-tab').addEventListener('click', deleteTab)
     document.getElementById('accessed-button').addEventListener('click', setAccessedDate)
     document.getElementById('copy-button').addEventListener('click', copyEvd)
