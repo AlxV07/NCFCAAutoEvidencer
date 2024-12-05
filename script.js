@@ -30,7 +30,6 @@ Copy-and-paste evidence straight from sources to automatically format cards.
 NCFCAAutoEvidencer Version 3+ introduces new usability, wrapping the good old AutoEvidencer in a multi-tab database-powered application.<br>
 Version 3+ will enable users to:<br>
 - Automatically cite from a database of known authors, publishers, and websites.<br>
-- Utilize a LLM to automatically extract credentials from websites.<br>
 - Save & edit multiple pieces of evidence across sessions and devices with tabs.<br>
 - Choose and create custom UI color themes.<br><br>
 
