@@ -224,6 +224,7 @@ function loadCookies() {
         }
     } catch (e) {
         console.log('Error loading cookies:', e);
+        console.log('`document.cookie`:', document.cookie)
         console.log('Clearing document.cookie');
         clearCookies();
         return;
