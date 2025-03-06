@@ -20,12 +20,13 @@ Settings will include: <br>
 const AboutContent = `
 <h2>About</h2>
 
-NCFCAAutoEvidencer Version: 3.1.4<br>
-Last updated: 12/4/24<br><br>
+NCFCAAutoEvidencer Version: 3.1.4.1<br>
 
 A tool to quickly format evidence for NCFCA Debate.
 Copy-and-paste evidence straight from sources to automatically format cards.
 <br><br>
+
+NOTICE: NCFCAAutoEvidencer Version 3+ uses cookies to, and only to, save evidence in-browser across sessions. Blocking cookies blocks this feature.<br><br>
 
 NCFCAAutoEvidencer Version 3+ introduces new usability, wrapping the good old AutoEvidencer in a multi-tab database-powered application.<br>
 Version 3+ will enable users to:<br>
@@ -33,15 +34,14 @@ Version 3+ will enable users to:<br>
 - Save & edit multiple pieces of evidence across sessions and devices with tabs.<br>
 - Choose and create custom UI color themes.<br><br>
 
-NOTICE: Massive rework of application in progress.  Please report any bugs!<br><br>
 
-NOTICE: NCFCAAutoEvidencer Version 3+ uses cookies to, and only to, save evidence in-browser across sessions. Blocking cookies blocks this feature.<br><br>
-
-Any suggestions, comments, or feedback is appreciated! <br><br>
-
+Any suggestions, comments, or feedback is appreciated! <br>
 Contact: alexander.kai.chen@gmail.com | <a href="https://alxv07.github.io/AboutMe/">https://alxv07.github.io/AboutMe/</a> <br>
 Chen/Kuykendall | Region 11, 2023-2024 | Sts. Peter & Paul Speech & Debate<br>
 Chen/O'Connors | Region 11, 2024-2025 | Sts. Peter & Paul Speech & Debate<br><br>
+
+=== Change log ===<br>
+03/06/2025 | 3.1.4.1: added public change log to 'About' page; added "Team" input field to auto-evidencer (thanks Lewis/Singh for suggestion).
 `;
 
 const NonTabsHashToContent = new Map([['#about', AboutContent], ['#settings', SettingsContent]]);
@@ -51,9 +51,9 @@ const tabNotFoundContent = `<h2>Tab Not Found</h2><p>The requested tab does not 
 const cookiesStart = '$7ST@7T7$';
 const cookiesEnd = '$73N0S7$';
 
-const defaultFieldOrder = 'author,authorCredentials,publisher,publisherCredentials,publishedDate,title,accessed,link,evidence,impact'.split(',');
-const defaultExcluded = 'n,n,n,n,n,n,n,n,n,n'.split(',');
-const defaultFieldValues = ',,,,,,,,,'.split(',');
+const defaultFieldOrder = 'author,authorCredentials,publisher,publisherCredentials,publishedDate,title,accessed,team,link,evidence,impact'.split(',');
+const defaultExcluded = 'n,n,n,n,n,n,n,n,n,n,n'.split(',');
+const defaultFieldValues = ',,,,,,,,,,'.split(',');
 const fieldToLabel = new Map([
     ['author', 'Authors(s)'],
     ['authorCredentials', 'Authors(s) Credentials'],
@@ -62,6 +62,7 @@ const fieldToLabel = new Map([
     ['publishedDate', 'Published Date'],
     ['title', 'Article Title'],
     ['accessed', 'Accessed'],
+    ['team', 'Team'],
     ['link', 'Article Link'],
     ['evidence', 'Evidence'],
     ['impact', 'Impact'],
@@ -428,6 +429,7 @@ function updateFormattedText() {
     const publisherCredentials = credentialSpan(document.getElementById('input_publisherCredentials').textContent)
     const article = articleSpan(document.getElementById('input_title').textContent)
     const accessed = nonImportantSpan(document.getElementById('input_accessed').textContent)
+    const team = nonImportantSpan(document.getElementById('input_team').textContent)
     const link = linkSpan(document.getElementById('input_link').textContent)
     const evd = evidenceSpan(document.getElementById('input_evidence').textContent)
     const impact = impactSpan(document.getElementById('input_impact').textContent)
@@ -439,28 +441,31 @@ function updateFormattedText() {
     })
     let citationText = ''
     if (!isDisabled['author']) {
-        citationText += `According to ${author} `
+        citationText += `According to ${author}. `
     }
     if (!isDisabled['authorCredentials']) {
-        citationText += authorCredentials + ' '
+        citationText += `${authorCredentials}. `
     }
     if (!isDisabled['publisher']) {
-        citationText += `Published by ${publisher} `
+        citationText += `Published by ${publisher}. `
     }
     if (!isDisabled['publisherCredentials']) {
-        citationText += publisherCredentials + ' '
+        citationText += `${publisherCredentials}. `
     }
     if (!isDisabled['publishedDate']) {
-        citationText += `Published on ${published} `
+        citationText += `Published ${published}. `
     }
     if (!isDisabled['title']) {
-        citationText += article + ' '
+        citationText += `${article}. `
     }
     if (!isDisabled['accessed']) {
-        citationText += `Accessed on ${accessed} `
+        citationText += `Accessed ${accessed}. `
+    }
+    if (!isDisabled['team']) {
+        citationText += `[${team}]. `
     }
     if (!isDisabled['link']) {
-        citationText += link + ' '
+        citationText += `${link}`
     }
     let citation = `${nonImportantSpan(citationText)}`
     if (!isDisabled['evidence']) {
