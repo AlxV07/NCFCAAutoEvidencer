@@ -4,45 +4,107 @@ I might try to clean it up, but it works rn & I don't want to break everything -
  */
 
 
+import { SettingsContent, AboutContent } from './content_html.js';
+
+
+// === Theme Handling ===
+
+function addThemeListeners() {
+    document.querySelectorAll(".color-circle").forEach(circle => {
+        circle.addEventListener("click", () => {
+            setTheme(circle.style.backgroundColor);
+        });
+    });
+}
+
+const Theme = new Map([
+    // cur tab
+    ["cur-back", "#111111"],
+    ["cur-back-hover", "2c2c2c1"],
+    // other tabs
+    ["tab-back", "#3f3f3f"],
+    ["tab-back-hover", "#212121"],
+])  // map storing current themes; initially gray
+
+function setTheme(color) {
+    if (color === "rgb(68, 68, 68)") {  // Gray theme
+        Theme.set('cur-back', '#111111')
+        Theme.set('cur-back-hover', '#2c2c2c')
+        Theme.set('tab-back', '#3f3f3f')
+        Theme.set('tab-back-hover', '#212121')
+    }
+    if (color === "rgb(208, 0, 0)") {  // Red theme
+        Theme.set('cur-back', 'rgba(37,0,0,0.5)')
+        Theme.set('cur-back-hover', 'rgba(72,0,0,0.5)')
+        Theme.set('tab-back', 'rgba(112,0,0,0.5)')
+        Theme.set('tab-back-hover', 'rgba(72,0,0,0.5)')
+    }
+    if (color === "rgb(211, 132, 0)") {  // Orange theme
+        Theme.set('cur-back', 'rgba(210,79,0,0.5)')
+        Theme.set('cur-back-hover', 'rgba(190,67,0,0.5)')
+        Theme.set('tab-back', 'rgba(128,72,0,0.5)')
+        Theme.set('tab-back-hover', 'rgba(117,40,0,0.5)')
+    }
+    if (color === "rgb(255, 255, 114)") {  // Yellow theme
+        Theme.set('cur-back', 'rgba(164,150,0,0.5)')
+        Theme.set('cur-back-hover', 'rgba(162,149,0,0.5)')
+        Theme.set('tab-back', 'rgba(79,61,0,0.5)')
+        Theme.set('tab-back-hover', 'rgba(134,105,0,0.5)')
+    }
+    if (color === "rgb(0, 168, 0)") {  // Green theme
+        Theme.set('cur-back', 'rgba(0,148,0,0.5)')
+        Theme.set('cur-back-hover', 'rgba(0,119,0,0.5)')
+        Theme.set('tab-back', 'rgba(8,72,0,0.5)')
+        Theme.set('tab-back-hover', 'rgba(0,108,6,0.5)')
+    }
+    if (color === "rgb(0, 0, 161)") {  // Blue theme
+        Theme.set('cur-back', 'rgba(45,115,173,0.5)')
+        Theme.set('cur-back-hover', 'rgba(45,82,173,0.5)')
+        Theme.set('tab-back', 'rgba(21,32,96,0.5)')
+        Theme.set('tab-back-hover', 'rgba(45,81,173,0.5)')
+    }
+    if (color === "rgb(57, 0, 96)") {  // Purple theme
+        Theme.set('cur-back', 'rgba(85,0,176,0.5)')
+        Theme.set('cur-back-hover', 'rgba(63,0,157,0.5)')
+        Theme.set('tab-back', 'rgba(36,0,86,0.5)')
+        Theme.set('tab-back-hover', 'rgba(68,5,119,0.5)')
+    }
+    if (color === "rgb(255, 198, 255)") {  // Pink theme
+        Theme.set('cur-back', 'rgba(170,0,217,0.5)')
+        Theme.set('cur-back-hover', 'rgba(161,0,197,0.5)')
+        Theme.set('tab-back', 'rgba(120,0,140,0.5)')
+    Theme.set('tab-back-hover', 'rgba(231,16,180,0.5)')
+    }
+
+    // Update current tabs
+    let c = Theme.get('tab-back');
+    let h = Theme.get('tab-back-hover');
+    getTabs().forEach(t => {
+        t.style.backgroundColor = c;
+        t.onmouseenter = () => {t.style.backgroundColor = h};
+        t.onmouseleave = () => {t.style.backgroundColor = c};
+    })
+
+    aboutTabButton.style.backgroundColor = c;
+    aboutTabButton.onmouseenter = () => {aboutTabButton.style.backgroundColor = h};
+    aboutTabButton.onmouseleave = () => {aboutTabButton.style.backgroundColor = c};
+
+    newTabButton.style.backgroundColor = c;
+    newTabButton.onmouseenter = () => {newTabButton.style.backgroundColor = h};
+    newTabButton.onmouseleave = () => {newTabButton.style.backgroundColor = c};
+
+    onHashChange()
+}
+
+
+// === Settings Content Generation ===
+
+function setupSettingsContent() {
+    addThemeListeners();
+}
+
+
 // === Constants & Values ===
-
-const SettingsContent = `
-<h2>Settings</h2>
-To be implemented soon.<br><br>
-
-NOTICE: Massive rework of application in progress.  Please report any bugs!<br><br>
-
-Settings will include: <br>
-- Control auto-citation tools. <br>
-- Color theme customization. <br>
-`;
-
-const AboutContent = `
-<h2>About</h2>
-
-NCFCAAutoEvidencer Version: 3.1.4.1<br>
-
-A tool to quickly format evidence for NCFCA Debate.
-Copy-and-paste evidence straight from sources to automatically format cards.
-<br><br>
-
-NOTICE: NCFCAAutoEvidencer Version 3+ uses cookies to, and only to, save evidence in-browser across sessions. Blocking cookies blocks this feature.<br><br>
-
-NCFCAAutoEvidencer Version 3+ introduces new usability, wrapping the good old AutoEvidencer in a multi-tab database-powered application.<br>
-Version 3+ will enable users to:<br>
-- Automatically cite from a database of known authors, publishers, and websites.<br>
-- Save & edit multiple pieces of evidence across sessions and devices with tabs.<br>
-- Choose and create custom UI color themes.<br><br>
-
-
-Any suggestions, comments, or feedback is appreciated! <br>
-Contact: alexander.kai.chen@gmail.com | <a href="https://alxv07.github.io/AboutMe/">https://alxv07.github.io/AboutMe/</a> <br>
-Chen/Kuykendall | Region 11, 2023-2024 | Sts. Peter & Paul Speech & Debate<br>
-Chen/O'Connors | Region 11, 2024-2025 | Sts. Peter & Paul Speech & Debate<br><br>
-
-=== Change log ===<br>
-03/06/2025 | 3.1.4.1: added public change log to 'About' page; added "Team" input field to auto-evidencer (thanks Lewis/Singh for suggestion).
-`;
 
 const NonTabsHashToContent = new Map([['#about', AboutContent], ['#settings', SettingsContent]]);
 
@@ -73,13 +135,19 @@ const TabHashToData = new Map([]);  // Hash -> [fieldOrder, excluded, fieldValue
 
 const ContentDisplay = document.getElementById('content');
 
-const aboutTab = document.getElementById('about-tab');
+const aboutTabButton = document.getElementById('about-tab');
+const newTabButton = document.getElementById('new-tab')
+
 
 // === Tabs ===
 
-let curTab = null;
+let curTab = null;  // Button element for cur tab
+
 
 function getTabs() {
+    /*
+    Get tabs in tab container
+     */
     return Array.from(TabsContainer.querySelectorAll('a'));
 }
 
@@ -125,7 +193,7 @@ function deleteTab() {
     // Trigger onHashChange
     tabs = getTabs()
     if (tabs.length === 0) {
-        aboutTab.click()
+        aboutTabButton.click()
     } else {
         tabs[Math.max(i - 1, 0)].click()
     }
@@ -162,20 +230,27 @@ function onHashChange() {
 
     // Otherwise, select tab.
     const tab = document.querySelector(`a[href="${hash}"]`)  // Find tab w/ target hash
-    if (curTab !== null) {
-        const t = curTab
-        t.style.backgroundColor = '#444'
-        curTab.onmouseenter = () => {t.style.backgroundColor = '#555'}
-        curTab.onmouseleave = () => {t.style.backgroundColor = '#444'}
+    if (curTab !== null) {  // update previous tab
+        let t = curTab;
+        let c = Theme.get('tab-back')
+        let h = Theme.get('tab-back-hover')
+        t.style.backgroundColor = c
+        t.onmouseenter = () => {t.style.backgroundColor = h}
+        t.onmouseleave = () => {t.style.backgroundColor = c}
     }
     curTab = tab;
-    curTab.style.backgroundColor = '#ad2d2d'
-    curTab.onmouseenter = () => {tab.style.backgroundColor = '#ad3d2d'}
-    curTab.onmouseleave = () => {tab.style.backgroundColor = '#ad2d2d'}
+    const c = Theme.get('cur-back')
+    const h = Theme.get('cur-back-hover')
+    curTab.style.backgroundColor = c
+    curTab.onmouseenter = () => {tab.style.backgroundColor = h}
+    curTab.onmouseleave = () => {tab.style.backgroundColor = c}
 
     // Is a none-tab?
     if (NonTabsHashToContent.has(hash)) {
         ContentDisplay.innerHTML = NonTabsHashToContent.get(hash);
+        if (hash === '#settings') {
+            setupSettingsContent();
+        }
         return;
     }
 
@@ -194,13 +269,13 @@ function onLoad() {
     if (hash !== '') {
         onHashChange();
     }
-    document.getElementById('new-tab').addEventListener('click', newTab)
+    newTabButton.addEventListener('click', newTab)
     loadCookies()
     initializeTabsContainer()
 
     // Open application to about page
-    curTab = aboutTab
-    aboutTab.click();
+    curTab = aboutTabButton
+    aboutTabButton.click();
 }
 
 window.addEventListener('load', onLoad);

@@ -3,6 +3,11 @@ body {
     overflow-y: auto;
     overflow-x: auto;
     background-color: #888;
+    --toolbar-front: #fff;
+    --toolbar-back: #333;
+
+    --init-back: #3f3f3f;
+    --init-hover: #212121;
 }
 
 button {
@@ -18,8 +23,8 @@ button {
 
 #toolbar {
     width: 13%;
-    background-color: #333;
-    color: #fff;
+    color: var(--toolbar-front);
+    background-color: var(--toolbar-back);
     padding: 20px;
     display: flex;
     flex-direction: column;
@@ -38,14 +43,14 @@ button {
     padding: 10px;
     width: 90%;
     text-align: center;
-    background-color: #444;
+    background-color: var(--init-back);
     border-radius: 5px;
     transition: background-color 0.3s;
     cursor: pointer;
 }
 
 #toolbar a:hover {
-    background-color: #555;
+    background-color: var(--init-hover);
 }
 
 #toolbar button {
@@ -55,7 +60,7 @@ button {
     padding: 10px;
     width: 100%;
     text-align: center;
-    background-color: #444;
+    background-color: var(--init-back);
     border: none;
     border-radius: 5px;
     transition: background-color 0.3s;
@@ -63,7 +68,7 @@ button {
 }
 
 #toolbar button:hover {
-    background-color: #555;
+    background-color: var(--init-hover);
 }
 
 #tabs-container {
@@ -82,7 +87,7 @@ button {
 #tabs-container a {
     color: #fff;
     text-decoration: none;
-    background-color: #444;
+    background-color: var(--init-back);
     border-radius: 5px;
     width: 99%;
     margin-bottom: 10px;
@@ -90,7 +95,7 @@ button {
 }
 
 #tabs-container a:hover {
-    background-color: #555;
+    background-color: var(--init-hover);
 }
 
 #content {
