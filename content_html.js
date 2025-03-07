@@ -33,7 +33,7 @@ export const AboutContent = `
 <div style="max-width: 100%; justify-content: center; align-items: center; text-align: center;">
     <br>
     
-    <h2>NCFCAAutoEvidencer | Version: 3.14</h2>
+    <h2>NCFCAAutoEvidencer | Version: 3.141</h2>
     <strong>a.k.a. "The Auto Evidencer"</strong><br><br>
     <p style="font-size: 20px">
         A tool for fast evidence formatting - copy-and-paste straight from sources into the Auto Evidencer to:
