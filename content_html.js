@@ -60,7 +60,8 @@ export const AboutContent = `
 
     <h3 style="margin-bottom: 0">Change Log</h3>
     <ul style="text-align: left; display: inline-block">
-        <p><strong>03/07/2025 | 3.14:</strong> *Aesthetic Update* - "About" page style updated, basic color themes implemented: control panel in Settings</p>
+        <p><strong>03/07/2025 | 3.141:</strong> bug fix: fixed field-exclude button breaking tab; organized citation completion data</p>
+        <p><strong>03/07/2025 | 3.14:</strong> *Aesthetic Update* - "About" page style updated; basic color themes implemented: control panel in Settings</p>
         <p><strong>03/06/2025 | 3.1.4.1:</strong> added public change log to "About" page; added "Team" input field to auto-evidencer (thanks Lewis/Singh for suggestion).</p>
     </ul>
 </div>
