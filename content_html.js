@@ -33,7 +33,7 @@ export const AboutContent = `
 <div style="max-width: 100%; justify-content: center; align-items: center; text-align: center;">
     <br>
     
-    <h2>NCFCAAutoEvidencer | Version: 3.141</h2>
+    <h2>NCFCAAutoEvidencer | Version: 3.1415</h2>
     <strong>a.k.a. "The Auto Evidencer"</strong><br><br>
     <p style="font-size: 20px">
         A tool for fast evidence formatting - copy-and-paste straight from sources into the Auto Evidencer to:
@@ -60,6 +60,7 @@ export const AboutContent = `
 
     <h3 style="margin-bottom: 0">Change Log</h3>
     <ul style="text-align: left; display: inline-block">
+        <p><strong>03/09/2025 | 3.1415:</strong> bug fix: fixed cookie operations to not conflict and override analytics; evidencer data should no longer be periodically deleted</p>
         <p><strong>03/07/2025 | 3.141:</strong> bug fix: fixed field-exclude button breaking tab; organized citation completion data</p>
         <p><strong>03/07/2025 | 3.14:</strong> *Aesthetic Update* - "About" page style updated; basic color themes implemented: control panel in Settings</p>
         <p><strong>03/06/2025 | 3.1.4.1:</strong> added public change log to "About" page; added "Team" input field to auto-evidencer (thanks Lewis/Singh for suggestion).</p>

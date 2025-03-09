@@ -287,7 +287,7 @@ window.addEventListener('hashchange', onHashChange);
 // === Cookies ===
 
 function clearCookies() {
-    document.cookie = ''
+    document.cookie = cookiesStart + '=;'
 }
 
 function loadCookies() {
@@ -295,32 +295,34 @@ function loadCookies() {
     Loads cookie data and updates tabs.
      */
 
-    // Cookies empty or no data
-    try {
-        if (document.cookie === '' || document.cookie.split(cookiesStart, 2)[1].split(cookiesEnd, 2)[0] === '') {
-            return;
+    const cookies = document.cookie.split('; ')
+    let cookie = null;
+    for (let i = 0; i < cookies.length; i++) {
+        const [cookieName, cookieValue] = cookies[i].split('=');
+        if (cookieName === cookiesStart) {
+            cookie = cookieValue;
+            break
         }
-    } catch (e) {
-        console.log('Error loading cookies:', e);
-        console.log('`document.cookie`:', document.cookie)
-        console.log('Clearing document.cookie');
-        clearCookies();
-        return;
     }
 
-    const cookie = document.cookie.split(cookiesStart, 2)[1].split(cookiesEnd, 2)[0]
-
-    try {
-        const hashToData = JSON.parse(cookie);
-        hashToData.forEach(a => {
-            const hash = a[0];
-            const d = a[1];
-            updateTab(hash, d);
-        })
-    } catch (e) {
-        console.log('Error loading cookies:', e);
-        console.log('Clearing document.cookie');
+    // Cookies empty or no data
+    if (cookie === null) {
+        console.log('No cookies found. Clearing...')
         clearCookies();
+    } else {  // Parse
+        try {
+            const hashToData = JSON.parse(cookie);
+            hashToData.forEach(a => {
+                const hash = a[0];
+                const d = a[1];
+                updateTab(hash, d);
+            })
+        } catch (e) {
+            console.log('Error loading cookies:', e);
+            console.log('With cookie:', cookie)
+            console.log('Clearing...');
+            clearCookies();
+        }
     }
 }
 
@@ -345,7 +347,7 @@ function updateCookies() {
     for (const hash of TabHashToData.keys()) {
         a.push([hash, TabHashToData.get(hash)])
     }
-    document.cookie = cookiesStart + JSON.stringify(a) + cookiesEnd
+    document.cookie = cookiesStart + '=' + JSON.stringify(a) + ';'
 }
 
 
