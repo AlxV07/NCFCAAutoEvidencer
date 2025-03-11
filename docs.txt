@@ -1,0 +1,63 @@
+=== Docs ===
+
+Cookies:
+Theme
+Tabs
+Preferred Evidencing Setup
+
+===
+tabs = {
+    tabOrder: [list of tabIds],
+    tabData: {
+        *each*tabId: tab{
+            tabId: tabId,
+            fieldOrder: [list of fieldIds],
+            fieldData: {
+                *each*fieldId: field{
+                    fieldId=fieldId
+                    v=value      |""
+                    p=prefix     |""
+                    s=suffix     |""
+                    z=field size |10/12
+                    u=underline  |true/false
+                    i=italic     |true/false
+                    b=bold       |true/false
+                    e=excluded   |true/false
+                }
+            }
+        }
+    }
+}
+===
+
+Evidence Components:
+*field component just here for reference; not used in code
+=field*=   =id=        =label=      =default_pre= =default_suf= =default_sty=
+author_name|an|Author(s)            |According to |.            |
+author_cred|ac|Author(s) Credentials|(            |).           |
+pub_name   |pn|Publisher            |Published by |.            |
+pub_cred   |pc|Publisher Credentials|(            |).           |
+pub_date   |pd|Published Date       |On           |.            |
+acc_date   |cd|Accessed Date        |Accessed     |.            |
+title      |ti|Article Title        |("           |").          |
+team       |te|Team                 |[            |].           |
+link       |li|Link                 |             |             |[special: no config]
+evidence   |ev|Evidence             |[“]          |[”]          |[special: no config]
+impact     |im|Impact               |MPX:         |             |
+
+Evidencing Setup:  user's currently displayed setup of fields.
+toolbar *TODO: maybe rename; the tab container + abt & settings buttons as of rn.
+content: currently displayed - an evidencing setup, abt page, settings, or tab-not-found.
+field-container: class containing all components to edit this evidence component.
+field-label: label for field container
+field-input: class of input elements which represent their individual evidence components.
+
+
+=== Todo List ===
+1. allow users to specify citation order, underline / italic / bold / font size
+add customizable prefix for author "According to..."  "Written by..." etc.
+UI change to:
+| ^ [                field                 ] [pre][suf] |10|12|u|b|i| [ex][cl] |
+..^.. up/down arrows for order rearrangement
+
+2. customizable color themes

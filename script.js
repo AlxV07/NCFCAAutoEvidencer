@@ -1,101 +1,7 @@
-/*
-DISCLAIMER: This code is quite iffy and was put together while half-awake, plus it's JS so.
-I might try to clean it up, but it works rn & I don't want to break everything - so we'll see.
- */
-
-
 import { SettingsContent, AboutContent } from './content_html.js';
 import { publisherToCredential, publisherToName } from "./citation_completion_data.js";
 
 
-// === Theme Handling ===
-
-function addThemeListeners() {
-    document.querySelectorAll(".color-circle").forEach(circle => {
-        circle.addEventListener("click", () => {
-            setTheme(circle.style.backgroundColor);
-        });
-    });
-}
-
-const Theme = new Map([
-    // cur tab
-    ["cur-back", "#111111"],
-    ["cur-back-hover", "2c2c2c1"],
-    // other tabs
-    ["tab-back", "#3f3f3f"],
-    ["tab-back-hover", "#212121"],
-])  // map storing current themes; initially gray
-
-function setTheme(color) {
-    if (color === "rgb(68, 68, 68)") {  // Gray theme
-        Theme.set('cur-back', '#111111')
-        Theme.set('cur-back-hover', '#2c2c2c')
-        Theme.set('tab-back', '#3f3f3f')
-        Theme.set('tab-back-hover', '#212121')
-    }
-    if (color === "rgb(208, 0, 0)") {  // Red theme
-        Theme.set('cur-back', 'rgba(37,0,0,0.5)')
-        Theme.set('cur-back-hover', 'rgba(72,0,0,0.5)')
-        Theme.set('tab-back', 'rgba(112,0,0,0.5)')
-        Theme.set('tab-back-hover', 'rgba(72,0,0,0.5)')
-    }
-    if (color === "rgb(211, 132, 0)") {  // Orange theme
-        Theme.set('cur-back', 'rgba(210,79,0,0.5)')
-        Theme.set('cur-back-hover', 'rgba(190,67,0,0.5)')
-        Theme.set('tab-back', 'rgba(128,72,0,0.5)')
-        Theme.set('tab-back-hover', 'rgba(117,40,0,0.5)')
-    }
-    if (color === "rgb(255, 255, 114)") {  // Yellow theme
-        Theme.set('cur-back', 'rgba(164,150,0,0.5)')
-        Theme.set('cur-back-hover', 'rgba(162,149,0,0.5)')
-        Theme.set('tab-back', 'rgba(79,61,0,0.5)')
-        Theme.set('tab-back-hover', 'rgba(134,105,0,0.5)')
-    }
-    if (color === "rgb(0, 168, 0)") {  // Green theme
-        Theme.set('cur-back', 'rgba(0,148,0,0.5)')
-        Theme.set('cur-back-hover', 'rgba(0,119,0,0.5)')
-        Theme.set('tab-back', 'rgba(8,72,0,0.5)')
-        Theme.set('tab-back-hover', 'rgba(0,108,6,0.5)')
-    }
-    if (color === "rgb(0, 0, 161)") {  // Blue theme
-        Theme.set('cur-back', 'rgba(45,115,173,0.5)')
-        Theme.set('cur-back-hover', 'rgba(45,82,173,0.5)')
-        Theme.set('tab-back', 'rgba(21,32,96,0.5)')
-        Theme.set('tab-back-hover', 'rgba(45,81,173,0.5)')
-    }
-    if (color === "rgb(57, 0, 96)") {  // Purple theme
-        Theme.set('cur-back', 'rgba(85,0,176,0.5)')
-        Theme.set('cur-back-hover', 'rgba(63,0,157,0.5)')
-        Theme.set('tab-back', 'rgba(36,0,86,0.5)')
-        Theme.set('tab-back-hover', 'rgba(68,5,119,0.5)')
-    }
-    if (color === "rgb(255, 198, 255)") {  // Pink theme
-        Theme.set('cur-back', 'rgba(170,0,217,0.5)')
-        Theme.set('cur-back-hover', 'rgba(161,0,197,0.5)')
-        Theme.set('tab-back', 'rgba(120,0,140,0.5)')
-    Theme.set('tab-back-hover', 'rgba(231,16,180,0.5)')
-    }
-
-    // Update current tabs
-    let c = Theme.get('tab-back');
-    let h = Theme.get('tab-back-hover');
-    getTabs().forEach(t => {
-        t.style.backgroundColor = c;
-        t.onmouseenter = () => {t.style.backgroundColor = h};
-        t.onmouseleave = () => {t.style.backgroundColor = c};
-    })
-
-    aboutTabButton.style.backgroundColor = c;
-    aboutTabButton.onmouseenter = () => {aboutTabButton.style.backgroundColor = h};
-    aboutTabButton.onmouseleave = () => {aboutTabButton.style.backgroundColor = c};
-
-    newTabButton.style.backgroundColor = c;
-    newTabButton.onmouseenter = () => {newTabButton.style.backgroundColor = h};
-    newTabButton.onmouseleave = () => {newTabButton.style.backgroundColor = c};
-
-    onHashChange()
-}
 
 
 // === Settings Content Generation ===
@@ -107,12 +13,10 @@ function setupSettingsContent() {
 
 // === Constants & Values ===
 
+const tabNotFoundContent = `<h2>Tab Not Found</h2><p>The requested tab does not exist.</p>`;
 const NonTabsHashToContent = new Map([['#about', AboutContent], ['#settings', SettingsContent]]);
 
-const tabNotFoundContent = `<h2>Tab Not Found</h2><p>The requested tab does not exist.</p>`;
-
 const cookiesStart = '$7ST@7T7$';
-const cookiesEnd = '$73N0S7$';
 
 const defaultFieldOrder = 'author,authorCredentials,publisher,publisherCredentials,publishedDate,title,accessed,team,link,evidence,impact'.split(',');
 const defaultExcluded = 'n,n,n,n,n,n,n,n,n,n,n'.split(',');
@@ -140,7 +44,7 @@ const aboutTabButton = document.getElementById('about-tab');
 const newTabButton = document.getElementById('new-tab')
 
 
-// === Tabs ===
+// ============================================= Tabs =============================================
 
 let curTab = null;  // Button element for cur tab
 
@@ -215,7 +119,7 @@ function initializeTabsContainer() {
 }
 
 
-// === Window Listeners ===
+// ============================================= Window Listeners =============================================
 
 function onHashChange() {
     /*
@@ -284,11 +188,97 @@ window.addEventListener('load', onLoad);
 window.addEventListener('hashchange', onHashChange);
 
 
-// === Cookies ===
+// ============================================= Theme =============================================
 
-function clearCookies() {
-    document.cookie = cookiesStart + '=;'
+function addThemeListeners() {
+    document.querySelectorAll(".color-circle").forEach(circle => {
+        circle.addEventListener("click", () => {
+            setTheme(circle.style.backgroundColor);
+        });
+    });
 }
+
+const Theme = new Map([
+    // cur tab
+    ["cur-back", "#111111"],
+    ["cur-back-hover", "2c2c2c1"],
+    // other tabs
+    ["tab-back", "#3f3f3f"],
+    ["tab-back-hover", "#212121"],
+])  // map storing current themes; initially gray
+
+function setTheme(color) {
+    if (color === "rgb(68, 68, 68)") {  // Gray theme
+        Theme.set('cur-back', '#111111')
+        Theme.set('cur-back-hover', '#2c2c2c')
+        Theme.set('tab-back', '#3f3f3f')
+        Theme.set('tab-back-hover', '#212121')
+    }
+    if (color === "rgb(208, 0, 0)") {  // Red theme
+        Theme.set('cur-back', 'rgba(37,0,0,0.5)')
+        Theme.set('cur-back-hover', 'rgba(72,0,0,0.5)')
+        Theme.set('tab-back', 'rgba(112,0,0,0.5)')
+        Theme.set('tab-back-hover', 'rgba(72,0,0,0.5)')
+    }
+    if (color === "rgb(211, 132, 0)") {  // Orange theme
+        Theme.set('cur-back', 'rgba(210,79,0,0.5)')
+        Theme.set('cur-back-hover', 'rgba(190,67,0,0.5)')
+        Theme.set('tab-back', 'rgba(128,72,0,0.5)')
+        Theme.set('tab-back-hover', 'rgba(117,40,0,0.5)')
+    }
+    if (color === "rgb(255, 255, 114)") {  // Yellow theme
+        Theme.set('cur-back', 'rgba(164,150,0,0.5)')
+        Theme.set('cur-back-hover', 'rgba(162,149,0,0.5)')
+        Theme.set('tab-back', 'rgba(79,61,0,0.5)')
+        Theme.set('tab-back-hover', 'rgba(134,105,0,0.5)')
+    }
+    if (color === "rgb(0, 168, 0)") {  // Green theme
+        Theme.set('cur-back', 'rgba(0,148,0,0.5)')
+        Theme.set('cur-back-hover', 'rgba(0,119,0,0.5)')
+        Theme.set('tab-back', 'rgba(8,72,0,0.5)')
+        Theme.set('tab-back-hover', 'rgba(0,108,6,0.5)')
+    }
+    if (color === "rgb(0, 0, 161)") {  // Blue theme
+        Theme.set('cur-back', 'rgba(45,115,173,0.5)')
+        Theme.set('cur-back-hover', 'rgba(45,82,173,0.5)')
+        Theme.set('tab-back', 'rgba(21,32,96,0.5)')
+        Theme.set('tab-back-hover', 'rgba(45,81,173,0.5)')
+    }
+    if (color === "rgb(57, 0, 96)") {  // Purple theme
+        Theme.set('cur-back', 'rgba(85,0,176,0.5)')
+        Theme.set('cur-back-hover', 'rgba(63,0,157,0.5)')
+        Theme.set('tab-back', 'rgba(36,0,86,0.5)')
+        Theme.set('tab-back-hover', 'rgba(68,5,119,0.5)')
+    }
+    if (color === "rgb(255, 198, 255)") {  // Pink theme
+        Theme.set('cur-back', 'rgba(170,0,217,0.5)')
+        Theme.set('cur-back-hover', 'rgba(161,0,197,0.5)')
+        Theme.set('tab-back', 'rgba(120,0,140,0.5)')
+        Theme.set('tab-back-hover', 'rgba(231,16,180,0.5)')
+    }
+
+    // Update current tabs
+    let c = Theme.get('tab-back');
+    let h = Theme.get('tab-back-hover');
+    getTabs().forEach(t => {
+        t.style.backgroundColor = c;
+        t.onmouseenter = () => {t.style.backgroundColor = h};
+        t.onmouseleave = () => {t.style.backgroundColor = c};
+    })
+
+    aboutTabButton.style.backgroundColor = c;
+    aboutTabButton.onmouseenter = () => {aboutTabButton.style.backgroundColor = h};
+    aboutTabButton.onmouseleave = () => {aboutTabButton.style.backgroundColor = c};
+
+    newTabButton.style.backgroundColor = c;
+    newTabButton.onmouseenter = () => {newTabButton.style.backgroundColor = h};
+    newTabButton.onmouseleave = () => {newTabButton.style.backgroundColor = c};
+
+    onHashChange()
+}
+
+
+// ============================================= Cookies =============================================
 
 function loadCookies() {
     /*
@@ -307,8 +297,10 @@ function loadCookies() {
 
     // Cookies empty or no data
     if (cookie === null) {
-        console.log('No cookies found. Clearing...')
+        console.log('No cookies found (null). Setting to blank...');
         clearCookies();
+    } else if (cookie === '') {
+        console.log('Blank cookies ("").  Continuing...');
     } else {  // Parse
         try {
             const hashToData = JSON.parse(cookie);
@@ -320,10 +312,28 @@ function loadCookies() {
         } catch (e) {
             console.log('Error loading cookies:', e);
             console.log('With cookie:', cookie)
-            console.log('Clearing...');
+            console.log('Setting to blank...');
             clearCookies();
         }
     }
+}
+
+function clearCookies() {
+    /*
+    Sets document cookies to blank ("")
+     */
+    document.cookie = cookiesStart + '=;';
+}
+
+function updateCookies() {
+    /*
+    Updates document cookies.
+     */
+    const a = []
+    for (const hash of TabHashToData.keys()) {
+        a.push([hash, TabHashToData.get(hash)])
+    }
+    document.cookie = cookiesStart + '=' + JSON.stringify(a) + '; Expires=Tue, 10 Mar 2026 12:00:00 UTC'
 }
 
 function updateCurrentTabContent() {
@@ -339,15 +349,31 @@ function updateCurrentTabContent() {
     TabHashToData.get(hash)[2] = fieldValueArray
 }
 
-function updateCookies() {
-    /*
-    Updates document cookies.
-     */
-    const a = []
-    for (const hash of TabHashToData.keys()) {
-        a.push([hash, TabHashToData.get(hash)])
+
+// ============================================= Citation Completion =============================================
+
+let prevLink = '';
+let fillPublisherCredentials = true;
+
+function urlStringToPublisher(urlString) {
+    let hostname = new URL(urlString).hostname;
+    let parts = hostname.split(".");
+    for (let i = 0; i < parts.length; i++) {
+        if (publisherToName.has(parts[i])) {
+            return parts[i];
+        }
     }
-    document.cookie = cookiesStart + '=' + JSON.stringify(a) + ';'
+    return null;
+}
+
+function fillCredentialsFromPublisher(p) {
+    if (publisherToName.has(p)) {
+        document.getElementById('input_publisher').textContent = publisherToName.get(p)
+    }
+    if (publisherToCredential.has(p)) {
+        document.getElementById('input_publisherCredentials').textContent = publisherToCredential.get(p)
+    }
+    updateFormattedText()
 }
 
 
@@ -416,7 +442,16 @@ function addEvidencingListeners() {
 
     defaultFieldOrder.forEach(field => {
         const inputFieldElement = document.getElementById('input_' + field);
-        inputFieldElement.addEventListener('input', updateFormattedText)
+        inputFieldElement.style.fontWeight = 'normal'
+        inputFieldElement.style.fontSize = '12px'
+        inputFieldElement.style.fontFamily = 'times'
+
+        inputFieldElement.addEventListener("paste", function (event) {
+            event.preventDefault();
+            const text = (event.clipboardData || window.clipboardData).getData("text");
+            document.execCommand("insertText", false, text);
+        });
+        inputFieldElement.addEventListener('input', () => {updateFormattedText();})
 
         // input field element highlighting
         inputFieldElement.addEventListener('mouseenter', () => {
@@ -580,31 +615,4 @@ function updateFormattedText() {
             }
         }
     }
-}
-
-
-// === Citation Completion ===
-
-let prevLink = '';
-let fillPublisherCredentials = true;
-
-function urlStringToPublisher(urlString) {
-    let hostname = new URL(urlString).hostname;
-    let parts = hostname.split(".");
-    for (let i = 0; i < parts.length; i++) {
-        if (publisherToName.has(parts[i])) {
-            return parts[i];
-        }
-    }
-    return null;
-}
-
-function fillCredentialsFromPublisher(p) {
-    if (publisherToName.has(p)) {
-        document.getElementById('input_publisher').textContent = publisherToName.get(p)
-    }
-    if (publisherToCredential.has(p)) {
-        document.getElementById('input_publisherCredentials').textContent = publisherToCredential.get(p)
-    }
-    updateFormattedText()
 }
