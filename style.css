@@ -128,6 +128,10 @@ button {
     padding-top: 5px;
 }
 
+.field-order {
+    display: flex;
+}
+
 .field-up  {
     width: 31px;
     height: 31px;
@@ -209,6 +213,10 @@ button {
 
 .field-suf {
     margin-right: 13px;
+}
+
+.field-size {
+    display: flex;
 }
 
 .field-size10pt {
