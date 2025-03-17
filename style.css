@@ -1,3 +1,7 @@
+/*
+====================== General ======================
+ */
+
 body {
     font-family: Cantarell, sans-serif;
     overflow-y: auto;
@@ -14,6 +18,10 @@ button {
     font-family: Cantarell, sans-serif;
     cursor: pointer;
 }
+
+/*
+====================== Main Containers ======================
+ */
 
 #top-container {
     display: flex;
@@ -105,14 +113,35 @@ button {
     background-color: #f9f9f9;
 }
 
+/*
+====================== Field Components ======================
+ */
+
 .field-container {
     display: flex;
     flex-direction: row;
     justify-content: left;
+    align-items: center;
     border: 2px solid #ccc;
     transition: 0.1s ease;
     padding-bottom: 5px;
     padding-top: 5px;
+}
+
+.field-up  {
+    width: 31px;
+    height: 31px;
+    margin: 0 0 0 10px;
+    border-radius: 5px;
+    background-color: #f6f6f6;
+}
+
+.field-down {
+    width: 31px;
+    height: 31px;
+    margin: 0 17px 0 2px;
+    border-radius: 5px;
+    background-color: #f6f6f6;
 }
 
 .field-label {
@@ -121,57 +150,155 @@ button {
     padding: 10px;
     font-size: 11px;
     min-width: 110px;
+    font-weight: bold;
 }
 
-.field-input {
+.field-value {
     font-style: normal;
     font-family: "Times New Roman", serif;
     font-size: 12px;
     text-decoration: none;
-    color: black;
-    transition: 0.1s ease;
-    background-color: white;
-    display: inline-block;
-    border: 1px solid #ccc;
-    padding: 5px;
-    width: 90%;
-    margin: 10px auto;
+
     line-height: 1.5;
+
+    transition: 0.1s ease;
+    color: black;
+    background-color: white;
+    border: 1px solid #ccc;
     outline: none;
+
+    padding: 5px;
+    width: 47%;
+    max-width: 47%;
+    margin: 10px auto;
+
+    display: inline-block;
+    word-wrap: break-word;
+    white-space: normal;
+    overflow-wrap: break-word;
 }
 
-.field-clear {
-    min-width: 50px;
-    margin: 5px 15px;
+.field-pre, .field-suf {
+    font-style: normal;
+    font-family: "Times New Roman", serif;
+    font-size: 12px;
+    text-decoration: none;
+
+    line-height: 1.5;
+
+    transition: 0.1s ease;
+    color: black;
+    background-color: white;
+    border: 1px solid #ccc;
+    outline: none;
+
+    padding: 5px;
+    width: 5%;
+    max-width: 5%;
+    margin: 0 1px 0 3px;
+
+    display: inline-block;
+    word-wrap: break-word;
+    white-space: normal;
+    overflow-wrap: break-word;
+}
+
+.field-pre {
+    margin-left: 19px;
+}
+
+.field-suf {
+    margin-right: 13px;
+}
+
+.field-size10pt {
+    width: 43px;
+    height: 31px;
+    margin: 0 0 0 15px;
     border-radius: 5px;
     background-color: #f6f6f6;
 }
 
+.field-size12pt {
+    width: 43px;
+    height: 31px;
+    margin: 0 15px 0 0;
+    border-radius: 5px;
+    background-color: #f6f6f6;
+}
+
+.field-underline, .field-italicize, .field-bold {
+    font-family: "Times New Roman", serif;
+    width: 31px;
+    height: 31px;
+    margin: 0 3px 0 3px;
+    border-radius: 5px;
+    background-color: #f6f6f6;
+}
+
+.field-underline {
+    margin-left: 17px;
+    text-decoration: underline;
+}
+
+.field-italicize {
+    font-style: italic;
+}
+
+.field-bold {
+    font-weight: bold;
+    margin-right: 17px;
+}
+
 .field-exclude {
     min-width: 60px;
+    height: 31px;
     margin: 5px 3px 5px 15px;
     border-radius: 5px;
     background-color: #f6f6f6;
 }
 
-#label_accessed {
-    margin-left: 0;
-    margin-right: 0;
-    padding-left: 20px;
-    padding-right: 0;
+.field-clear {
+    min-width: 50px;
+    height: 31px;
+    margin: 5px 23px;
+    border-radius: 5px;
+    background-color: #f6f6f6;
+}
+
+
+/*
+====================== Accessed Date ======================
+ */
+
+#label_cd {
     text-align: center;
+    margin: 10px;
+    padding: 10px;
+    font-size: 11px;
+    min-width: 110px;
+
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
 }
 
 #accessed-button {
-    font-size: 11px;
-    min-height: 12px;
+    font-size: 10px;
+    min-height: 15px;
+    max-height: 15px;
     min-width: 35px;
-    max-height: 36px;
-    margin: 5px 10px 5px 0;
+    max-width: 35px;
+    margin: 0 0 0 3px;
     padding: 0;
     background-color: #f6f6f6;
     border-radius: 5px;
 }
+
+/*
+====================== Result Container ======================
+ */
 
 #formatted-display {
     border: 2px solid #ccc;
@@ -179,6 +306,9 @@ button {
     width: 80%;
     max-width: 67%;
     margin: 10px auto;
+    word-wrap: break-word;
+    white-space: normal;
+    overflow-wrap: break-word;
 }
 
 #copy-button {
@@ -197,7 +327,11 @@ button {
     background-color: #f6f6f6;
 }
 
-#delete-tab {
+/*
+====================== Content title ======================
+ */
+
+#delete-tab-button {
     font-family: Cantarell, sans-serif;
     cursor: pointer;
     border-radius: 10px;

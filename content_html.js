@@ -3,18 +3,17 @@ export const SettingsContent = `
 
 <h2>Settings</h2> <br>
 
-<strong>Auto-Citation Controls: (To be implemented soon.)</strong><br><br>
+<strong>Citation Preference Controls: (To be implemented soon)</strong><br><br>
 Will include:<br>
 <ul style="text-align: left; display: inline-block;">
     -Customize prefixes e.g. "According to...", "Written by...", etc.<br>
     -Choose what you want bolded, underlined, and italicized.<br>
     -Select font sizes (10 or 12 pt) for personalized citations.<br>
-    -Potentially: Log in with your Google Account to save preferences & citations.<br>
 </ul>
 <br>
 
 <strong>Select Color Theme:</strong><br><br>
-More advanced configurations coming later; for now, here are some default themes:<br><br>
+More advanced configurations coming later; for now, here are some default tab-bar themes:<br><br>
 <div style="display: flex; justify-content: center; gap: 10px;">
     <div class="color-circle" style="width: 30px; height: 30px; border-radius: 50%; cursor: pointer; background-color: #444444;"></div>
     <div class="color-circle" style="width: 30px; height: 30px; border-radius: 50%; cursor: pointer; background-color: #d00000;"></div>
@@ -25,6 +24,7 @@ More advanced configurations coming later; for now, here are some default themes
     <div class="color-circle" style="width: 30px; height: 30px; border-radius: 50%; cursor: pointer; background-color: #390060;"></div>
     <div class="color-circle" style="width: 30px; height: 30px; border-radius: 50%; cursor: pointer; background-color: #ffc6ff;"></div>
 </div><br>
+(evidencing setup color themes coming later too)
 
 </div>
 `;
@@ -33,7 +33,7 @@ export const AboutContent = `
 <div style="max-width: 100%; justify-content: center; align-items: center; text-align: center;">
     <br>
     
-    <h2>NCFCAAutoEvidencer | Version: 3.1415</h2>
+    <h2>NCFCAAutoEvidencer | Version: 3.14159</h2>
     <strong>a.k.a. "The Auto Evidencer"</strong><br><br>
     <p style="font-size: 20px">
         A tool for fast evidence formatting - copy-and-paste straight from sources into the Auto Evidencer to:
@@ -60,6 +60,14 @@ export const AboutContent = `
 
     <h3 style="margin-bottom: 0">Change Log</h3>
     <ul style="text-align: left; display: inline-block">
+        <p><strong>03/16/2025 | 3.14159:</strong> 
+           major update: 
+           formatting from source stripped first before displaying text content in input fields;
+           field-up/down buttons enable customizable field ordering;
+           10/12pt font size & bold+underline+italic options for fields;
+           pre/suf-fix customization implemented;
+           cookies actually fixed now and transition to JSON completed
+         </p>
         <p><strong>03/09/2025 | 3.1415:</strong> bug fix: fixed cookie operations to not conflict and override analytics; evidencer data should no longer be periodically deleted</p>
         <p><strong>03/07/2025 | 3.141:</strong> bug fix: fixed field-exclude button breaking tab; organized citation completion data</p>
         <p><strong>03/07/2025 | 3.14:</strong> *Aesthetic Update* - "About" page style updated; basic color themes implemented: control panel in Settings</p>

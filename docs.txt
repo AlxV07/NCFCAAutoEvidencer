@@ -7,7 +7,6 @@ Preferred Evidencing Setup
 
 ===
 tabs = {
-    tabOrder: [list of tabIds],
     tabData: {
         *each*tabId: tab{
             tabId: tabId,
@@ -54,10 +53,6 @@ field-input: class of input elements which represent their individual evidence c
 
 
 === Todo List ===
-1. allow users to specify citation order, underline / italic / bold / font size
-add customizable prefix for author "According to..."  "Written by..." etc.
-UI change to:
-| ^ [                field                 ] [pre][suf] |10|12|u|b|i| [ex][cl] |
-..^.. up/down arrows for order rearrangement
+1. Save {pre, suf, style, disabled} preferences in settings
 
 2. customizable color themes

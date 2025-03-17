@@ -2,16 +2,17 @@
 <html lang="en">
 <head>
     <link rel="icon" sizes="16x16 32x32 64x64" href="imgs/potat.jpg">
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z8KTGQM6BB"></script>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <title>NCFCAAutoEvidencer</title>
+    <script src="script.js" type="module"></script>
+    <script src="https://www.googletagmanager.com/gtag/js?id=G-Z8KTGQM6BB"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
         gtag('config', 'G-Z8KTGQM6BB');
     </script>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="style.css">
-    <title>NCFCAAutoEvidencer</title>
 </head>
 
 <body>
@@ -24,14 +25,13 @@
             </div>
 
             <button id="new-tab">New Tab</button>
-            <a id="settings-tab" href="#settings">Settings</a>
-            <a id="about-tab" href="#about">About</a>
+            <div id="settings"></div><a id="settings-tab" href="#settings">Settings</a>
+            <div id="about"></div><a id="about-tab" href="#about">About</a>
         </div>
 
         <div id="content">
         </div>
 
     </div>
-    <script src="script.js" type="module"></script>
 </body>
 </html>

@@ -4,7 +4,7 @@ export const FieldIdToLabel = JSON.parse(`{
     "pn": "Publisher",
     "pc": "Publisher Credentials",
     "pd": "Published Date",
-    "cd": "Accessed Date",
+    "cd": "Accessed On",
     "ti": "Article Title",
     "te": "Team",
     "li": "Link",
@@ -19,7 +19,7 @@ export const FieldIdToDefPre = JSON.parse(`{
     "pc": "(",
     "pd": "On ",
     "cd": "Accessed ",
-    "ti": "(\\"",
+    "ti": "(\\\\\\"",
     "te": "[",
     "li": "",
     "ev": "[“]",
@@ -33,21 +33,21 @@ export const FieldIdToDefSuf = JSON.parse(`{
     "pc": ").",
     "pd": ".",
     "cd": ".",
-    "ti": "\\").",
+    "ti": "\\\\\\").",
     "te": "].",
     "li": ".",
     "ev": "[”]",
-    "im": "MPX: "
+    "im": ""
 }`)
 
-export const DefaultTab = JSON.parse(`{
+export const DefaultTabStr = `{
     "tabId": "default",
     "fieldOrder": ["an", "ac", "pn", "pc", "pd", "cd", "ti", "te", "li", "ev", "im"],
     "fieldData": {
         "an": {
             "fieldId": "an", "v": "",
-            "p": ${FieldIdToDefPre["an"]},
-            "s": ${FieldIdToDefSuf["an"]},
+            "p": "${FieldIdToDefPre["an"]}",
+            "s": "${FieldIdToDefSuf["an"]}",
             "z": 12,
             "u": true, "i": true, "b": false,
             "e": false
@@ -55,8 +55,8 @@ export const DefaultTab = JSON.parse(`{
         
         "ac": {
             "fieldId": "ac", "v": "",
-            "p": ${FieldIdToDefPre["ac"]},
-            "s": ${FieldIdToDefSuf["ac"]},
+            "p": "${FieldIdToDefPre["ac"]}",
+            "s": "${FieldIdToDefSuf["ac"]}",
             "z": 10,
             "u": false, "i": true, "b": false,
             "e": false
@@ -64,8 +64,8 @@ export const DefaultTab = JSON.parse(`{
         
         "pn": {
             "fieldId": "pn", "v": "",
-            "p": ${FieldIdToDefPre["pn"]},
-            "s": ${FieldIdToDefSuf["pn"]},
+            "p": "${FieldIdToDefPre["pn"]}",
+            "s": "${FieldIdToDefSuf["pn"]}",
             "z": 12,
             "u": true, "i": true, "b": false,
             "e": false
@@ -73,8 +73,8 @@ export const DefaultTab = JSON.parse(`{
         
         "pc": {
             "fieldId": "pc", "v": "",
-            "p": ${FieldIdToDefPre["pc"]},
-            "s": ${FieldIdToDefSuf["pc"]},
+            "p": "${FieldIdToDefPre["pc"]}",
+            "s": "${FieldIdToDefSuf["pc"]}",
             "z": 10,
             "u": false, "i": true, "b": false,
             "e": false
@@ -82,8 +82,8 @@ export const DefaultTab = JSON.parse(`{
         
         "pd": {
             "fieldId": "pd", "v": "",
-            "p": ${FieldIdToDefPre["pd"]},
-            "s": ${FieldIdToDefSuf["pd"]},
+            "p": "${FieldIdToDefPre["pd"]}",
+            "s": "${FieldIdToDefSuf["pd"]}",
             "z": 12,
             "u": true, "i": true, "b": false,
             "e": false
@@ -91,8 +91,8 @@ export const DefaultTab = JSON.parse(`{
         
         "cd": {
             "fieldId": "cd", "v": "",
-            "p": ${FieldIdToDefPre["cd"]},
-            "s": ${FieldIdToDefSuf["cd"]},
+            "p": "${FieldIdToDefPre["cd"]}",
+            "s": "${FieldIdToDefSuf["cd"]}",
             "z": 10,
             "u": false, "i": true, "b": false,
             "e": false
@@ -100,8 +100,8 @@ export const DefaultTab = JSON.parse(`{
         
         "ti": {
             "fieldId": "ti", "v": "",
-            "p": ${FieldIdToDefPre["ti"]},
-            "s": ${FieldIdToDefSuf["ti"]},
+            "p": "${FieldIdToDefPre["ti"]}",
+            "s": "${FieldIdToDefSuf["ti"]}",
             "z": 10,
             "u": false, "i": true, "b": false,
             "e": false
@@ -109,8 +109,8 @@ export const DefaultTab = JSON.parse(`{
         
         "te": {
             "fieldId": "te", "v": "",
-            "p": ${FieldIdToDefPre["te"]},
-            "s": ${FieldIdToDefSuf["te"]},
+            "p": "${FieldIdToDefPre["te"]}",
+            "s": "${FieldIdToDefSuf["te"]}",
             "z": 10,
             "u": false, "i": true, "b": false,
             "e": false
@@ -118,8 +118,8 @@ export const DefaultTab = JSON.parse(`{
         
         "li": { 
             "fieldId": "li", "v": "",
-            "p": ${FieldIdToDefPre["li"]},
-            "s": ${FieldIdToDefSuf["li"]},
+            "p": "${FieldIdToDefPre["li"]}",
+            "s": "${FieldIdToDefSuf["li"]}",
             "z": 10,
             "u": true, "i": true, "b": false,
             "e": false
@@ -127,8 +127,8 @@ export const DefaultTab = JSON.parse(`{
         
         "ev": { 
             "fieldId": "ev", "v": "",
-            "p": ${FieldIdToDefPre["ev"]},
-            "s": ${FieldIdToDefSuf["ev"]},
+            "p": "${FieldIdToDefPre["ev"]}",
+            "s": "${FieldIdToDefSuf["ev"]}",
             "z": 12,
             "u": true, "i": false, "b": false,
             "e": false
@@ -136,14 +136,15 @@ export const DefaultTab = JSON.parse(`{
         
         "im": { 
             "fieldId": "im", "v": "",
-            "p": ${FieldIdToDefPre["im"]},
-            "s": ${FieldIdToDefSuf["im"]},
+            "p": "${FieldIdToDefPre["im"]}",
+            "s": "${FieldIdToDefSuf["im"]}",
             "z": 12,
             "u": false, "i": false, "b": true,
             "e": false
         }
     }
-}`)
+}`
+JSON.parse(DefaultTabStr)
 
 /*
 In main script:
@@ -165,7 +166,7 @@ export function generateEvidencingSetup(tab) {
     let content = ``;
 
     // Tab header
-    const header = `<h2 id="content-title">${tab["tabId"]} <button id="delete-tab-button">Delete Tab</button> </h2>`;
+    const header = `<h2 id="content-title">Tab ${tab["tabId"]} <button id="delete-tab-button">Delete Tab</button> </h2>`;
     content += header;
 
     // Generate evidence component containers
@@ -186,7 +187,7 @@ export function generateEvidencingSetup(tab) {
     return content;
 }
 
-export function updateEvidencingSetup(tab, deleteTab, setAccessedDate, copyEvidence, clearAll, updateEvidenceResult) {
+export function updateEvidencingSetup(tab, deleteTab, fieldUp, fieldDown, setAccessedDate, copyEvidence, clearAll, updateEvidenceResult) {
     /*
     Updates evidencing setup, adding listeners & applying configurations to field containers from given tab
     Requires HTML content to already be loaded in document
@@ -194,13 +195,13 @@ export function updateEvidencingSetup(tab, deleteTab, setAccessedDate, copyEvide
 
     // Add input listeners
     tab["fieldOrder"].forEach(fieldId => {
-        addFieldContainerListeners(tab["fieldData"][fieldId], updateEvidenceResult);
+        addFieldContainerListeners(tab["fieldData"][fieldId], updateEvidenceResult, fieldUp, fieldDown);
     })
     addMiscContainerListeners(deleteTab, setAccessedDate, copyEvidence, clearAll)
 
     // Update field containers
     tab["fieldOrder"].forEach(fieldId => {
-        updateFieldContainer(tab["fieldData"][fieldId], updateEvidenceResult);
+        updateFieldContainer(tab["fieldData"][fieldId]);
     })
 }
 
@@ -208,7 +209,7 @@ export function addMiscContainerListeners(deleteTab, setAccessedDate, copyEviden
     /*
     Add listeners for delete-tab-button, accessed-button, copy and clearall buttons
      */
-    document.getElementById('delete-tab').addEventListener('click', () => {deleteTab();})
+    document.getElementById('delete-tab-button').addEventListener('click', () => {deleteTab();})
     document.getElementById('accessed-button').addEventListener('click', () => {setAccessedDate();})
     document.getElementById('copy-button').addEventListener('click', () => {copyEvidence();})
     document.getElementById('clearall-button').addEventListener('click', () => {clearAll();})
@@ -220,13 +221,14 @@ export function generateFieldContainerHTML(field) {
      */
 
     const fieldId = field["fieldId"]
-    const label = FieldIdToLabel[fieldId] + (fieldId === 'cd') ? `<button id="accessed-button">Today</button>` : '';
+    const label = FieldIdToLabel[fieldId] + ((fieldId === 'cd') ? `<button id="accessed-button">Today</button>` : '');
+    const underlineDisabled = (fieldId === 'li') ? 'disabled' : '';
 
     return `
     <div class="field-container" id="container_${fieldId}">
         <div class="field-order" id="order_${fieldId}">
-            <button class="field-up"   id="up_${fieldId}"   >^</button>
-            <button class="field-down" id="down_${fieldId}" >v</button>
+            <button class="field-up"   id="up_${fieldId}"   >↑</button>
+            <button class="field-down" id="down_${fieldId}" >↓</button>
         </div>
         
         <label  class="field-label" id="label_${fieldId}">${label}</label>
@@ -241,7 +243,7 @@ export function generateFieldContainerHTML(field) {
             <button class="field-size12pt" id="size12pt_${fieldId}">12pt</button>
          </div>
          
-        <button class="field-underline" id="underline_${fieldId}">U</button>
+        <button class="field-underline" ${underlineDisabled} id="underline_${fieldId}">U</button>
         <button class="field-italicize" id="italicize_${fieldId}">I</button>
         <button class="field-bold"      id="bold_${fieldId}"     >B</button>
         
@@ -251,7 +253,7 @@ export function generateFieldContainerHTML(field) {
     </div>`;
 }
 
-export function addFieldContainerListeners(field, updateEvidenceResult) {
+export function addFieldContainerListeners(field, updateEvidenceResult, fieldUp, fieldDown) {
     /*
     Add listeners to buttons and input components in field container for given fieldId
     Requires: field container and elements to already be loaded in document
@@ -262,75 +264,178 @@ export function addFieldContainerListeners(field, updateEvidenceResult) {
 
     // Add background-color listener to container
     const container = document.getElementById(`container_${fieldId}`);
-    container.addEventListener('mouseenter', () => {container.style.backgroundColor = '#f5f5f5';});
-    container.addEventListener('mouseleave', () => {container.style.backgroundColor = 'white';});
+    container.addEventListener('mouseenter', () => {
+        container.style.backgroundColor = '#f5f5f5';
+    });
+    container.addEventListener('mouseleave', () => {
+        container.style.backgroundColor = 'white';
+    });
     container.style.backgroundColor = 'white';
+
+    // Add order change button containers
+    const up = document.getElementById(`up_${fieldId}`);
+    const down = document.getElementById(`down_${fieldId}`);
+    up.addEventListener('click', () => {
+        fieldUp(fieldId);
+    })
+    down.addEventListener('click', () => {
+        fieldDown(fieldId);
+    })
 
     // Add strip-formatting-on-paste to value component
     const value = document.getElementById(`value_${fieldId}`);
-    value.addEventListener('input', () => {value.innerHTML = value.textContent; updateEvidenceResult();})
+    value.addEventListener("paste", function (event) {
+        event.preventDefault();
+        const text = (event.clipboardData || window.clipboardData).getData("text");
+        document.execCommand("insertText", false, text);
+    });
 
-    // Add focus-on-hover listener to input components
+    // Add save-values-on-input to input components
     const pre = document.getElementById(`pre_${fieldId}`);
     const suf = document.getElementById(`suf_${fieldId}`);
-    value.addEventListener('mouseenter', () => {  if (value.style.backgroundColor === 'white' || !value.style.backgroundColor) {  value.focus(); value.style.boxShadow = '2px 2px 3px gray'; } })
-    value.addEventListener('mouseleave', () => { value.blur(); value.style.boxShadow = ''; })
-    pre.addEventListener('mouseenter', () => {  if (pre.style.backgroundColor === 'white' || !pre.style.backgroundColor) {  pre.focus(); pre.style.boxShadow = '2px 2px 3px gray'; } })
-    pre.addEventListener('mouseleave', () => { pre.blur(); pre.style.boxShadow = ''; })
-    suf.addEventListener('mouseenter', () => {  if (suf.style.backgroundColor === 'white' || !suf.style.backgroundColor) {  suf.focus(); suf.style.boxShadow = '2px 2px 3px gray'; } })
-    suf.addEventListener('mouseleave', () => { suf.blur(); suf.style.boxShadow = ''; })
+    value.addEventListener('input', () => {
+        field["v"] = value.textContent;
+        updateEvidenceResult();
+    })
+    pre.addEventListener('input', () => {
+        field["p"] = pre.textContent;
+        updateEvidenceResult();
+    })
+    suf.addEventListener('input', () => {
+        field["s"] = suf.textContent;
+        updateEvidenceResult();
+    })
+
+    // Add focus-on-hover listener to input components
+    value.addEventListener('mouseenter', () => {
+        if (value.style.backgroundColor === 'white' || !value.style.backgroundColor) {
+            value.focus();
+            value.style.boxShadow = '2px 2px 3px gray';
+        }
+    })
+    value.addEventListener('mouseleave', () => {
+        value.blur();
+        value.style.boxShadow = '';
+    })
+    pre.addEventListener('mouseenter', () => {
+        if (pre.style.backgroundColor === 'white' || !pre.style.backgroundColor) {
+            pre.focus();
+            pre.style.boxShadow = '2px 2px 3px gray';
+        }
+    })
+    pre.addEventListener('mouseleave', () => {
+        pre.blur();
+        pre.style.boxShadow = '';
+    })
+    suf.addEventListener('mouseenter', () => {
+        if (suf.style.backgroundColor === 'white' || !suf.style.backgroundColor) {
+            suf.focus();
+            suf.style.boxShadow = '2px 2px 3px gray';
+        }
+    })
+    suf.addEventListener('mouseleave', () => {
+        suf.blur();
+        suf.style.boxShadow = '';
+    })
 
     // Add style listeners
     const size10pt = document.getElementById(`size10pt_${fieldId}`);
     const size12pt = document.getElementById(`size12pt_${fieldId}`);
     size10pt.onclick = (skipUpdate) => {
-        size10pt.style.backgroundColor = 'gray';
-        size12pt.style.backgroundColor = 'white';
-        if (!skipUpdate) { field["size"] = 10; updateEvidenceResult(); }
+        if (skipUpdate !== null) {
+            field["z"] = 10;
+        }
+        size10pt.style.backgroundColor = (field["z"] === 10) ? 'gray' : 'white';
+        size12pt.style.backgroundColor = (field["z"] === 10) ? 'white' : 'gray';
+        if (skipUpdate !== null) {
+            updateEvidenceResult();
+        }
     }
     size12pt.onclick = (skipUpdate) => {
-        size10pt.style.backgroundColor = 'white';
-        size12pt.style.backgroundColor = 'gray';
-        if (!skipUpdate) { field["size"] = 12; updateEvidenceResult(); }
+        if (skipUpdate !== null) {
+            field["z"] = 12;
+        }
+        size10pt.style.backgroundColor = (field["z"] === 10) ? 'gray' : 'white';
+        size12pt.style.backgroundColor = (field["z"] === 10) ? 'white' : 'gray';
+        if (skipUpdate !== null) {
+            updateEvidenceResult();
+        }
     }
 
     const underline = document.getElementById(`underline_${fieldId}`);
     underline.onclick = (skipUpdate) => {
+        if (skipUpdate !== null) {
+            field["u"] = !field["u"];
+        }
         underline.style.backgroundColor = (field["u"]) ? 'gray' : 'white';
-        if (!skipUpdate) { field["u"] = !field["u"]; updateEvidenceResult(); }
+        if (skipUpdate !== null) {
+            updateEvidenceResult();
+        }
     }
 
-    const italic = document.getElementById(`italic_${fieldId}`);
+    const italic = document.getElementById(`italicize_${fieldId}`);
     italic.onclick = (skipUpdate) => {
+        if (skipUpdate !== null) {
+            field["i"] = !field["i"];
+        }
         italic.style.backgroundColor = (field["i"]) ? 'gray' : 'white';
-        if (!skipUpdate) { field["i"] = !field["i"]; updateEvidenceResult(); }
+        if (skipUpdate !== null) {
+            updateEvidenceResult();
+        }
     }
 
     const bold = document.getElementById(`bold_${fieldId}`);
     bold.onclick = (skipUpdate) => {
+        if (skipUpdate !== null) {
+            field["b"] = !field["b"];
+        }
         bold.style.backgroundColor = (field["b"]) ? 'gray' : 'white';
-        if (!skipUpdate) { field["b"] = !field["b"]; updateEvidenceResult(); }
+        if (skipUpdate !== null) {
+            updateEvidenceResult();
+        }
     }
 
     // Add exclude to exclude button
+    const comps = [value, pre, suf];
     const exclude = document.getElementById(`exclude_${fieldId}`)
     exclude.onclick = (skipUpdate) => {
-        if (field["e"]) {
-            exclude.innerHTML = 'Include'; value.contentEditable = 'false';
-            value.style.textDecoration = 'line-through'; value.style.backgroundColor = '#ffe9e9';  // TODO: see prev todo
-        } else {
-            exclude.innerHTML = 'Exclude'; value.contentEditable = 'true'
-            value.style.textDecoration = ''; value.style.backgroundColor = 'white';
+        if (skipUpdate !== null) {
+            field["e"] = !field["e"];
         }
-        if (!skipUpdate) { field["e"] = !field["e"]; updateEvidenceResult(); }
+        if (field["e"]) {
+            exclude.innerHTML = 'Include';
+            for (const c of comps) {
+                c.contentEditable = 'false';
+                c.style.textDecoration = 'line-through';
+                c.style.backgroundColor = '#ffe9e9';
+            }
+        } else {
+            exclude.innerHTML = 'Exclude';
+            for (const c of comps) {
+                c.contentEditable = 'true'
+                c.style.textDecoration = '';
+                c.style.backgroundColor = 'white';
+            }
+        }
+        if (skipUpdate !== null) {
+            updateEvidenceResult();
+        }
     }
 
     // Add clear-field to clear button
     const clear = document.getElementById(`clear_${fieldId}`)
-    clear.addEventListener('click', () => { value.innerHTML = ''; updateEvidenceResult(); })
+    clear.addEventListener('click', () => {
+        value.innerHTML = '';
+        pre.innerHTML = JSON.parse('{"a":"' + FieldIdToDefPre[fieldId] + '"}').a;
+        suf.innerHTML = JSON.parse('{"a":"' + FieldIdToDefSuf[fieldId] + '"}').a;
+        field['v'] = '';
+        field['p'] = JSON.parse('{"a":"' + FieldIdToDefPre[fieldId] + '"}').a;
+        field['s'] = JSON.parse('{"a":"' + FieldIdToDefSuf[fieldId] + '"}').a;
+        updateEvidenceResult();
+    })
 }
 
-export function updateFieldContainer(field, updateEvidenceResult) {
+export function updateFieldContainer(field) {
     /*
     Exclude, mark text size styles from data for field container of given field
     Requires: field container to already be loaded in document & listeners for this container already added
@@ -340,13 +445,13 @@ export function updateFieldContainer(field, updateEvidenceResult) {
     const size10pt = document.getElementById(`size10pt_${fieldId}`);
     const size12pt = document.getElementById(`size12pt_${fieldId}`);
     const underline = document.getElementById(`underline_${fieldId}`);
-    const italic = document.getElementById(`italic_${fieldId}`);
+    const italicize = document.getElementById(`italicize_${fieldId}`);
     const bold = document.getElementById(`bold_${fieldId}`);
     const exclude = document.getElementById(`exclude_${fieldId}`);
 
-    if (field["size"] === 10) { size10pt.onclick(false); } else {  size12pt.onclick(false); }
-    if (field["u"]) { underline.onclick(false); }
-    if (field["i"]) { italic.onclick(false); }
-    if (field["b"]) { bold.onclick(false); }
-    if (field["e"]) { exclude.onclick(false); }
+    if (field["z"] === 10) { size10pt.onclick(null); } else {  size12pt.onclick(null); }
+    if (field["u"]) { underline.onclick(null); }
+    if (field["i"]) { italicize.onclick(null); }
+    if (field["b"]) { bold.onclick(null); }
+    if (field["e"]) { exclude.onclick(null); }
 }
