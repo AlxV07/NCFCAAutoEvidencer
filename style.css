@@ -6,7 +6,7 @@ body {
     font-family: Cantarell, sans-serif;
     overflow-y: auto;
     overflow-x: auto;
-    background-color: #888;
+    background-color: #333;
     --toolbar-front: #fff;
     --toolbar-back: #333;
 
@@ -27,6 +27,7 @@ button {
     display: flex;
     height: 100%;
     width: 100%;
+    background-color: white;
 }
 
 #toolbar {
@@ -110,7 +111,6 @@ button {
     flex: 1;
     padding: 20px;
     overflow-y: auto;
-    background-color: #f9f9f9;
 }
 
 /*
@@ -137,7 +137,6 @@ button {
     height: 31px;
     margin: 0 0 0 10px;
     border-radius: 5px;
-    background-color: #f6f6f6;
 }
 
 .field-down {
@@ -145,7 +144,6 @@ button {
     height: 31px;
     margin: 0 17px 0 2px;
     border-radius: 5px;
-    background-color: #f6f6f6;
 }
 
 .field-label {
@@ -182,6 +180,48 @@ button {
     overflow-wrap: break-word;
 }
 
+.field-collapsible {
+    display: flex;
+    flex-direction: row;
+    transition: transform 0.3s ease;
+    transform: translateX(130px);
+    width: 25%;
+    max-width: 25%;
+    height: 100%;
+    justify-content: left;
+    align-items: center;
+}
+
+.field-collapse {
+    width: fit-content;
+    text-wrap: nowrap;
+    height: 12px;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 5px;
+    font-size: 11px;
+    color: black;
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: #eaeaea;
+    cursor: pointer;
+    text-align: center;
+    margin: 0;
+}
+
+.field-collapsible-content {
+    height: 100%;
+    overflow-x: clip;
+    width: 600px;
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+    border-radius: 3px;
+    transition: opacity 0.3s;
+    opacity: 0;
+}
+
 .field-pre, .field-suf {
     font-style: normal;
     font-family: "Times New Roman", serif;
@@ -197,8 +237,8 @@ button {
     outline: none;
 
     padding: 5px;
-    width: 5%;
-    max-width: 5%;
+    width: 20%;
+    max-width: 20%;
     margin: 0 1px 0 3px;
 
     display: inline-block;
@@ -208,11 +248,11 @@ button {
 }
 
 .field-pre {
-    margin-left: 19px;
+    margin-left: 9px;
 }
 
 .field-suf {
-    margin-right: 13px;
+    margin-right: 3px;
 }
 
 .field-size {
@@ -222,17 +262,15 @@ button {
 .field-size10pt {
     width: 43px;
     height: 31px;
-    margin: 0 0 0 15px;
+    margin: 0 0 0 4px;
     border-radius: 5px;
-    background-color: #f6f6f6;
 }
 
 .field-size12pt {
     width: 43px;
     height: 31px;
-    margin: 0 15px 0 0;
+    margin: 0 4px 0 0;
     border-radius: 5px;
-    background-color: #f6f6f6;
 }
 
 .field-underline, .field-italicize, .field-bold {
@@ -241,11 +279,10 @@ button {
     height: 31px;
     margin: 0 3px 0 3px;
     border-radius: 5px;
-    background-color: #f6f6f6;
 }
 
 .field-underline {
-    margin-left: 17px;
+    margin-left: 4px;
     text-decoration: underline;
 }
 
@@ -263,7 +300,6 @@ button {
     height: 31px;
     margin: 5px 3px 5px 15px;
     border-radius: 5px;
-    background-color: #f6f6f6;
 }
 
 .field-clear {
@@ -271,7 +307,6 @@ button {
     height: 31px;
     margin: 5px 23px;
     border-radius: 5px;
-    background-color: #f6f6f6;
 }
 
 
@@ -300,7 +335,6 @@ button {
     max-width: 35px;
     margin: 0 0 0 3px;
     padding: 0;
-    background-color: #f6f6f6;
     border-radius: 5px;
 }
 
@@ -324,7 +358,6 @@ button {
     height: 45px;
     max-height: 45px;
     border-radius: 5px;
-    background-color: #f6f6f6;
 }
 
 #clearall-button {
@@ -332,7 +365,6 @@ button {
     height: 45px;
     max-height: 45px;
     border-radius: 5px;
-    background-color: #f6f6f6;
 }
 
 /*
@@ -343,7 +375,6 @@ button {
     font-family: Cantarell, sans-serif;
     cursor: pointer;
     border-radius: 10px;
-    background-color: #f6f6f6;
     margin-left: 17px;
     font-size: 10px;
 }
