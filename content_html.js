@@ -33,10 +33,10 @@ export const AboutContent = `
 <div style="max-width: 100%; justify-content: center; align-items: center; text-align: center;">
     <br>
     
-    <h2>NCFCAAutoEvidencer | Version: 3.2</h2>
-    <strong>a.k.a. "The Autoevidencer"</strong><br><br>
+    <h2>NCFCAAutoEvidencer | Version: 3.14159</h2>
+    <strong>a.k.a. "The Auto Evidencer"</strong><br><br>
     <p style="font-size: 20px">
-        A tool for fast evidence formatting - copy-and-paste straight from sources into the Autoevidencer to:
+        A tool for fast evidence formatting - copy-and-paste straight from sources into the Auto Evidencer to:
         <ul style="text-align: left; display: inline-block; font-size: 16px; margin-top: 0">
             <li>automatically clean up irregular, colorful text from sources into plain Times New Roman.</li>
             <li>automatically format citations with proper (parentheses), [“]quotes[”], and font size.</li>
@@ -60,7 +60,6 @@ export const AboutContent = `
 
     <h3 style="margin-bottom: 0">Change Log</h3>
     <ul style="text-align: left; display: inline-block">
-        <p><strong>03/31/2025 | 3.2:</strong> added collapsible window for field customization to make UI less cluttered (thanks Liam O'Connors & Therese Pammit for pointing out *ahem*); renamed "Auto Evidencer" to "Autoevidencer"</p>
         <p><strong>03/16/2025 | 3.14159:</strong> 
            major update: 
            formatting from source stripped first before displaying text content in input fields;

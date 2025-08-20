@@ -32,19 +32,20 @@ tabs = {
 Evidence Components:
 *field component just here for reference; not used in code
 =field*=   =id=        =label=      =default_pre= =default_suf= =default_sty=
-author_name|an|Author(s)            |According to |.            |12,u,i
-author_cred|ac|Author(s) Credentials|(            |).           |10,i
-pub_name   |pn|Publisher            |Published by |.            |12,u,i
-pub_cred   |pc|Publisher Credentials|(            |).           |10,i
-pub_date   |pd|Published Date       |On           |.            |12,u,i
-acc_date   |cd|Accessed Date        |Accessed     |.            |10,i
-title      |ti|Article Title        |("           |").          |10,i
-team       |te|Team                 |[            |].           |10,i
-link       |li|Link                 |             |             |[special: always underline]    10,u
-evidence   |ev|Evidence             |[“]          |[”]          |[special: no style for quotes] 12,u
-impact     |im|Impact               |MPX:         |             |12,b
+author_name|an|Author(s)            |According to |.            |
+author_cred|ac|Author(s) Credentials|(            |).           |
+pub_name   |pn|Publisher            |Published by |.            |
+pub_cred   |pc|Publisher Credentials|(            |).           |
+pub_date   |pd|Published Date       |On           |.            |
+acc_date   |cd|Accessed Date        |Accessed     |.            |
+title      |ti|Article Title        |("           |").          |
+team       |te|Team                 |[            |].           |
+link       |li|Link                 |             |             |[special: no config]
+evidence   |ev|Evidence             |[“]          |[”]          |[special: no config]
+impact     |im|Impact               |MPX:         |             |
 
 Evidencing Setup:  user's currently displayed setup of fields.
+toolbar *TODO: maybe rename; the tab container + abt & settings buttons as of rn.
 content: currently displayed - an evidencing setup, abt page, settings, or tab-not-found.
 field-container: class containing all components to edit this evidence component.
 field-label: label for field container
@@ -55,5 +56,3 @@ field-input: class of input elements which represent their individual evidence c
 1. Save {pre, suf, style, disabled} preferences in settings
 
 2. customizable color themes
-
-3. sources database
