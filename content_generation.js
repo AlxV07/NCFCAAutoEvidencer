@@ -235,23 +235,31 @@ export function generateFieldContainerHTML(field) {
         
         <div class="field-value" id="value_${fieldId}" contentEditable="true">${field['v']}</div>
         
-        <div class="field-pre" id="pre_${fieldId}" contentEditable="true">${field['p']}</div>
-        <div class="field-suf" id="suf_${fieldId}" contentEditable="true">${field['s']}</div>
-        
-        <div class="field-size" id="size_${fieldId}">
-            <button class="field-size10pt" id="size10pt_${fieldId}">10pt</button>
-            <button class="field-size12pt" id="size12pt_${fieldId}">12pt</button>
-         </div>
-         
-        <button class="field-underline" ${underlineDisabled} id="underline_${fieldId}">U</button>
-        <button class="field-italicize" id="italicize_${fieldId}">I</button>
-        <button class="field-bold"      id="bold_${fieldId}"     >B</button>
-        
         <button class="field-exclude" id="exclude_${fieldId}">Exclude</button>
-        
         <button class="field-clear" id="clear_${fieldId}"  >Clear</button>
+        
+         <div class="field-collapsible" id="collapsible_${fieldId}">
+            <div class="field-collapse" id="collapse_${fieldId}">< Field Customization</div>
+            <div class="field-collapsible-content" id="collapsible-content_${fieldId}">
+            
+                <div class="field-pre" id="pre_${fieldId}" contentEditable="true">${field['p']}</div>
+                <div class="field-suf" id="suf_${fieldId}" contentEditable="true">${field['s']}</div>
+                
+                <div class="field-size" id="size_${fieldId}">
+                    <button class="field-size10pt" id="size10pt_${fieldId}">10pt</button>
+                    <button class="field-size12pt" id="size12pt_${fieldId}">12pt</button>
+                 </div>
+                 
+                <button class="field-underline" ${underlineDisabled} id="underline_${fieldId}">U</button>
+                <button class="field-italicize" id="italicize_${fieldId}">I</button>
+                <button class="field-bold"      id="bold_${fieldId}"     >B</button>
+        
+            </div>
+        </div>
+        
     </div>`;
 }
+// 445G
 
 export function addFieldContainerListeners(field, updateEvidenceResult, fieldUp, fieldDown) {
     /*
@@ -433,6 +441,22 @@ export function addFieldContainerListeners(field, updateEvidenceResult, fieldUp,
         field['s'] = JSON.parse('{"a":"' + FieldIdToDefSuf[fieldId] + '"}').a;
         updateEvidenceResult();
     })
+
+    // Add collapsible listeners
+    const collapsible = document.getElementById(`collapsible_${fieldId}`);
+    const collapse = document.getElementById(`collapse_${fieldId}`);
+    const collapsibleContent = document.getElementById(`collapsible-content_${fieldId}`);
+    collapse.addEventListener("click", () => {
+        if (collapse.textContent === "< Field Customization") {
+            collapsible.style.transform = "translateX(0px)";
+            collapsibleContent.style.opacity = '100%';
+            collapse.innerHTML = ">";
+        } else {
+            collapsible.style.transform = "translateX(130px)";
+            collapsibleContent.style.opacity = '0%';
+            collapse.innerHTML = "< Field Customization";
+        }
+    });
 }
 
 export function updateFieldContainer(field) {

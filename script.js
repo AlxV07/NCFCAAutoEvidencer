@@ -394,7 +394,7 @@ function clearAll() {
     curTabData['fieldOrder'].forEach(fieldId => {
         document.getElementById('clear_' + fieldId).click()
         const inputFieldExcludeButton = document.getElementById('exclude_' + fieldId)
-        if (inputFieldExcludeButton.innerHTML === 'Include') {inputFieldExcludeButton.click()}  // TODO: remove and replace w/ update field["e"]
+        if (inputFieldExcludeButton.innerHTML === 'Include') {inputFieldExcludeButton.click()}
     })
     updateEvidenceResult()
 }
