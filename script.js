@@ -1,19 +1,34 @@
-import { SettingsContent, AboutContent } from './content_html.js';
+import { AboutContent } from './content_html.js';
 import { publisherToCredential, publisherToName } from "./citation_completion_data.js";
 import { DefaultTabStr, generateEvidencingSetup, updateEvidencingSetup } from "./content_generation.js";
 
 
-// ============================================= Settings Content Generation =============================================
+// ============================================= NonTab Content Generation =============================================
 
 function setupSettingsContent() {
     addThemeListeners();
 }
 
+function setupAboutContent() {
+    const circle = document.getElementById('circle');
+    const colorPicker = document.getElementById('colorPicker');
+
+    circle.addEventListener('click', () => {
+        colorPicker.click();
+    });
+
+    colorPicker.addEventListener('input', (e) => {
+        const color = e.target.value;
+        document.documentElement.style.setProperty('--gradient', color);
+        circle.style.backgroundColor = color; // optional, immediate update
+        document.body.style.setProperty('--gradient', color);
+    });
+}
 
 // ============================================= Constants & Values =============================================
 
 const tabNotFoundContent = `<h2>Tab Not Found</h2><p>The requested tab does not exist.</p>`;
-const NonTabsHashToContent = new Map([['#about', AboutContent], ['#settings', SettingsContent]]);
+const NonTabsHashToContent = new Map([['#about', AboutContent]]);
 const ContentDisplay = document.getElementById('content');
 
 const aboutTabButton = document.getElementById('about-tab');
@@ -128,6 +143,7 @@ function onHashChange() {
     if (NonTabsHashToContent.has(hash)) {
         ContentDisplay.innerHTML = NonTabsHashToContent.get(hash);
         if (hash === '#settings') { setupSettingsContent(); }
+        if (hash === '#about') { setupAboutContent(); }
         return;
     }
 
@@ -175,7 +191,7 @@ const Theme = new Map([
     ["cur-back", "#111111"],
     ["cur-back-hover", "2c2c2c1"],
     // other tabs
-    ["tab-back", "#3f3f3f"],
+    ["tab-back", "#252525"],
     ["tab-back-hover", "#212121"],
 ])  // map storing current themes; initially gray
 
@@ -485,3 +501,13 @@ function fillCredentialsFromPublisher(p) {
     }
     updateEvidenceResult()
 }
+
+function getRandomItem(arr) {
+    const randomIndex = Math.floor(Math.random() * arr.length);
+    return arr[randomIndex];
+}
+
+// document.addEventListener('', () => {
+// })
+const arr = ['rgb(135, 33, 33)', 'rgb(135,140,6)', 'rgb(43,122,12)', 'rgb(12,73,122)', 'rgb(65,12,122)']
+document.body.style.setProperty('--gradient', getRandomItem(arr));

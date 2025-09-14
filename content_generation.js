@@ -261,6 +261,9 @@ export function generateFieldContainerHTML(field) {
 }
 // 445G
 
+const CONTAINER_DEFAULT_BACKGROUND = 'transparent'
+const CONTAINER_HIGHLIGHT_BACKGROUND = 'rgba(30,30,30,0.82)';
+
 export function addFieldContainerListeners(field, updateEvidenceResult, fieldUp, fieldDown) {
     /*
     Add listeners to buttons and input components in field container for given fieldId
@@ -273,12 +276,12 @@ export function addFieldContainerListeners(field, updateEvidenceResult, fieldUp,
     // Add background-color listener to container
     const container = document.getElementById(`container_${fieldId}`);
     container.addEventListener('mouseenter', () => {
-        container.style.backgroundColor = '#f5f5f5';
+        container.style.background = CONTAINER_HIGHLIGHT_BACKGROUND;
     });
     container.addEventListener('mouseleave', () => {
-        container.style.backgroundColor = 'white';
+        container.style.background = CONTAINER_DEFAULT_BACKGROUND;
     });
-    container.style.backgroundColor = 'white';
+    container.style.background = CONTAINER_DEFAULT_BACKGROUND;
 
     // Add order change button containers
     const up = document.getElementById(`up_${fieldId}`);
@@ -415,7 +418,7 @@ export function addFieldContainerListeners(field, updateEvidenceResult, fieldUp,
             for (const c of comps) {
                 c.contentEditable = 'false';
                 c.style.textDecoration = 'line-through';
-                c.style.backgroundColor = '#ffe9e9';
+                c.style.backgroundColor = '#ffa8a8';
             }
         } else {
             exclude.innerHTML = 'Exclude';

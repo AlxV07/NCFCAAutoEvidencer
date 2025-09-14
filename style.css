@@ -6,17 +6,22 @@ body {
     font-family: Cantarell, sans-serif;
     overflow-y: auto;
     overflow-x: auto;
-    background-color: #333;
+    background: #252525;
+    --gradient: #157200;
     --toolbar-front: #fff;
-    --toolbar-back: #333;
+    --toolbar-back: linear-gradient(to bottom, #333333, var(--gradient));
 
-    --init-back: #3f3f3f;
-    --init-hover: #212121;
+    --init-back: #262626;
+    --init-hover: #000000;
 }
 
 button {
     font-family: Cantarell, sans-serif;
     cursor: pointer;
+}
+
+button:hover {
+    background: lightgray;
 }
 
 /*
@@ -27,18 +32,19 @@ button {
     display: flex;
     height: 100%;
     width: 100%;
-    background-color: white;
+    background: transparent;
 }
 
 #toolbar {
     width: 13%;
     color: var(--toolbar-front);
-    background-color: var(--toolbar-back);
+    background: var(--toolbar-back);
     padding: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    overflow-y: scroll;
+    overflow-y: hidden;
+    overflow-x: hidden;
 }
 
 #toolbar h2 {
@@ -89,7 +95,7 @@ button {
     max-height: 650px;
     width: 99%;
     scrollbar-width: thin;
-    border: #555555 1px solid;
+    border: #3b3b3b 1px solid;
     border-radius: 5px;
 }
 
@@ -109,8 +115,11 @@ button {
 
 #content {
     flex: 1;
-    padding: 20px;
+    padding: 10px;
+    max-height: 100%;
     overflow-y: auto;
+    overflow-x: hidden;
+    background: var(--toolbar-back);
 }
 
 /*
@@ -122,7 +131,6 @@ button {
     flex-direction: row;
     justify-content: left;
     align-items: center;
-    border: 2px solid #ccc;
     transition: 0.1s ease;
     padding-bottom: 5px;
     padding-top: 5px;
@@ -153,6 +161,7 @@ button {
     font-size: 11px;
     min-width: 110px;
     font-weight: bold;
+    color: white;
 }
 
 .field-value {
@@ -166,7 +175,7 @@ button {
     transition: 0.1s ease;
     color: black;
     background-color: white;
-    border: 1px solid #ccc;
+    border-radius: 5px;
     outline: none;
 
     padding: 5px;
@@ -233,7 +242,7 @@ button {
     transition: 0.1s ease;
     color: black;
     background-color: white;
-    border: 1px solid #ccc;
+    border-radius: 5px;
     outline: none;
 
     padding: 5px;
@@ -343,6 +352,7 @@ button {
  */
 
 #formatted-display {
+    background: white;
     border: 2px solid #ccc;
     padding: 10px;
     width: 80%;
@@ -384,5 +394,26 @@ button {
     margin-top: 20px;
     display: flex;
     flex-direction: row;
-    justify-content: center
+    justify-content: center;
+    color: white;
+}
+
+/*
+=== Color Picker ===
+*/
+.color-circle {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background-color: var(--gradient);
+    cursor: pointer;
+    transition: box-shadow 0.2s;
+}
+
+.color-circle:hover {
+    box-shadow: 0 0 10px #00000040;
+}
+
+input[type="color"] {
+    display: none;
 }

@@ -1,79 +1,74 @@
-export const SettingsContent = `
-<div style="max-width: 100%; justify-content: center; align-items: center; text-align: center;">
-
-<h2>Settings</h2> <br>
-
-<strong>Citation Preference Controls: (To be implemented soon)</strong><br><br>
-Will include:<br>
-<ul style="text-align: left; display: inline-block;">
-    -Customize prefixes e.g. "According to...", "Written by...", etc.<br>
-    -Choose what you want bolded, underlined, and italicized.<br>
-    -Select font sizes (10 or 12 pt) for personalized citations.<br>
-</ul>
-<br>
-
-<strong>Select Color Theme:</strong><br><br>
-More advanced configurations coming later; for now, here are some default tab-bar themes:<br><br>
-<div style="display: flex; justify-content: center; gap: 10px;">
-    <div class="color-circle" style="width: 30px; height: 30px; border-radius: 50%; cursor: pointer; background-color: #444444;"></div>
-    <div class="color-circle" style="width: 30px; height: 30px; border-radius: 50%; cursor: pointer; background-color: #d00000;"></div>
-    <div class="color-circle" style="width: 30px; height: 30px; border-radius: 50%; cursor: pointer; background-color: #d38400;"></div>
-    <div class="color-circle" style="width: 30px; height: 30px; border-radius: 50%; cursor: pointer; background-color: #ffff72;"></div>
-    <div class="color-circle" style="width: 30px; height: 30px; border-radius: 50%; cursor: pointer; background-color: #00a800;"></div>
-    <div class="color-circle" style="width: 30px; height: 30px; border-radius: 50%; cursor: pointer; background-color: #0000a1;"></div>
-    <div class="color-circle" style="width: 30px; height: 30px; border-radius: 50%; cursor: pointer; background-color: #390060;"></div>
-    <div class="color-circle" style="width: 30px; height: 30px; border-radius: 50%; cursor: pointer; background-color: #ffc6ff;"></div>
-</div><br>
-(evidencing setup color themes coming later too)
-
-</div>
-`;
-
 export const AboutContent = `
-<div style="max-width: 100%; justify-content: center; align-items: center; text-align: center;">
+<div style="margin: 0; width: 100%; max-width: 100%; justify-content: center; align-items: center; text-align: center; 
+color: white;
+height: 100%;
+overflow: hidden;
+ ">
+    <p style="font-size: 13px; margin-bottom: 0">
+        🍪 The Autoevidencer uses cookies only to save evidence locally across sessions.  Blocking cookies blocks this feature but does not break overall functionality.  Do not rely on this feature to store important evidence.<br><br>
+    </p>
+    <div style="display: flex; justify-content: center; align-items: center">
+        <div style="display: flex; justify-content: center; flex-direction: row; align-items: center">
+            <div style="margin-right: 10px; font-size: 12px">Set Color Theme (opens color picker, enter / esc to close):</div>
+            <div class="color-circle" id="circle"></div>
+            <input type="color" id="colorPicker">
+        </div>
+    </div>
+    <br> 
+    <br>
     <br>
     
-    <h2>NCFCAAutoEvidencer | Version: 3.2</h2>
-    <strong>a.k.a. "The Autoevidencer"</strong><br><br>
+    <h2 style="font-size: 37px; margin: 0">The Autoevidencer</h2>
+    <div style="font-size: 10px; margin: 7px 7px 0;">(previously known as "NCFCAAutoEvidencer")</div>
+    <h4 style="margin: 7px; font-size: 27px;">Version 3.3</h4><br>
     <p style="font-size: 20px">
-        A tool for fast evidence formatting - copy-and-paste straight from sources into the Autoevidencer to:
-        <ul style="text-align: left; display: inline-block; font-size: 16px; margin-top: 0">
-            <li>automatically clean up irregular, colorful text from sources into plain Times New Roman.</li>
-            <li>automatically format citations with proper (parentheses), [“]quotes[”], and font size.</li>
-            <li>automatically fix all your weird spacing problems :)</li>
-            <li>automatically provide credentials for well known sources.</li>
-            <li>automatically work on and save multiple pieces of evidence in separate tabs.</li>
-            <li>automatically do your work in a fancy little student-made application :D</li>
-        </ul><br>
+        A tool for efficient evidence formatting.
+        
+        <br><br>
+        
+        Paste from sources right into the Autoevidencer to build clean, consistent cards.
+        
+        <br><br>
+        
+        Shine with polished and professional display.
     </p>
+   
 
-    <p style="font-size: 16px">
-        🍪 NCFCAAutoEvidencer uses cookies to, and only to, save evidence in-browser across sessions. Blocking cookies blocks this feature.<br><br>
-    </p>
+    
+    <div style="font-size: 70px">
+    †
+    </div>
 
     <p>
-    <strong style="font-size: 20px">Any suggestions, comments, or feedback is appreciated!</strong><br><br>
-    Contact: <a href="mailto:alexander.kai.chen@gmail.com">alexander.kai.chen@gmail.com |  <a href="https://alxv07.github.io/AboutMe/">https://alxv07.github.io/AboutMe/</a><br>
-    Chen/Kuykendall | Region 11, 2023-2024 | Sts. Peter & Paul Speech & Debate<br>
-    Chen/O'Connors | Region 11, 2024-2025 | Sts. Peter & Paul Speech & Debate<br>
-    </strong><br>
-
-    <h3 style="margin-bottom: 0">Change Log</h3>
-    <ul style="text-align: left; display: inline-block">
-        <p><strong>03/31/2025 | 3.2:</strong> added collapsible window for field customization to make UI less cluttered (thanks Liam O'Connors & Therese Pammit for pointing out *ahem*); renamed "Auto Evidencer" to "Autoevidencer"</p>
-        <p><strong>03/16/2025 | 3.14159:</strong> 
-           major update: 
-           formatting from source stripped first before displaying text content in input fields;
-           field-up/down buttons enable customizable field ordering;
-           10/12pt font size & bold+underline+italic options for fields;
-           pre/suf-fix customization implemented;
-           cookies actually fixed now and transition to JSON completed
-         </p>
-        <p><strong>03/09/2025 | 3.1415:</strong> bug fix: fixed cookie operations to not conflict and override analytics; evidencer data should no longer be periodically deleted</p>
-        <p><strong>03/07/2025 | 3.141:</strong> bug fix: fixed field-exclude button breaking tab; organized citation completion data</p>
-        <p><strong>03/07/2025 | 3.14:</strong> *Aesthetic Update* - "About" page style updated; basic color themes implemented: control panel in Settings</p>
-        <p><strong>03/06/2025 | 3.1.4.1:</strong> added public change log to "About" page; added "Team" input field to auto-evidencer (thanks Lewis/Singh for suggestion).</p>
-    </ul>
+    <div style="font-size: 12px">
+     <div>Suggestions, comments, or feedback of any kind is appreciated!</div><br>
+     <div>
+        Built By: <a href="mailto:alexander.kai.chen@gmail.com">alexander.kai.chen@gmail.com</a> | About Me: <a href="https://alxv07.github.io/AboutMe/">https://alxv07.github.io/AboutMe/</a><br>
+     </div>
+     <br>
+     Chen/Kuykendall | Region 11, 2023-2024 | Sts. Peter & Paul Speech & Debate<br>
+     Chen/O'Connors | Region 11, 2024-2025 | Sts. Peter & Paul Speech & Debate<br>
+     <br>
+    </div>
+    <div style="font-size: 10px">
+        <h3 style="margin-bottom: 0">Change Log</h3>
+        <ul style="text-align: left; display: inline-block; width: 50%">
+            <p><strong>09/13/2025 | 3.3:</strong> removed unused "Settings" tab, discontinued unused color themes; updated overall theme to sleeker gradient; cleaned home page</p>
+            <p><strong>03/31/2025 | 3.2:</strong> added collapsible window for field customization to make UI less cluttered (thanks Liam O'Connors & Therese Pammit for pointing out *ahem*); renamed "Auto Evidencer" to "Autoevidencer"</p>
+            <p><strong>03/16/2025 | 3.14159:</strong> 
+               major update: 
+               formatting from source stripped first before displaying text content in input fields;
+               field-up/down buttons enable customizable field ordering;
+               10/12pt font size & bold+underline+italic options for fields;
+               pre/suf-fix customization implemented;
+               cookies actually fixed now and transition to JSON completed
+             </p>
+            <p><strong>03/09/2025 | 3.1415:</strong> bug fix: fixed cookie operations to not conflict and override analytics; evidencer data should no longer be periodically deleted</p>
+            <p><strong>03/07/2025 | 3.141:</strong> bug fix: fixed field-exclude button breaking tab; organized citation completion data</p>
+            <p><strong>03/07/2025 | 3.14:</strong> *Aesthetic Update* - "About" page style updated; basic color themes implemented: control panel in Settings</p>
+            <p><strong>03/06/2025 | 3.1.4.1:</strong> added public change log to "About" page; added "Team" input field to auto-evidencer (thanks Lewis/Singh for suggestion).</p>
+        </ul>
+    </div>
 </div>
 `;
 
