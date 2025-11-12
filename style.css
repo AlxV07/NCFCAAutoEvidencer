@@ -304,7 +304,7 @@ button:hover {
     margin-right: 17px;
 }
 
-.field-exclude {
+.field-exclude, #qexclude-only-citation, #qexclude-author-info, #qexclude-publisher-info, #qexclude-team {
     min-width: 60px;
     height: 31px;
     margin: 5px 3px 5px 15px;

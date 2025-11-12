@@ -169,6 +169,9 @@ export function generateEvidencingSetup(tab) {
     const header = `<h2 id="content-title">Tab ${tab["tabId"]} <button id="delete-tab-button">Delete Tab</button> </h2>`;
     content += header;
 
+    // Quick exclude buttons
+    content += generateQuickExcludeButtons()
+
     // Generate evidence component containers
     tab["fieldOrder"].forEach(fieldId => {
         const container = generateFieldContainerHTML(tab["fieldData"][fieldId]);
@@ -185,6 +188,30 @@ export function generateEvidencingSetup(tab) {
     content += footer;
 
     return content;
+}
+
+export function generateQuickExcludeButtons() {
+    const bar = `
+    <div class="field-container" style="margin-top: 0">
+        <div class="field-value"  contentEditable="false" style="opacity: 0">x</div>
+    
+        <div style="color: white">Quick Exclude:</div>
+        <div style="width: 20px"></div>
+        <button id="qexclude-only-citation">Only Citation</button>
+        <div style="width: 20px"></div>
+        <button id="qexclude-author-info">No Author Info</button>
+        <div style="width: 20px"></div>
+        <button id="qexclude-publisher-info">No Publisher Info</button>
+        <div style="width: 20px"></div>
+        <button id="qexclude-team">No Team</button>
+        
+        <div style="opacity: 0;">
+            <div style="width: 70px"></div>
+            <button class="field-clear"   disabled style="cursor: default">_____</button>
+        </div>
+    </div>
+    `
+    return bar
 }
 
 export function updateEvidencingSetup(tab, deleteTab, fieldUp, fieldDown, setAccessedDate, copyEvidence, clearAll, updateEvidenceResult) {
@@ -207,12 +234,28 @@ export function updateEvidencingSetup(tab, deleteTab, fieldUp, fieldDown, setAcc
 
 export function addMiscContainerListeners(deleteTab, setAccessedDate, copyEvidence, clearAll) {
     /*
-    Add listeners for delete-tab-button, accessed-button, copy and clearall buttons
+    Add listeners for delete-tab-button, accessed-button, qexclude, copy and clearall buttons
      */
     document.getElementById('delete-tab-button').addEventListener('click', () => {deleteTab();})
     document.getElementById('accessed-button').addEventListener('click', () => {setAccessedDate();})
     document.getElementById('copy-button').addEventListener('click', () => {copyEvidence();})
     document.getElementById('clearall-button').addEventListener('click', () => {clearAll();})
+
+    document.getElementById("qexclude-only-citation").addEventListener('click', () => {
+        ((a) => {if (a.textContent == 'Exclude') a.click()})(document.getElementById('exclude_ev'));
+        ((a) => {if (a.textContent == 'Exclude') a.click()})(document.getElementById('exclude_im'));
+    });
+    document.getElementById("qexclude-author-info").addEventListener('click', () => {
+        ((a) => {if (a.textContent == 'Exclude') a.click()})(document.getElementById('exclude_an'));
+        ((a) => {if (a.textContent == 'Exclude') a.click()})(document.getElementById('exclude_ac'));
+    });
+    document.getElementById("qexclude-publisher-info").addEventListener('click', () => {
+        ((a) => {if (a.textContent == 'Exclude') a.click()})(document.getElementById('exclude_pn'));
+        ((a) => {if (a.textContent == 'Exclude') a.click()})(document.getElementById('exclude_pc'));
+    });
+    document.getElementById("qexclude-team").addEventListener('click', () => {
+        ((a) => {if (a.textContent == 'Exclude') a.click()})(document.getElementById('exclude_te'));
+    });
 }
 
 export function generateFieldContainerHTML(field) {

@@ -23,6 +23,8 @@ function setupAboutContent() {
         circle.style.backgroundColor = color; // optional, immediate update
         document.body.style.setProperty('--gradient', color);
     });
+
+
 }
 
 // ============================================= Constants & Values =============================================
@@ -493,11 +495,16 @@ function urlStringToPublisher(urlString) {
 }
 
 function fillCredentialsFromPublisher(p) {
+    const fieldData = curTabData['fieldData'];
     if (publisherToName.has(p)) {
-        document.getElementById('value_pn').textContent = publisherToName.get(p).toString()
+        const a = publisherToName.get(p).toString();
+        document.getElementById('value_pn').textContent = a;
+        fieldData['pn']['v'] = a;
     }
     if (publisherToCredential.has(p)) {
-        document.getElementById('value_pc').textContent = publisherToCredential.get(p).toString()
+        const a = publisherToCredential.get(p).toString()
+        document.getElementById('value_pc').textContent = a;
+        fieldData['pc']['v'] = a;
     }
     updateEvidenceResult()
 }
@@ -507,7 +514,7 @@ function getRandomItem(arr) {
     return arr[randomIndex];
 }
 
-// document.addEventListener('', () => {
-// })
-const arr = ['rgb(135, 33, 33)', 'rgb(135,140,6)', 'rgb(43,122,12)', 'rgb(12,73,122)', 'rgb(65,12,122)']
-document.body.style.setProperty('--gradient', getRandomItem(arr));
+// const arr = ['rgb(135, 33, 33)', 'rgb(135,140,6)', 'rgb(43,122,12)', 'rgb(12,73,122)', 'rgb(65,12,122)']
+// document.body.style.setProperty('--gradient', getRandomItem(arr));
+const arr = ['rgb(110, 110, 110)']
+document.body.style.setProperty('--gradient', arr[0]);

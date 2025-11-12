@@ -15,7 +15,8 @@ export const publisherToName = new Map([
     ['ustr', 'Office of the United States Trade Representative'],
     ['bloomberg', 'Bloomberg'],
     ['foreignassistance', 'U.S. Government Foreign Assistance'],
-    ['dialogo-americas', 'Dialogo Americas']
+    ['dialogo-americas', 'Dialogo Americas'],
+    ['ed', 'U.S. Department of Education']
 ])
 
 export const publisherToCredential = new Map([
