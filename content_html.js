@@ -33,7 +33,7 @@ overflow: hidden;">
         <div style="font-size: 12px;">
             <h3 style="margin-bottom: 0">About the Builder</h3><br>
             <div>
-                Personal website: <a style="color: white;" href="https://alxv07.github.io/AboutMe/">https://alxv07.github.io/AboutMe/</a>
+                Personal website: <a style="color: white;" href="https://alxv07.github.io/">https://alxv07.github.io/</a>
                 <br><br>
                 Contact: <a style="color: white" href="mailto:alexander.kai.chen@gmail.com">alexander.kai.chen@gmail.com</a> 
             </div>
