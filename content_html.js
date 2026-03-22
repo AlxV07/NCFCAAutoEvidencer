@@ -24,7 +24,8 @@ overflow: hidden;">
     <br>
     
     <p style="font-size: 13px; margin-bottom: 0">🍪 We use cookies to save Tabs across sessions.  Blocking cookies retains tool functionality but blocks this feature.</p>
-    
+    <p>By using this site, you agree to the <a href="/privacypolicy.txt" class="footer-link">Privacy Policy</a></p>
+
     <br><br>
     
     <div style="display: flex; justify-content: center">
