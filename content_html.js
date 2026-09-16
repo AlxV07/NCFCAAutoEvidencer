@@ -53,7 +53,9 @@ overflow: hidden;">
                 </div>
             </div>
 
-						<div>
+						<br>
+
+						<div style="font-size: 11px;">
 							Why use random numbers for tab naming? Honestly no clue why I did years ago when I first built this thing lol (psst, back then we didn't have AI... I know, crazy right? Coding by hand... good ol' days :_) ). Well, want me to change it?  Maybe if you ask, I might ;)
 						</div>
        </div>
