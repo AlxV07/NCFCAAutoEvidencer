@@ -1,6 +1,7 @@
 import { AboutContent } from './content_html.js';
 import { publisherToCredential, publisherToName } from "./citation_completion_data.js";
 import { DefaultTabStr, generateEvidencingSetup, updateEvidencingSetup } from "./content_generation.js";
+import { BibleVerses } from "./bible_verses.js";
 
 
 // ============================================= NonTab Content Generation =============================================
@@ -10,21 +11,33 @@ function setupSettingsContent() {
 }
 
 function setupAboutContent() {
-    const circle = document.getElementById('circle');
-    const colorPicker = document.getElementById('colorPicker');
+    const verseReference = document.querySelector('.verse-reference');
+    const verseText = document.querySelector('.verse-text');
+    let lastVerse = -1;
 
-    circle.addEventListener('click', () => {
-        colorPicker.click();
-    });
+    const showRandomVerse = () => {
+        let index;
+        do { index = Math.floor(Math.random() * BibleVerses.length); } while (BibleVerses.length > 1 && index === lastVerse);
+        lastVerse = index;
+        verseReference.textContent = BibleVerses[index].reference;
+        verseText.textContent = BibleVerses[index].text;
+    };
 
-    colorPicker.addEventListener('input', (e) => {
-        const color = e.target.value;
-        document.documentElement.style.setProperty('--gradient', color);
-        circle.style.backgroundColor = color; // optional, immediate update
-        document.body.style.setProperty('--gradient', color);
-    });
+    showRandomVerse();
+}
 
-
+function setupThemeToggle() {
+    const toggle = document.getElementById('theme-toggle');
+    const light = document.body.classList.contains('light-theme');
+    toggle.textContent = light ? '☀' : '☾';
+    toggle.title = light ? 'Switch to dark mode' : 'Switch to light mode';
+    toggle.onclick = () => {
+        document.body.classList.toggle('light-theme');
+        const isLight = document.body.classList.contains('light-theme');
+        document.cookie = `autoevidencer-theme=${isLight ? 'light' : 'dark'}; Max-Age=31536000; SameSite=Lax`;
+        toggle.textContent = isLight ? '☀' : '☾';
+        toggle.title = isLight ? 'Switch to dark mode' : 'Switch to light mode';
+    };
 }
 
 // ============================================= Constants & Values =============================================
@@ -118,6 +131,8 @@ function onHashChange() {
     /*
     On window hash changed.
      */
+    if (document.cookie.split('; ').includes('autoevidencer-theme=light')) document.body.classList.add('light-theme');
+    setupThemeToggle();
     const hash = window.location.hash;
 
     // Tab not found?
@@ -130,12 +145,14 @@ function onHashChange() {
     const tab = document.querySelector(`a[href="${hash}"]`)  // Find tab w/ target hash
     if (curTabElement !== null) {  // update previous tab
         let t = curTabElement;
+        t.classList.remove('current-tab');
         let c = Theme.get('tab-back'); let h = Theme.get('tab-back-hover');
         t.style.backgroundColor = c;
         t.onmouseenter = () => {t.style.backgroundColor = h};
         t.onmouseleave = () => {t.style.backgroundColor = c};
     }
     curTabElement = tab;
+    curTabElement.classList.add('current-tab');
     const c = Theme.get('cur-back'); const h = Theme.get('cur-back-hover');
     curTabElement.style.backgroundColor = c
     curTabElement.onmouseenter = () => {tab.style.backgroundColor = h}
@@ -190,11 +207,11 @@ function addThemeListeners() {
 
 const Theme = new Map([
     // cur tab
-    ["cur-back", "#111111"],
-    ["cur-back-hover", "2c2c2c1"],
+    ["cur-back", "#183b63"],
+    ["cur-back-hover", "#234f80"],
     // other tabs
-    ["tab-back", "#252525"],
-    ["tab-back-hover", "#212121"],
+    ["tab-back", "#253247"],
+    ["tab-back-hover", "#334155"],
 ])  // map storing current themes; initially gray
 
 function setTheme(color) {
@@ -297,6 +314,8 @@ function loadCookies() {
             hashToData.forEach(a => {
                 const hash = a[0];
                 const d = a[1];
+                if (!d.fieldData.ta) d.fieldData.ta = { fieldId: 'ta', v: '', p: '', s: '', z: 12, u: false, i: false, b: true, e: false };
+                if (!d.fieldOrder.includes('ta')) d.fieldOrder.unshift('ta');
                 TabHashToTabData.set(hash, d);
             })
         } catch (e) {
@@ -427,6 +446,7 @@ function updateEvidenceResult() {
     let citationText = ''
     const fieldData = curTabData['fieldData'];
     curTabData['fieldOrder'].forEach(fieldId => {
+        if (fieldId === 'ta') return;
         if (!fieldData[fieldId]['e']) {
             let t = (fieldData[fieldId]['p'] + fieldData[fieldId]['v'] + fieldData[fieldId]['s']);  // prefix + value + suffix
             if (fieldId === 'li') {  // link
@@ -458,8 +478,10 @@ function updateEvidenceResult() {
         }
     })
     let result = `${citationText}`
+    const tag = fieldData.ta;
+    const tagText = tag && !tag.e && tag.v.trim() ? `<div class="evidence-tag">${tag.v}</div>` : '';
 
-    formattedDisplay.innerHTML = timesNewRomanSpan(`${result}`)
+    formattedDisplay.innerHTML = tagText + timesNewRomanSpan(`${result}`)
     updateCookies()
     if (autoFillPublisherCredentialsEnabled) {
         const l = document.getElementById('value_li').textContent;

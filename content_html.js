@@ -1,13 +1,13 @@
 export const AboutContent = `
-<div style="margin: 0; width: 100%; max-width: 100%; justify-content: center; align-items: center; text-align: center; 
-color: white;
+<div class="home-page" style="margin: 0; width: 100%; max-width: 100%; justify-content: center; align-items: center; text-align: center;
+color: #f8fafc;
 height: 100%;
 overflow: hidden;">         
-    <br><br><br>
+    <div class="home-hero">
  
     <h2 style="font-size: 37px; margin: 0">The Autoevidencer</h2>
-    <h4 style="margin: 7px; font-size: 27px;">Version 4.0</h4><br>
-    <p style="font-size: 20px">
+    <h4 style="margin: 7px; font-size: 27px;">Version 5.0</h4><br>
+    <p class="home-lead">
         Paste evidence straight into the Autoevidencer for immediate clean and consistent cards.
         
         <br><br>
@@ -15,53 +15,49 @@ overflow: hidden;">
         <div style="font-size: 17px">
         Click "New Tab" in the bottom left to get started.
         </div>
-    </p> 
+    </p>
+    <div class="home-cross" aria-hidden="true">†</div>
+    <section class="verse-of-the-day" aria-live="polite">
+        <div class="verse-reference"></div>
+        <p class="verse-text"></p>
+    </section>
+    </div>
     
-    <br>
+    <div class="home-grid">
     
-    <div style="font-size: 70px">†</div>
-    
-    <br>
-    
-    <p style="font-size: 13px; margin-bottom: 0">🍪 We use cookies to save Tabs across sessions.  Blocking cookies retains tool functionality but blocks this feature.</p>
-    <p>By using this site, you agree to the <a href="/privacypolicy.txt" class="footer-link">Privacy Policy</a></p>
+        <div class="home-panel builder-panel">
+            <h3>About the Builder</h3>
 
-    <br><br>
-    
-    <div style="display: flex; justify-content: center">
-    <div style="display: grid; grid-template-columns: 1fr 2fr; width: 70%">
-    
-        <div style="font-size: 12px;">
-            <h3 style="margin-bottom: 0">About the Builder</h3><br>
-            <div>
-                Personal website: <a style="color: white;" href="https://alxv07.github.io/">https://alxv07.github.io/</a>
-                <br><br>
-                Contact: <a style="color: white" href="mailto:alexander.kai.chen@gmail.com">alexander.kai.chen@gmail.com</a> 
+						<h4 class="builder-label">Connect with me! :D</h4>
+            <div class="builder-contact">
+                <a href="https://alxv07.github.io/">https://alxv07.github.io</a>
+								<a href="mailto:alexander.kai.chen@gmail.com">alexander.kai.chen@gmail.com</a>
             </div>
-            
-            <br>
-            
-            <div style="font-weight: bold"">Debate History</div>
-            NCFCA Team Policy - Sts. Peter & Paul Speech & Debate<br>
-                <li>Chen/Kuykendall, R11, 23-24</li>
-                <li>Chen/O'Connors, R11, 24-25</li>
-            Coolidge 1v1 Debate - Independent Competitor<br>
-                <li>Alexander Chen, 25-26</li>
-            <br>
-            
-            <h3 style="margin-bottom: 0">Settings</h3><br>
-            <div style="">
-            <div style="display: flex; justify-content: center; align-items: center">
-                <div style="display: flex; justify-content: center; flex-direction: row; align-items: center">
-                    <div style="margin-right: 10px; font-size: 12px">Color Theme</div><div style="border: 1px solid white" class="color-circle" id="circle"></div><input type="color" id="colorPicker">
+
+            <div class="builder-history">
+                <h4>My Debate History:</h4>
+                <div class="builder-entry">
+                    <strong>NCFCA Team Policy</strong>
+                    <span>Sts. Peter &amp; Paul Speech &amp; Debate</span>
+                    <ul>
+                        <li>Chen/Kuykendall <em>R11, 23–24</em></li>
+                        <li>Chen/O'Connors <em>R11, 24–25</em></li>
+                    </ul>
                 </div>
-            </div>
+                <div class="builder-entry">
+                    <strong>Calvin Coolidge Presidential Foundation</strong>
+                    <span>Coolidge Cup qualifying debater</span>
+                    <ul>
+                        <li>Alexander Chen <em>25–26</em></li>
+                    </ul>
+                </div>
             </div>
        </div>
         
-       <div style="font-size: 12px;">
+       <div class="home-panel" style="font-size: 12px;">
             <h3 style="margin-bottom: 0">Change Log</h3>
             <ul style="text-align: left; display: inline-block;">
+                <p><strong><span style="color: #60a5fa;">09/15/2026</span> | 5.0:</strong> added Tags to evidence cards; cleaner home, label clarifications, smoother buttons; Bible verse cycle; solarized interface themes, dark/light mode toggle button in top right (learn about Solarized! <a href="https://en.wikipedia.org/wiki/Solarized">https://en.wikipedia.org/wiki/Solarized</a>)</p>
                 <p><strong>11/12/2025 | 4.0:</strong> added quick-exclude buttons; randomized-init color theme replaced with default grey; home page update; fixed auto-publisher-from-link not setting content</p>
                 <p><strong>09/13/2025 | 3.3:</strong> removed unused "Settings" tab, discontinued unused color themes; updated overall theme to sleeker gradient; cleaned home page</p>
                 <p><strong>03/31/2025 | 3.2:</strong> added collapsible window for field customization to make UI less cluttered (thanks Liam O'Connors & Therese Pammit for pointing out *ahem*); renamed "Auto Evidencer" to "Autoevidencer"</p>
@@ -81,7 +77,6 @@ overflow: hidden;">
         </div>     
         
     </div>
-    </div>
+    <div class="home-meta">🍪 Cookies save your tabs and theme preference. By using this site, you agree to the <a href="/privacypolicy.txt" class="footer-link">Privacy Policy</a>.</div>
 </div>
 `;
-

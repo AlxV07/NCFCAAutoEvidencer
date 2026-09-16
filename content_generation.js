@@ -8,6 +8,7 @@ export const FieldIdToLabel = JSON.parse(`{
     "ti": "Article Title",
     "te": "Team",
     "li": "Link",
+    "ta": "Tag",
     "ev": "Evidence",
     "im": "Impact"
 }`)
@@ -22,6 +23,7 @@ export const FieldIdToDefPre = JSON.parse(`{
     "ti": "(\\\\\\"",
     "te": "[",
     "li": "",
+    "ta": "",
     "ev": "[“]",
     "im": "MPX: "
 }`)
@@ -36,14 +38,16 @@ export const FieldIdToDefSuf = JSON.parse(`{
     "ti": "\\\\\\").",
     "te": "].",
     "li": ".",
+    "ta": "",
     "ev": "[”]",
     "im": ""
 }`)
 
 export const DefaultTabStr = `{
     "tabId": "default",
-    "fieldOrder": ["an", "ac", "pn", "pc", "pd", "cd", "ti", "te", "li", "ev", "im"],
+    "fieldOrder": ["ta", "an", "ac", "pn", "pc", "pd", "cd", "ti", "te", "li", "ev", "im"],
     "fieldData": {
+        "ta": { "fieldId": "ta", "v": "", "p": "", "s": "", "z": 12, "u": false, "i": false, "b": true, "e": false },
         "an": {
             "fieldId": "an", "v": "",
             "p": "${FieldIdToDefPre["an"]}",
@@ -183,7 +187,7 @@ export function generateEvidencingSetup(tab) {
     <div class="field-container">
         <button id="copy-button"      >Copy</button>
         <div    id="formatted-display"></div>
-        <button id="clearall-button"  >Clear All</button>
+        <button id="clearall-button"  >Reset All</button>
     </div> `;
     content += footer;
 
@@ -195,9 +199,9 @@ export function generateQuickExcludeButtons() {
     <div class="field-container" style="margin-top: 0">
         <div class="field-value"  contentEditable="false" style="opacity: 0">x</div>
     
-        <div style="color: white">Quick Exclude:</div>
+        <div class="quick-exclusion-label">Quick Exclusion Controls:</div>
         <div style="width: 20px"></div>
-        <button id="qexclude-only-citation">Only Citation</button>
+        <button id="qexclude-only-citation">Only Citing Credentials</button>
         <div style="width: 20px"></div>
         <button id="qexclude-author-info">No Author Info</button>
         <div style="width: 20px"></div>
