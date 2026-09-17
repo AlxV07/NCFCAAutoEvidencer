@@ -295,7 +295,11 @@ function loadCookies() {
     const cookies = document.cookie.split('; ')
     let cookie = null;
     for (let i = 0; i < cookies.length; i++) {
-        const [cookieName, cookieValue] = cookies[i].split('=');
+        // Values may contain '=' (for example in URLs), so only split at the
+        // first equals sign.
+        const separator = cookies[i].indexOf('=');
+        const cookieName = separator === -1 ? cookies[i] : cookies[i].slice(0, separator);
+        const cookieValue = separator === -1 ? '' : cookies[i].slice(separator + 1);
         if (cookieName === cookiesStart) {
             cookie = cookieValue;
             break
@@ -310,7 +314,16 @@ function loadCookies() {
         console.log('Blank cookies ("").  Continuing...');
     } else {  // Parse
         try {
-            const hashToData = JSON.parse(cookie);
+            // New values are URI encoded so semicolons and other cookie
+            // delimiters in pasted evidence cannot corrupt document.cookie.
+            let decodedCookie;
+            try {
+                decodedCookie = decodeURIComponent(cookie);
+            } catch (e) {
+                // Support cookies written by older versions.
+                decodedCookie = cookie;
+            }
+            const hashToData = JSON.parse(decodedCookie);
             hashToData.forEach(a => {
                 const hash = a[0];
                 const d = a[1];
@@ -331,7 +344,7 @@ function clearCookies() {
     /*
     Sets document cookies to blank ("")
      */
-    document.cookie = cookiesStart + '=;';
+    document.cookie = cookiesStart + '=; Max-Age=0; SameSite=Lax';
 }
 
 function updateCookies() {
@@ -342,7 +355,10 @@ function updateCookies() {
     for (const hash of TabHashToTabData.keys()) {
         a.push([hash, TabHashToTabData.get(hash)])
     }
-    document.cookie = cookiesStart + '=' + JSON.stringify(a) + '; Expires=Tue, 10 Mar 2026 12:00:00 UTC'
+    // Keep the data for a year. The previous fixed expiry date was in the
+    // past, causing every subsequent save to create an already-expired cookie.
+    const value = encodeURIComponent(JSON.stringify(a));
+    document.cookie = `${cookiesStart}=${value}; Max-Age=31536000; SameSite=Lax`;
 }
 
 
@@ -403,6 +419,17 @@ function boldSpan(text) {return `<span style="font-weight: bold">${text}</span>`
 function tenPtSpan(text) {return `<span style="font-size: 10pt;">${text}</span>`}
 function twelvePtSpan(text) {return `<span style="font-size: 12pt">${text}</span>`}
 
+// Apply the same field customization used by the citation fields.  Tags are
+// displayed separately from the citation, but they are still a field and
+// must honor their prefix/suffix and style settings.
+function formatField(field, text) {
+    if (field["u"]) { text = underlinedSpan(text); }
+    if (field["i"]) { text = italicizedSpan(text); }
+    if (field["b"]) { text = boldSpan(text); }
+    text = field["z"] === 10 ? tenPtSpan(text) : twelvePtSpan(text);
+    return timesNewRomanSpan(text);
+}
+
 function linkSpan(text) {return `<a href=${text}><span style="color: #2043a9" >${text}</span></a>`}
 
 function setAccessedDate() {
@@ -457,11 +484,7 @@ function updateEvidenceResult() {
                 if (fieldData[fieldId]['z'] === 10) { t = tenPtSpan(t); } else { t = twelvePtSpan(t); }
                 t = timesNewRomanSpan(t);
             } else {
-                if (fieldData[fieldId]['u']) { t = underlinedSpan(t); }
-                if (fieldData[fieldId]['i']) { t = italicizedSpan(t); }
-                if (fieldData[fieldId]['b']) { t = boldSpan(t); }
-                if (fieldData[fieldId]['z'] === 10) { t = tenPtSpan(t); } else { t = twelvePtSpan(t); }
-                t = timesNewRomanSpan(t);
+                t = formatField(fieldData[fieldId], t);
             }
             if (fieldId === 'ev') {
                 t = timesNewRomanSpan(fieldData['ev']['v'])
@@ -479,7 +502,9 @@ function updateEvidenceResult() {
     })
     let result = `${citationText}`
     const tag = fieldData.ta;
-    const tagText = tag && !tag.e && tag.v.trim() ? `<div class="evidence-tag">${tag.v}</div>` : '';
+    const tagText = tag && !tag.e && tag.v.trim()
+        ? `<div class="evidence-tag">${formatField(tag, tag.p + tag.v + tag.s)}</div>`
+        : '';
 
     formattedDisplay.innerHTML = tagText + timesNewRomanSpan(`${result}`)
     updateCookies()

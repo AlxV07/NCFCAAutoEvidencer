@@ -6,7 +6,7 @@ overflow: hidden;">
     <div class="home-hero">
  
     <h2 style="font-size: 37px; margin: 0">The Autoevidencer</h2>
-    <h4 style="margin: 7px; font-size: 27px;">Version 5.0</h4><br>
+    <h4 style="margin: 7px; font-size: 27px;">Version 5.0.1</h4><br>
     <p class="home-lead">
         Paste evidence straight into the Autoevidencer for immediate clean and consistent cards.
         
@@ -63,7 +63,8 @@ overflow: hidden;">
        <div class="home-panel" style="font-size: 12px;">
             <h3 style="margin-bottom: 0">Change Log</h3>
             <ul style="text-align: left; display: inline-block;">
-                <p><strong><span style="color: #60a5fa;">09/15/2026</span> | 5.0:</strong> added Tags to evidence cards; cleaner home, label clarifications, smoother buttons; Bible verse cycle; solarized interface themes, dark/light mode toggle button in top right (learn about Solarized! <a href="https://en.wikipedia.org/wiki/Solarized">https://en.wikipedia.org/wiki/Solarized</a>)</p>
+                <p><strong><span style="color: #60a5fa;">09/16/2026</span> | 5.0.1:</strong> fixed Tag field customization formatting not updating in generated evidence; fixed tab persistence cookies w/ updated expiration date</p>
+            <p><strong><span >09/15/2026</span> | 5.0:</strong> added Tags to evidence cards; cleaner home, label clarifications, smoother buttons; Bible verse cycle; solarized interface themes, dark/light mode toggle button in top right (learn about Solarized! <a href="https://en.wikipedia.org/wiki/Solarized">https://en.wikipedia.org/wiki/Solarized</a>)</p>
                 <p><strong>11/12/2025 | 4.0:</strong> added quick-exclude buttons; randomized-init color theme replaced with default grey; home page update; fixed auto-publisher-from-link not setting content</p>
                 <p><strong>09/13/2025 | 3.3:</strong> removed unused "Settings" tab, discontinued unused color themes; updated overall theme to sleeker gradient; cleaned home page</p>
                 <p><strong>03/31/2025 | 3.2:</strong> added collapsible window for field customization to make UI less cluttered (thanks Liam O'Connors & Therese Pammit for pointing out *ahem*); renamed "Auto Evidencer" to "Autoevidencer"</p>
